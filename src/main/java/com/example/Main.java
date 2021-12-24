@@ -68,7 +68,7 @@ public class Main {
     ArrayList<Employee> output = new ArrayList<Employee>();
     while (rs.next()) {
       Employee emp = new Employee();
-      emp.setName(rs.getString("name"));
+      emp.setName(rs.getString("employeeName"));
       emp.setName(rs.getString("password"));
 
       output.add(emp);
