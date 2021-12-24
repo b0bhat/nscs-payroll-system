@@ -53,6 +53,35 @@ public class Main {
     return "index";
   }
 
+  @RequestMapping("/employees")
+  String employeeList(Map<String, Object> model) {
+    try (Connection connection = dataSource.getConnection()) {
+    Statement stmt = connection.createStatement();
+
+    /*stmt.executeUpdate(
+        "CREATE TABLE IF NOT EXISTS employees (id varchar(40), name varchar(40), position varchar(10), role varchar(40),"
+            + "team varchar(40), status boolean, startdate date, enddate date)");*/
+
+    String sql = "SELECT * FROM login ORDER BY startdate ASC";
+    ResultSet rs = stmt.executeQuery(sql);
+
+    ArrayList<Employee> output = new ArrayList<Employee>();
+    while (rs.next()) {
+      Employee emp = new Employee();
+      emp.setName(rs.getString("name"));
+      emp.setName(rs.getString("password"));
+
+      output.add(emp);
+    }
+    model.put("employees", output);
+
+
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    } return "employees";
+  }
+/*
   @RequestMapping("/db")
   String db(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
@@ -72,7 +101,7 @@ public class Main {
       model.put("message", e.getMessage());
       return "error";
     }
-  }
+  }*/
 
   @Bean
   public DataSource dataSource() throws SQLException {
