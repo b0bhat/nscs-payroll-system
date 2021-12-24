@@ -61,7 +61,7 @@ public class Main {
     /*stmt.executeUpdate(
         "CREATE TABLE IF NOT EXISTS employees (id varchar(40), name varchar(40), position varchar(10), role varchar(40),"
             + "team varchar(40), status boolean, startdate date, enddate date)");*/
-    console.log(HELP);
+    console.log("HELP");
     String sql = "SELECT * FROM login";
     ResultSet rs = stmt.executeQuery(sql);
 
