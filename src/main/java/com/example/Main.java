@@ -62,7 +62,7 @@ public class Main {
         "CREATE TABLE IF NOT EXISTS employees (id varchar(40), name varchar(40), position varchar(10), role varchar(40),"
             + "team varchar(40), status boolean, startdate date, enddate date)");*/
 
-    String sql = "SELECT * FROM login ORDER BY startdate ASC";
+    String sql = "SELECT * FROM login ORDER BY employeeName ASC";
     ResultSet rs = stmt.executeQuery(sql);
 
     ArrayList<Employee> output = new ArrayList<Employee>();
