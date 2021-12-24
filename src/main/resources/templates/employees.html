@@ -43,12 +43,7 @@
           <thead>
             <tr>
               <th>Name</th>
-              <th>Employee Type</th>
-              <th>Role</th>
-              <th>Team</th>
-              <th>Hired</th>
-              <th>Start Date</th>
-              <th>End Date</th>
+              <th>Password</th>
               <th></th>
               <th></th>
             </tr>
@@ -57,19 +52,14 @@
           <tbody>
             <tr th:each="employee : ${employees}">
               <td th:text="${employee.name}"></td>
-              <td th:text="${employee.position}"></td>
-              <td th:text="${employee.role}"></td>
-              <td th:text="${employee.team}"></td>
-              <td th:text="${employee.status}"></td>
-              <td th:text="${employee.start}"></td>
-              <td th:text="${employee.end}"></td>
+              <td th:text="${employee.password}"></td>
 
-              <td>
+              <!--<td>
                 <button><a th:href="@{/employees/edit?rid={id}(id = ${employee.getId()})}">Edit</a></button>
               </td>
               <td>
                 <button><a th:href="@{/employees/deleted?e_id={id}(id=${employee.id})}"><i class="bi bi-trash"></i>Delete</a></button>
-              </td>
+              </td>-->
             </tr>
 
           </tbody>
