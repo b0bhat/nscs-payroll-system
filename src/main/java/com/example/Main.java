@@ -68,7 +68,7 @@ public class Main {
     while (rs.next()) {
       Employee emp = new Employee();
       emp.setName(rs.getString("employeeName"));
-      emp.setName(rs.getString("password"));
+      emp.setPassword(rs.getString("password"));
 
       output.add(emp);
     }
