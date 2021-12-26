@@ -69,16 +69,14 @@ public class Main {
       Employee emp = new Employee();
       emp.setName(rs.getString("employeeName"));
       emp.setPassword(rs.getString("password"));
-
       output.add(emp);
     }
     model.put("employees", output);
-
-
+    return "employees";
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
-    } return "employees";
+    }
   }
 /*
   @RequestMapping("/db")
