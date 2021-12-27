@@ -37,6 +37,8 @@ import java.util.Map;
 @Controller
 @SpringBootApplication
 public class Main {
+  boolean flag = true;
+  boolean edit = true;
 
   @Value("${spring.datasource.url}")
   private String dbUrl;
@@ -53,31 +55,64 @@ public class Main {
     return "index";
   }
 
-  @RequestMapping("/employees")
+  @GetMapping("/employees")
   String employeeList(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
-    Statement stmt = connection.createStatement();
+      Statement stmt = connection.createStatement();
 
-    /*stmt.executeUpdate(
-        "CREATE TABLE IF NOT EXISTS employees (id varchar(40), name varchar(40), position varchar(10), role varchar(40),"
-            + "team varchar(40), status boolean, startdate date, enddate date)");*/
-    String sql = "SELECT * FROM login";
-    ResultSet rs = stmt.executeQuery(sql);
+      /*stmt.executeUpdate(
+          "CREATE TABLE IF NOT EXISTS employees (id varchar(40), name varchar(40), position varchar(10), role varchar(40),"
+              + "team varchar(40), status boolean, startdate date, enddate date)");*/
+      String sql = "SELECT * FROM login";
+      ResultSet rs = stmt.executeQuery(sql);
 
-    ArrayList<Employee> output = new ArrayList<Employee>();
-    while (rs.next()) {
-      Employee emp = new Employee();
-      emp.setName(rs.getString("employeeName"));
-      emp.setPassword(rs.getString("password"));
-      output.add(emp);
-    }
-    model.put("employees", output);
-    return "employees";
+      ArrayList<Employee> output = new ArrayList<Employee>();
+      while (rs.next()) {
+        Employee emp = new Employee();
+        emp.setName(rs.getString("employeeName"));
+        emp.setPassword(rs.getString("password"));
+        output.add(emp);
+      }
+      model.put("employees", output);
+      if (flag && edit) {
+        return "employees";
+      } else {
+        return "userNotFound";
+      }
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
     }
   }
+
+  @GetMapping("/employees/add")
+  public String returnEmployeeAdd(Map<String, Object> model) throws Exception {
+    Employee employee = new Employee();
+    model.put("employee", employee);
+    if (flag && edit) {
+      return "employees/addEmployee";
+    } else {
+      return "userNotFound";
+    }
+  }
+
+  @PostMapping(path = "/employees/add", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+  public String handleEmployeeProfileSubmit(Map<String, Object> model, Employee employee) throws Exception {
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+
+      String sql = "INSERT INTO employees (name, password) VALUES ('"
+          + employee.getName() + "','" + employee.getPassword() + "')";
+
+      stmt.executeUpdate(sql);
+      return "redirect:/employees"; // Directly returns to employee homepage
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
+  }
+
+
 /*
   @RequestMapping("/db")
   String db(Map<String, Object> model) {

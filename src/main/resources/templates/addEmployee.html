@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::header})}"></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/employees.css" />
+    <title>Current Employees</title>
+</head>
+
+<header></header>
+
+<body>
+    <div class="container">
+        <h1 class="heading">Profile</h1>
+        <form action="#" method="post" th:action="@{/addrecord}" th:object="${employee}">
+            <label for="name">Name</label> <br>
+            <input type="text" th:field=*{name} id="name" required> <br>
+
+            <label for="password">Password</label> <br>
+            <input type="text" th:field=*{password} id="password" required> <br>
+            <div class="buttons">
+                <input type="submit" value="Save">
+                <button class="cancel"><a th:href="@{/employees}" required>Cancel</a></button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+    </script>
+
+</body>
+
+
+</html>
