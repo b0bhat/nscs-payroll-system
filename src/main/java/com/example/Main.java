@@ -104,7 +104,7 @@ public class Main {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
-      String sql = "INSERT INTO login (employeeName, password) VALUES ('"
+      String sql = "INSERT INTO login VALUES ('"
           + employee.getName() + "','" + employee.getPassword() + "')";
 
       stmt.executeUpdate(sql);
