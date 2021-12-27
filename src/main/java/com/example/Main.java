@@ -40,8 +40,8 @@ import java.util.UUID;
 @Controller
 @SpringBootApplication
 public class Main {
-  boolean flag = true;
-  boolean edit = true;
+  boolean flag = false;
+  boolean edit = false;
 
   @Value("${spring.datasource.url}")
   private String dbUrl;
@@ -54,8 +54,55 @@ public class Main {
   }
 
   @RequestMapping("/")
-  String index() {
-    return "index";
+  String index(Map<String, Object> model) {
+    return "redirect:/login";
+  }
+
+  @GetMapping("/login")
+  String loginPageHandler(Map<String, Object> model) {
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+      flag = false;
+      edit = false;
+      Employee user = new Employee();
+      model.put("user", user);
+      return "login";
+    }catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
+  }
+
+  @PostMapping(path = "/login", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+  public String login(Map<String, Object> model, Employee user) throws Exception {
+    String employeeName = user.getName();
+    String password = user.getPassword();
+
+    if (employeeName.equals("admin") && password.equals("123")){
+      flag = true;
+      edit = true;
+      return "redirect:/employees"; //CHANGE TO MAINPAGE FOR EACH LOGIN TYPE
+    }
+
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+      String sql = "SELECT * FROM login";
+      ResultSet rs = stmt.executeQuery(sql);
+
+      while (rs.next()) {
+        String compareName = rs.getString("employeeName");
+        String comparePassword = rs.getString("password");
+        if (employeeName.equals(compareName) && password.equals(comparePassword)) {
+          System.out.println("user exists");
+          flag = true;
+          edit = true;
+        } return "redirect:/employees"; //MAINPAGE
+      }
+      return "error";
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
   }
 
   @GetMapping("/employees")
