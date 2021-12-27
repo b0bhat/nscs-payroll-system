@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/employees.css" />
+    <title>Current Employees</title>
+</head>
+
+<header></header>
+
+<body>
+  <section class="home-section">
+    <div class="text">Employees</div>
+
+    <form action="#" method="post" th:action="@{/employees/create}" th:object="${employee}" class="formtemplate">
+      <h1>Add Employee</h1>
+      <br></br>
+      <ul>
+        <li>
+          <label for="name">Name</label>
+          <input type="text" th:field="*{name}" id="name" required />
+        </li>
+        <li>
+          <label for="password">Password</label>
+          <input type="text" th:field="*{password}" id="password" required />
+        </li>
+        <li>
+          <span>
+            <button class="cancel"><a th:href="@{/employees}">Cancel</a></button>
+            <input type="submit" value="Save" />
+          </span>
+        </li>
+      </ul>
+    </form>
+  </section>
+
+    <script>
+    </script>
+
+</body>
+
+
+</html>

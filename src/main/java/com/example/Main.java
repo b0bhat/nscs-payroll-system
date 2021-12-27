@@ -80,7 +80,7 @@ public class Main {
       if (flag && edit) {
         return "employees";
       } else {
-        return "userNotFound";
+        return "error";
       }
     } catch (Exception e) {
       model.put("message", e.getMessage());
@@ -95,12 +95,12 @@ public class Main {
     if (flag && edit) {
       return "employees/addEmployee";
     } else {
-      return "userNotFound";
+      return "error";
     }
   }
 
   @PostMapping(path = "/employees/add", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-  public String handleEmployeeAddSubmit(Map<String, Object> model, Employee employee) throws Exception {
+  public String handleEmployeeAdd(Map<String, Object> model, Employee employee) throws Exception {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
