@@ -24,7 +24,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.w3c.dom.ranges.Range;
+import org.springframework.http.MediaType;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -33,6 +35,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.UUID;
 
 @Controller
 @SpringBootApplication
@@ -97,7 +100,7 @@ public class Main {
   }
 
   @PostMapping(path = "/employees/add", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-  public String handleEmployeeProfileSubmit(Map<String, Object> model, Employee employee) throws Exception {
+  public String handleEmployeeAddSubmit(Map<String, Object> model, Employee employee) throws Exception {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
