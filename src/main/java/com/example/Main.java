@@ -37,6 +37,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
+import java.io.*;
 
 @Controller
 @SpringBootApplication
@@ -170,6 +171,7 @@ public class Main {
       PreparedStatement ps = connection.prepareStatement(sql);
       ps.setString(1, e_id);
       ps.executeUpdate();
+      System.out.println(ps);
 
       return "redirect:/employees";
     } catch (Exception e) {
