@@ -216,7 +216,7 @@ public class Main {
   }
 
   @PostMapping(path = "/clients/add", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-  public String handleClientAdd(Map<String, Object> model, String client) throws Exception {
+  public String handleClientAdd(Map<String, Object> model, @RequestParam String client) throws Exception {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
