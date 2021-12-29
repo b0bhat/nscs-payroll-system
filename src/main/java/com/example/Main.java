@@ -209,7 +209,7 @@ public class Main {
     String client = new String();
     model.put("client", client);
     if (flag && edit) {
-      return "employees/addClient";
+      return "clients/addClient";
     } else {
       return "error";
     }
