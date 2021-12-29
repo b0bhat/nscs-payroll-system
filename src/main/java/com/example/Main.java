@@ -83,7 +83,7 @@ public class Main {
     if (employeeName.equals("admin") && password.equals("123")){
       flag = true;
       edit = true;
-      return "redirect:/employees"; //CHANGE TO MAINPAGE FOR EACH LOGIN TYPE
+      return "redirect:/clients"; //CHANGE TO MAINPAGE FOR EACH LOGIN TYPE
     }
 
     try (Connection connection = dataSource.getConnection()) {
