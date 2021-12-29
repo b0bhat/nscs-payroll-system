@@ -31,7 +31,7 @@
                 <button><a th:href="@{/employees/edit?rid={name}(name = ${employee.getName()})}">Edit</a></button>
               </td>-->
               <td>
-                <button><a th:href="@{/employees/deleted?e_id={id}(id=${employee.employeeName})}"><i class="bi bi-trash"></i>Delete</a></button>
+                <button><a th:href="@{/employees/deleted?e_id={id}(id=${login.employeeName})}"><i class="bi bi-trash"></i>Delete</a></button>
               </td>
             </tr>
 
