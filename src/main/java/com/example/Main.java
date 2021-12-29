@@ -166,7 +166,7 @@ public class Main {
   @GetMapping("/employees/deleted")
   public String deleteEmployee(Map<String, Object> model, @RequestParam String e_id) {
     try (Connection connection = dataSource.getConnection()) {
-      String sql = "DELETE FROM login WHERE employeeName =?";
+      String sql = "DELETE FROM login WHERE 'employeeName' =?";
       PreparedStatement ps = connection.prepareStatement(sql);
       ps.setString(1, e_id);
       ps.executeUpdate();
