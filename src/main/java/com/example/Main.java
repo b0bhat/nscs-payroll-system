@@ -79,7 +79,7 @@ public class Main {
     String employeeName = user.getName();
     String password = user.getPassword();
 
-    if (employeeName.equals("admin") && password.equals("adminpassword")){
+    if (employeeName.equals("admin") && password.equals("123")){
       flag = true;
       edit = true;
       return "redirect:/employees"; //CHANGE TO MAINPAGE FOR EACH LOGIN TYPE
