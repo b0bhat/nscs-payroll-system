@@ -15,12 +15,12 @@
     <div class="text">Clients</div>
 
     <form action="#" method="post" th:action="@{add}" th:object="${client}" class="formtemplate">
-      <h1>Add Employee</h1>
+      <h1>Add Client</h1>
       <br></br>
       <ul>
         <li>
           <label for="name">Client Name</label>
-          <input type="text" th:field="*{client}" id="client" required />
+          <input type="text" id="client" required />
         </li>
         <li>
           <span>
