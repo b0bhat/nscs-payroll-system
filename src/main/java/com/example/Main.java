@@ -34,16 +34,15 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.sql.Date;
 import java.io.*;
 
 @Controller
 @SpringBootApplication
 public class Main {
   boolean flag = false;
-  boolean edit = false;
+  String logID = new String();
 
   @Value("${spring.datasource.url}")
   private String dbUrl;
@@ -65,7 +64,6 @@ public class Main {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
       flag = false;
-      edit = false;
       Employee user = new Employee();
       model.put("user", user);
       return "login";
@@ -82,7 +80,7 @@ public class Main {
 
     if (employeeName.equals("admin") && password.equals("123")){
       flag = true;
-      edit = true;
+      logID = "admin";
       return "redirect:/clients"; //CHANGE TO MAINPAGE FOR EACH LOGIN TYPE
     }
 
@@ -97,7 +95,7 @@ public class Main {
         if (employeeName.equals(compareName) && password.equals(comparePassword)) {
           System.out.println("user exists");
           flag = true;
-          edit = false;
+          logID = employeeName;
         } return "redirect:/employees"; //MAINPAGE
       }
       return "nouser";
@@ -106,6 +104,8 @@ public class Main {
       return "error";
     }
   }
+
+//==================================== EMPLOYEES ====================================//
 
   @GetMapping("/employees")
   String employeeList(Map<String, Object> model) {
@@ -126,7 +126,7 @@ public class Main {
         output.add(emp);
       }
       model.put("employees", output);
-      if (flag && edit) {
+      if (flag && logID == "admin") {
         return "employees";
       } else {
         return "nouser";
@@ -141,7 +141,7 @@ public class Main {
   public String returnEmployeeAdd(Map<String, Object> model) throws Exception {
     Employee employee = new Employee();
     model.put("employee", employee);
-    if (flag && edit) {
+    if (flag && logID == "admin") {
       return "employees/addEmployee";
     } else {
       return "error";
@@ -180,6 +180,8 @@ public class Main {
     }
   }
 
+//==================================== CLIENTS ====================================//
+
   @GetMapping("/clients")
   String clientList(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
@@ -193,7 +195,7 @@ public class Main {
         output.add(rs.getString("clientName"));
       }
       model.put("clients", output);
-      if (flag && edit) {
+      if (flag && logID == "admin") {
         return "clients";
       } else {
         return "nouser";
@@ -208,7 +210,7 @@ public class Main {
   public String returnClientAdd(Map<String, Object> model) throws Exception {
     String client = new String();
     model.put("client", client);
-    if (flag && edit) {
+    if (flag && logID == "admin") {
       return "clients/addClient";
     } else {
       return "error";
@@ -225,6 +227,42 @@ public class Main {
 
       stmt.executeUpdate(sql);
       return "redirect:/clients"; // Directly returns to employee homepage
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
+  }
+
+//==================================== RECORDS ====================================//
+
+  @GetMapping("/records/all")
+  String recordListAll(Map<String, Object> model) {
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+
+      /*stmt.executeUpdate(
+          "CREATE TABLE IF NOT EXISTS employees (id varchar(40), name varchar(40), position varchar(10), role varchar(40),"
+              + "team varchar(40), status boolean, startdate date, enddate date)");*/
+      String sql = "SELECT * FROM records";
+      ResultSet rs = stmt.executeQuery(sql);
+
+      ArrayList<Record> output = new ArrayList<Record>();
+      while (rs.next()) {
+        Record ret = new Record();
+        ret.setEmployeeName(rs.getString("employeeName"));
+        ret.setClientName(rs.getString("clientName"));
+        ret.setRecordID(rs.getInt("recordID"));
+        ret.setWorkHours(rs.getFloat("workHours"));
+        ret.setWorkType(rs.getString("workType"));
+        ret.setWorkDate(rs.getDate("workDate"));
+        output.add(ret);
+      }
+      model.put("records", output);
+      if (flag && logID == "admin") {
+        return "records/all";
+      } else {
+        return "nouser";
+      }
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
