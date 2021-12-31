@@ -107,7 +107,7 @@ public class Main {
 
 //==================================== EMPLOYEES ====================================//
 
-  @GetMapping("/employees")
+  @GetMapping("/admin/employees")
   String employeeList(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
@@ -127,7 +127,7 @@ public class Main {
       }
       model.put("employees", output);
       if (flag && logID == "admin") {
-        return "employees";
+        return "admin/employees";
       } else {
         return "nouser";
       }
@@ -137,18 +137,18 @@ public class Main {
     }
   }
 
-  @GetMapping("/employees/add")
+  @GetMapping("/admin/addEmployee")
   public String returnEmployeeAdd(Map<String, Object> model) throws Exception {
     Employee employee = new Employee();
     model.put("employee", employee);
     if (flag && logID == "admin") {
-      return "employees/addEmployee";
+      return "admin/addEmployee";
     } else {
       return "error";
     }
   }
 
-  @PostMapping(path = "/employees/add", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+  @PostMapping(path = "/admin/addEmployee", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
   public String handleEmployeeAdd(Map<String, Object> model, Employee employee) throws Exception {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
@@ -157,14 +157,14 @@ public class Main {
           + employee.getName() + "','" + employee.getPassword() + "')";
 
       stmt.executeUpdate(sql);
-      return "redirect:/employees"; // Directly returns to employee homepage
+      return "redirect:/admin/employees"; // Directly returns to employee homepage
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
     }
   }
 
-  @GetMapping("/employees/deleted")
+  @GetMapping("/admin/deleteEmployee")
   public String deleteEmployee(Map<String, Object> model, @RequestParam String e_id) {
     try (Connection connection = dataSource.getConnection()) {
       String sql = "DELETE FROM login WHERE \"employeeName\" =?";
@@ -173,7 +173,7 @@ public class Main {
       ps.executeUpdate();
       System.out.println(ps);
 
-      return "redirect:/employees";
+      return "redirect:/admin/employees";
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
@@ -182,7 +182,7 @@ public class Main {
 
 //==================================== CLIENTS ====================================//
 
-  @GetMapping("/clients")
+  @GetMapping("/admin/clients")
   String clientList(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
@@ -196,7 +196,7 @@ public class Main {
       }
       model.put("clients", output);
       if (flag && logID == "admin") {
-        return "clients";
+        return "admin/clients";
       } else {
         return "nouser";
       }
@@ -206,18 +206,18 @@ public class Main {
     }
   }
 
-  @GetMapping("/clients/add")
+  @GetMapping("/admin/addClient")
   public String returnClientAdd(Map<String, Object> model) throws Exception {
     String client = new String();
     model.put("client", client);
     if (flag && logID == "admin") {
-      return "clients/addClient";
+      return "admin/addClient";
     } else {
       return "error";
     }
   }
 
-  @PostMapping(path = "/clients/add", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+  @PostMapping(path = "/admin/addClient", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
   public String handleClientAdd(Map<String, Object> model, @RequestParam String client) throws Exception {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
@@ -226,7 +226,7 @@ public class Main {
           + client + "')";
 
       stmt.executeUpdate(sql);
-      return "redirect:/clients"; // Directly returns to employee homepage
+      return "redirect:/admin/clients"; // Directly returns to employee homepage
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
@@ -235,7 +235,7 @@ public class Main {
 
 //==================================== RECORDS ====================================//
 
-  @GetMapping("/records/all")
+  @GetMapping("/admin/records")
   String recordListAll(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
@@ -259,7 +259,7 @@ public class Main {
       }
       model.put("records", output);
       if (flag && logID == "admin") {
-        return "records/all";
+        return "admin/records";
       } else {
         return "nouser";
       }

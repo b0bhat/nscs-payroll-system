@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/stylesheets/employees.css" />
-    <title>Clients</title>
+    <title>Current Employees</title>
 </head>
 
 <header></header>
@@ -17,24 +17,29 @@
           <thead>
             <tr>
               <th>Name</th>
+              <th>Password</th>
               <th></th>
               <th></th>
             </tr>
           </thead>
 
           <tbody>
-            <tr th:each="client : ${clients}">
-              <td th:text="${client}"></td>
+            <tr th:each="employee : ${employees}">
+              <td th:text="${employee.name}"></td>
+              <td th:text="${employee.password}"></td>
 
               <!--<td>
                 <button><a th:href="@{/employees/edit?rid={name}(name = ${employee.getName()})}">Edit</a></button>
               </td>-->
+              <td>
+                <button><a th:href="@{/admin/deleteEmployee?e_id={id}(id=${employee.name})}"><i class="bi bi-trash"></i>Delete</a></button>
+              </td>
             </tr>
 
           </tbody>
       </table>
       <span class="add-employee">
-          <button class="add"><a th:href="@{/clients/add}"><i class="bi bi-person-plus"></i>Add New Client</a></button>
+          <button class="add"><a th:href="@{/admin/addEmployee}"><i class="bi bi-person-plus"></i>Add New Employee</a></button>
       </span>
     </div>
 
