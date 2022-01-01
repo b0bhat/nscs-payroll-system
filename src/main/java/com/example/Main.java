@@ -93,7 +93,7 @@ public class Main {
         String compareName = rs.getString("employeeName");
         String comparePassword = rs.getString("password");
         if (employeeName.equals(compareName) && password.equals(comparePassword)) {
-          System.out.println("user exists");
+          System.out.println("user: " + employeeName + ", " + password);
           flag = true;
           logID = employeeName;
         } return "redirect:/user/home"; //MAINPAGE
