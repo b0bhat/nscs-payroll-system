@@ -24,30 +24,17 @@ table {
 
 th, td {
     padding: 8px;
-}
-
-th {
-    background: #eee;
+    margin: 10px;
 }
 
 .data-table, .data-table td {
-    box-shadow: inset 1px -1px rgb(255, 255, 255);
+    box-shadow: inset 1px -1px rgb(200, 200, 200);
 }
 
 .data-table th {
-    box-shadow: inset 1px 1px rgb(255, 255, 255), 0 1px #000;
+    box-shadow: inset 1px 1px rgb(200, 200, 200), 0 1px #000;
 }
 
 .visual {
     overflow-x: auto;
 }
-
-
-
-
-
-
-
-
-
-

@@ -6,12 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/stylesheets/employees.css" />
-    <title>All Records</title>
+    <title>Past Records</title>
 </head>
 
 <header></header>
 
 <body>
+  <span class="add-employee">
+      <button class="add"><a th:href="@{/admin/addEmployee}"><i class="bi bi-person-plus"></i>Add New Employee</a></button>
+  </span>
     <div class="data-table">
       <table id="myTable">
           <thead>

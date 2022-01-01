@@ -269,6 +269,38 @@ public class Main {
     }
   }
 
+//==================================== USER ====================================//
+
+@GetMapping("/user/records")
+String recordListUser(Map<String, Object> model) {
+  try (Connection connection = dataSource.getConnection()) {
+    Statement stmt = connection.createStatement();
+    String sql = "SELECT * FROM records WHERE employeeName = " + logID;
+    ResultSet rs = stmt.executeQuery(sql);
+
+    ArrayList<Record> output = new ArrayList<Record>();
+    while (rs.next()) {
+      Record ret = new Record();
+      ret.setEmployeeName(rs.getString("employeeName"));
+      ret.setClientName(rs.getString("clientName"));
+      ret.setRecordID(rs.getInt("recordID"));
+      ret.setWorkHours(rs.getFloat("workHours"));
+      ret.setWorkType(rs.getString("workType"));
+      ret.setWorkDate(rs.getDate("workDate"));
+      output.add(ret);
+    }
+    model.put("records", output);
+    if (flag) {
+      return "user/records";
+    } else {
+      return "nouser";
+    }
+  } catch (Exception e) {
+    model.put("message", e.getMessage());
+    return "error";
+  }
+}
+
   @Bean
   public DataSource dataSource() throws SQLException {
     if (dbUrl == null || dbUrl.isEmpty()) {
