@@ -81,7 +81,7 @@ public class Main {
     if (employeeName.equals("admin") && password.equals("123")){
       flag = true;
       logID = "admin";
-      return "redirect:/clients"; //CHANGE TO MAINPAGE FOR EACH LOGIN TYPE
+      return "redirect:/admin/records"; //CHANGE TO MAINPAGE FOR EACH LOGIN TYPE
     }
 
     try (Connection connection = dataSource.getConnection()) {
@@ -96,7 +96,7 @@ public class Main {
           System.out.println("user exists");
           flag = true;
           logID = employeeName;
-        } return "redirect:/employees"; //MAINPAGE
+        } return "redirect:/user/home"; //MAINPAGE
       }
       return "nouser";
     } catch (Exception e) {
@@ -275,7 +275,8 @@ public class Main {
 String recordListUser(Map<String, Object> model) {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
-    String sql = "SELECT * FROM records WHERE employeeName = " + logID;
+    String sql = "SELECT * FROM records WHERE employeeName = '" + logID + "'";
+    System.out.println(sql);
     ResultSet rs = stmt.executeQuery(sql);
 
     ArrayList<Record> output = new ArrayList<Record>();
