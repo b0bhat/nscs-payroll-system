@@ -96,9 +96,9 @@ public class Main {
           System.out.println("user: " + employeeName + ", " + password);
           flag = true;
           logID = employeeName;
-        } return "redirect:/user/home"; //MAINPAGE
-      }
-      return "nouser";
+          return "redirect:/user/home";
+        }
+      } return "nouser";
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
