@@ -5,7 +5,8 @@
 
 .data-table {
     overflow-y: auto;
-    margin: auto;
+    padding: 10px;
+    margin: 10px;
     width: 90%;
     height: 90%;
 }

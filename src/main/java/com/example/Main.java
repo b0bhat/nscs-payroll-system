@@ -302,6 +302,52 @@ String recordListUser(Map<String, Object> model) {
   }
 }
 
+@GetMapping("/user/addRecord")
+public String returnRecordAdd(Map<String, Object> model) throws Exception {
+  Record record = new Record();
+  model.put("record", record);
+  if (flag) {
+    return "user/addRecord";
+  } else {
+    return "error";
+  }
+}
+
+@PostMapping(path = "/user/addRecord", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+public String handleRecordAdd(Map<String, Object> model, Record record) throws Exception {
+  try (Connection connection = dataSource.getConnection()) {
+    Statement stmt = connection.createStatement();
+    final String UniqueID = UUID.randomUUID().toString().replace("-", "");
+    record.setRecordID(Integer.parseInt(UniqueID));
+
+    String sql = "INSERT INTO records VALUES ('"
+        + record.getRecordID() + "','" + record.getClientName() + "','" + record.getWorkHours() + "','"
+        + record.getWorkType() + "','" + record.getWorkDate() + "','" + record.getEmployeeName() + "')";
+
+    stmt.executeUpdate(sql);
+    return "redirect:/user/home";
+  } catch (Exception e) {
+    model.put("message", e.getMessage());
+    return "error";
+  }
+}
+
+@GetMapping("/user/deleteRecord")
+public String deleteRecord(Map<String, Object> model, @RequestParam String e_id) {
+  try (Connection connection = dataSource.getConnection()) {
+    String sql = "DELETE FROM records WHERE \"recordID\" =?";
+    PreparedStatement ps = connection.prepareStatement(sql);
+    ps.setString(1, e_id);
+    ps.executeUpdate();
+    System.out.println(ps);
+
+    return "redirect:/user/home";
+  } catch (Exception e) {
+    model.put("message", e.getMessage());
+    return "error";
+  }
+}
+
   @Bean
   public DataSource dataSource() throws SQLException {
     if (dbUrl == null || dbUrl.isEmpty()) {
