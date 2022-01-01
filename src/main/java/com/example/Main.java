@@ -271,7 +271,7 @@ public class Main {
 
 //==================================== USER ====================================//
 
-@GetMapping("/user/records")
+@GetMapping("/user/home")
 String recordListUser(Map<String, Object> model) {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
@@ -291,7 +291,7 @@ String recordListUser(Map<String, Object> model) {
     }
     model.put("records", output);
     if (flag) {
-      return "user/records";
+      return "user/home";
     } else {
       return "nouser";
     }
