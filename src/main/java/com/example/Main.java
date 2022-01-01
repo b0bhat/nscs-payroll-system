@@ -275,7 +275,7 @@ public class Main {
 String recordListUser(Map<String, Object> model) {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
-    String sql = "SELECT * FROM records WHERE 'employeeName' = '" + logID + "'";
+    String sql = "SELECT * FROM records WHERE \"employeeName\" = '" + logID + "'";
     System.out.println(sql);
     ResultSet rs = stmt.executeQuery(sql);
 
