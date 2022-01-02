@@ -54,6 +54,13 @@ public class Main {
     SpringApplication.run(Main.class, args);
   }
 
+  @InitBinder
+  private void dateBinder(WebDataBinder binder) {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
+    binder.registerCustomEditor(Date.class, editor);
+  }
+
   @RequestMapping("/")
   String index(Map<String, Object> model) {
     return "redirect:/login";
