@@ -31,7 +31,7 @@
           <label for="workType">Work Type</label>
           <select name="status" th:field="*{workType}" id="workType" required>
             <option value="0">Select Worktype...</option>
-            <option th:each="wType : ${workType}" th:value="${wType}" th:text="${wType}"></option>
+            <option th:each="wType : ${workTypes}" th:value="${wType}" th:text="${wType}"></option>
           </select>
         </li>
         <li>
