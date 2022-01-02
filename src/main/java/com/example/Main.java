@@ -249,7 +249,7 @@ public class Main {
         }
         model.put("workTypes", output);
         if (flag && logID == "admin") {
-          return "admin/workTypes";
+          return "admin/worktypes";
         } else {
           return "nouser";
         }
