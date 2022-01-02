@@ -370,7 +370,7 @@ public String returnRecordAdd(Map<String, Object> model) throws Exception {
     model.put("workTypes", output);
 
     Record record = new Record();
-    model.put("workTypes", record);
+    model.put("record", record);
     if (flag) {
       return "user/addRecord";
     } else {
