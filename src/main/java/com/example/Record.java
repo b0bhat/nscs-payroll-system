@@ -3,14 +3,14 @@ import java.sql.Date;
 public class Record {
 
     // PROPERTIES
-    private Integer recordID;
+    private String recordID;
     private String clientName;
     private float workHours;
     private String workType;
     private Date workDate;
     private String employeeName;
 
-    public void setRecordID(Integer recordID) {
+    public void setRecordID(String recordID) {
         this.recordID = recordID;
     }
     public void setClientName(String clientName) {
@@ -29,7 +29,7 @@ public class Record {
         this.employeeName = employeeName;
     }
 
-    public Integer getRecordID() {
+    public String getRecordID() {
         return this.recordID;
     }
     public String getClientName() {

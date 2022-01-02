@@ -318,7 +318,7 @@ public String handleRecordAdd(Map<String, Object> model, Record record) throws E
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
     final String UniqueID = UUID.randomUUID().toString().replace("-", "");
-    record.setRecordID(Integer.parseInt(UniqueID));
+    record.setRecordID(UniqueID);
     record.setEmployeeName(logID);
 
     String sql = "INSERT INTO records VALUES ('"
