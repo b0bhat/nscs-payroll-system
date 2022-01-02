@@ -30,9 +30,8 @@
         <li>
           <label for="workType">Work Type</label>
           <select name="status" th:field="*{workType}" id="workType" required>
-            <c:forEach var="types" items="${workType}">
-              <option id="${workType}" value="${workType}">${workType}</option>
-            </c:forEach>
+            <option value="0">Select Worktype...</option>
+            <option th:each="wType : ${workType}" th:value="${wType}" th:text="${wType}"></option>
           </select>
         </li>
         <li>
