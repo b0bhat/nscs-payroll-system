@@ -233,6 +233,59 @@ public class Main {
     }
   }
 
+//==================================== Work Types ====================================//
+
+    @GetMapping("/admin/worktypes")
+    String workTypeList(Map<String, Object> model) {
+      try (Connection connection = dataSource.getConnection()) {
+        Statement stmt = connection.createStatement();
+
+        String sql = "SELECT * FROM workTypes";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        ArrayList<String> output = new ArrayList<String>();
+        while (rs.next()) {
+          output.add(rs.getString("workType"));
+        }
+        model.put("workTypes", output);
+        if (flag && logID == "admin") {
+          return "admin/workTypes";
+        } else {
+          return "nouser";
+        }
+      } catch (Exception e) {
+        model.put("message", e.getMessage());
+        return "error";
+      }
+    }
+
+    @GetMapping("/admin/addWorkType")
+    public String returnWorkTypeAdd(Map<String, Object> model) throws Exception {
+      String workType = new String();
+      model.put("workType", workType);
+      if (flag && logID == "admin") {
+        return "admin/addWorkType";
+      } else {
+        return "error";
+      }
+    }
+
+    @PostMapping(path = "/admin/addWorkType", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+    public String handleWorkTypeAdd(Map<String, Object> model, @RequestParam String workType) throws Exception {
+      try (Connection connection = dataSource.getConnection()) {
+        Statement stmt = connection.createStatement();
+
+        String sql = "INSERT INTO workTypes VALUES ('"
+            + workType + "')";
+
+        stmt.executeUpdate(sql);
+        return "redirect:/admin/worktypes"; // Directly returns to employee homepage
+      } catch (Exception e) {
+        model.put("message", e.getMessage());
+        return "error";
+      }
+    }
+
 //==================================== RECORDS ====================================//
 
   @GetMapping("/admin/records")
@@ -251,7 +304,7 @@ public class Main {
         Record ret = new Record();
         ret.setEmployeeName(rs.getString("employeeName"));
         ret.setClientName(rs.getString("clientName"));
-        ret.setRecordID(rs.getInt("recordID"));
+        ret.setRecordID(rs.getString("recordID"));
         ret.setWorkHours(rs.getFloat("workHours"));
         ret.setWorkType(rs.getString("workType"));
         ret.setWorkDate(rs.getDate("workDate"));
@@ -284,7 +337,7 @@ String recordListUser(Map<String, Object> model) {
       Record ret = new Record();
       ret.setEmployeeName(rs.getString("employeeName"));
       ret.setClientName(rs.getString("clientName"));
-      ret.setRecordID(rs.getInt("recordID"));
+      ret.setRecordID(rs.getString("recordID"));
       ret.setWorkHours(rs.getFloat("workHours"));
       ret.setWorkType(rs.getString("workType"));
       ret.setWorkDate(rs.getDate("workDate"));

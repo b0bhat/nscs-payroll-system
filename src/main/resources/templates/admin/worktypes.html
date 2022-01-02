@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'header')}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/employees.css" />
+    <title>Work Types</title>
+</head>
+
+<header></header>
+
+<body>
+    <div class="data-table">
+      <table id="myTable">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr th:each="workType : ${workTypes}">
+              <td th:text="${workType}"></td>
+
+              <!--<td>
+                <button><a th:href="@{/employees/edit?rid={name}(name = ${employee.getName()})}">Edit</a></button>
+              </td>-->
+            </tr>
+
+          </tbody>
+      </table>
+      <span class="add-employee">
+          <button class="add"><a th:href="@{/admin/addWorkType}"><i class="bi bi-person-plus"></i>Add New Work Type</a></button>
+      </span>
+    </div>
+
+</body>
+
+</html>
