@@ -357,11 +357,27 @@ String recordListUser(Map<String, Object> model) {
 
 @GetMapping("/user/addRecord")
 public String returnRecordAdd(Map<String, Object> model) throws Exception {
-  Record record = new Record();
-  model.put("record", record);
-  if (flag) {
-    return "user/addRecord";
-  } else {
+  try (Connection connection = dataSource.getConnection()) {
+    Statement stmt = connection.createStatement();
+
+    String sql = "SELECT * FROM workTypes";
+    ResultSet rs = stmt.executeQuery(sql);
+
+    ArrayList<String> output = new ArrayList<String>();
+    while (rs.next()) {
+      output.add(rs.getString("workType"));
+    }
+    model.put("workTypes", output);
+
+    Record record = new Record();
+    model.put("workTypes", record);
+    if (flag) {
+      return "user/addRecord";
+    } else {
+      return "nouser";
+    }
+  } catch (Exception e) {
+    model.put("message", e.getMessage());
     return "error";
   }
 }

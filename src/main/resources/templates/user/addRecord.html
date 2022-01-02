@@ -29,7 +29,11 @@
         </li>
         <li>
           <label for="workType">Work Type</label>
-          <input type="text" th:field="*{workType}" id="workType" required />
+          <select name="status" th:field="*{workType}" id="workType" required>
+            <c:forEach var="types" items="${workTypes}">
+              <option id="${workType}" value="${workType}">${workType}</option>   
+            </c:forEach>
+          </select>
         </li>
         <li>
           <label for="workDate">Work Date</label>
