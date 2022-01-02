@@ -360,7 +360,7 @@ public String returnRecordAdd(Map<String, Object> model) throws Exception {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
 
-    String sql = "SELECT * FROM workTypes";
+    String sql = "SELECT * FROM \"workTypes\"";
     ResultSet rs = stmt.executeQuery(sql);
 
     ArrayList<String> output = new ArrayList<String>();
