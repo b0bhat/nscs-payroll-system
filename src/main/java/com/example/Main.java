@@ -319,6 +319,7 @@ public String handleRecordAdd(Map<String, Object> model, Record record) throws E
     Statement stmt = connection.createStatement();
     final String UniqueID = UUID.randomUUID().toString().replace("-", "");
     record.setRecordID(Integer.parseInt(UniqueID));
+    record.setEmployeeName(logID);
 
     String sql = "INSERT INTO records VALUES ('"
         + record.getRecordID() + "','" + record.getClientName() + "','" + record.getWorkHours() + "','"

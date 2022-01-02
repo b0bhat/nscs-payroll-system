@@ -13,23 +13,31 @@
 
 <body>
   <section class="home-section">
-    <div class="text">Past Records</div>
+    <div class="text">Add Record</div>
 
-    <form action="#" method="post" th:action="@{add}" th:object="${employee}" class="formtemplate">
-      <h1>Add Employee</h1>
+    <form action="#" method="post" th:action="@{add}" th:object="${record}" class="formtemplate">
+      <h1>Fill in the following fields:</h1>
       <br></br>
       <ul>
         <li>
-          <label for="name">Name</label>
-          <input type="text" th:field="*{name}" id="name" required />
+          <label for="clientName">Client Name</label>
+          <input type="text" th:field="*{clientName}" id="clientName" required />
         </li>
         <li>
-          <label for="password">Password</label>
-          <input type="text" th:field="*{password}" id="password" required />
+          <label for="workHours">Work Hours</label>
+          <input type="number" th:field="*{workHours}" id="workHours" required />
+        </li>
+        <li>
+          <label for="workType">Work Type</label>
+          <input type="text" th:field="*{workType}" id="workType" required />
+        </li>
+        <li>
+          <label for="workDate">Work Date</label>
+          <input type="date" th:field="*{workDate}" id="workDate" required />
         </li>
         <li>
           <span>
-            <button class="cancel"><a th:href="@{/employees}">Cancel</a></button>
+            <button class="cancel"><a th:href="@{/user/home}">Cancel</a></button>
             <input type="submit" value="Save" />
           </span>
         </li>

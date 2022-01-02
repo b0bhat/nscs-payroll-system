@@ -30,10 +30,14 @@ th, td {
 
 .data-table, .data-table td {
     box-shadow: inset 1px -1px rgb(200, 200, 200);
+    padding: 10px;
+    margin: 10px;
 }
 
 .data-table th {
     box-shadow: inset 1px 1px rgb(200, 200, 200), 0 1px #000;
+    padding: 10px;
+    margin: 10px;
 }
 
 .visual {
