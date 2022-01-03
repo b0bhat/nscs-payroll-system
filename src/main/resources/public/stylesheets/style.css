@@ -86,11 +86,9 @@ input[type=text], input[type=password], input[type=date], select {
 .data-table thead th {
     position: sticky;
     top: 0;
-    /*background-color: #009879;*/
-    background-color: #0f2269;
+    background-color: #5dc691;
     color: white;
     text-align: left;
-    font-weight: normal;
 }
 
 table {
