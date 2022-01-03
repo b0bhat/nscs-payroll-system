@@ -12,39 +12,37 @@
 <header></header>
 
 <body>
-  <section class="home-section">
+  <section class="data-table">
     <div class="text">Add Record</div>
 
     <form action="#" method="post" th:action="@{addRecord}" th:object="${record}" class="formtemplate">
-      <h1>Fill in the following fields:</h1>
+      <h2>Fill in the following fields:</h1>
       <br></br>
-      <ul>
-        <li>
-          <label for="clientName">Client Name</label>
-          <input type="text" th:field="*{clientName}" id="clientName" required />
-        </li>
-        <li>
-          <label for="workHours">Work Hours</label>
-          <input type="number" step="0.05" th:field="*{workHours}" id="workHours" required />
-        </li>
-        <li>
-          <label for="workType">Work Type</label>
-          <select name="status" th:field="*{workType}" id="workType" required>
-            <option value="0">Select Worktype...</option>
-            <option th:each="wType : ${workTypes}" th:value="${wType}" th:text="${wType}"></option>
-          </select>
-        </li>
-        <li>
-          <label for="workDate">Work Date</label>
-          <input type="date" th:field="*{workDate}" id="workDate" required />
-        </li>
-        <li>
-          <span>
-            <button class="cancel"><a th:href="@{/user/home}">Cancel</a></button>
-            <input type="submit" value="Save" />
-          </span>
-        </li>
-      </ul>
+      <li>
+        <label for="clientName">Client Name</label>
+        <input type="text" th:field="*{clientName}" id="clientName" required />
+      </li>
+      <li>
+        <label for="workHours">Work Hours </label>
+        <input type="number" step="0.05" th:field="*{workHours}" id="workHours" required />
+      </li>
+      <li>
+        <label for="workType">Work Type  </label>
+        <select name="status" th:field="*{workType}" id="workType" required>
+          <option value="0">Select Worktype...</option>
+          <option th:each="wType : ${workTypes}" th:value="${wType}" th:text="${wType}"></option>
+        </select>
+      </li>
+      <li>
+        <label for="workDate">Work Date  </label>
+        <input type="date" th:field="*{workDate}" id="workDate" required />
+      </li>
+      <li>
+        <span>
+          <button class="cancel"><a th:href="@{/user/home}">Cancel</a></button>
+          <input type="submit" value="Save" />
+        </span>
+      </li>
     </form>
   </section>
 

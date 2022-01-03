@@ -36,6 +36,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 import java.sql.Date;
+import java.sql.*;
 import java.io.*;
 
 @Controller
@@ -405,6 +406,26 @@ public String handleRecordAdd(Map<String, Object> model, Record record) throws E
 @GetMapping("/user/deleteRecord")
 public String deleteRecord(Map<String, Object> model, @RequestParam String e_id) {
   try (Connection connection = dataSource.getConnection()) {
+    Statement stmt = connection.createStatement();
+    String search = "SELECT * FROM records WHERE \"recordID\" = '" + e_id + "'";
+    ResultSet rs = stmt.executeQuery(search);
+    Record ret = new Record();
+    ret.setEmployeeName(rs.getString("employeeName"));
+    ret.setClientName(rs.getString("clientName"));
+    ret.setRecordID(rs.getString("recordID"));
+    ret.setWorkHours(rs.getFloat("workHours"));
+    ret.setWorkType(rs.getString("workType"));
+    ret.setWorkDate(rs.getDate("workDate"));
+    java.sql.Date sqlDate = new Date(System.currentTimeMillis());
+
+    String save = "INSERT INTO oldRecords VALUES ('"
+        + UUID.randomUUID().toString().replace("-", "") + "','"
+        + ret.getClientName() + "','" + ret.getWorkHours() + "','" + ret.getWorkType() + "','"
+        + ret.getWorkDate() + "','" + ret.getEmployeeName() + "','"
+        + sqlDate + "','del','" +
+        ret.getRecordID() + "')";
+        System.out.println(save);
+        stmt.executeQuery(save);
     String sql = "DELETE FROM records WHERE \"recordID\" =?";
     PreparedStatement ps = connection.prepareStatement(sql);
     ps.setString(1, e_id);
