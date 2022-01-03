@@ -13,12 +13,9 @@
 
 <body>
   <section class="home-section">
-    <div class="text">Clients</div>
 
     <form action="#" method="post" th:action="@{addClient}" th:object="${client}" class="formtemplate">
       <h1>Add Client</h1>
-      <br></br>
-      <ul>
         <li>
           <label for="name">Client Name</label>
           <input type="text" th:value="${client}" name="client" required />
@@ -29,7 +26,6 @@
             <input type="submit" value="Save" />
           </span>
         </li>
-      </ul>
     </form>
   </section>
 

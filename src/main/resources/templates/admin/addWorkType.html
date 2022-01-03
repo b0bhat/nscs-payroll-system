@@ -6,19 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/stylesheets/employees.css" />
-    <title>Current Employees</title>
+    <title>Add Work Type</title>
 </head>
 
 <header></header>
 
 <body>
   <section class="home-section">
-    <div class="text">Work Types</div>
 
     <form action="#" method="post" th:action="@{addWorkType}" th:object="${workType}" class="formtemplate">
       <h1>Add Work Type</h1>
-      <br></br>
-      <ul>
         <li>
           <label for="workType">Work Type Name</label>
           <input type="text" th:value="${workType}" name="workType" required />
@@ -29,7 +26,6 @@
             <input type="submit" value="Save" />
           </span>
         </li>
-      </ul>
     </form>
   </section>
 

@@ -13,11 +13,9 @@
 
 <body>
   <section class="data-table">
-    <div class="text">Add Record</div>
 
     <form action="#" method="post" th:action="@{addRecord}" th:object="${record}" class="formtemplate">
-      <h2>Fill in the following fields:</h1>
-      <br></br>
+      <h1>Adding Record</h1>
       <li>
         <label for="clientName">Client Name</label>
         <input type="text" th:field="*{clientName}" id="clientName" required />

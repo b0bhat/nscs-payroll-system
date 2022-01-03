@@ -16,7 +16,6 @@
     <form action="#" method="post" th:action="@{addEmployee}" th:object="${employee}" class="formtemplate">
       <h1>Add Employee</h1>
       <br></br>
-      <ul>
         <li>
           <label for="name">Name</label>
           <input type="text" th:field="*{name}" id="name" required />
@@ -31,7 +30,6 @@
             <input type="submit" value="Save" />
           </span>
         </li>
-      </ul>
     </form>
   </section>
 
