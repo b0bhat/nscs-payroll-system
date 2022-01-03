@@ -24,8 +24,7 @@ label {
     padding: 20px 0;
 }
 
-.add-employee,
-.add-project {
+.add {
     display: inline-block;
     text-align: right;
     align-self: flex-end;
@@ -65,8 +64,8 @@ label {
     z-index: 1;
 }
 
-input[type=text], input[type=date], select {
-    width: 95%;
+input[type=text], input[type=password], input[type=date], select {
+    width: 100px;
     height: 100%;
     padding: 7px 15px;
     margin-right: 5px;
@@ -81,21 +80,14 @@ input[type=text], input[type=date], select {
 }
 
 /*** table ***/
-.data-table,
-.visual-table {
+.data-table {
     overflow-y: auto;
     max-height: 700px;
-    width: 100%;
     margin: auto;
     margin-bottom: 30px;
 }
 
-.data-table {
-    height: 300px;
-}
-
-.data-table thead th,
-.visual-table thead th {
+.data-table thead th {
     position: sticky;
     top: 0;
     /*background-color: #009879;*/
@@ -107,7 +99,6 @@ input[type=text], input[type=date], select {
 
 table {
     border-collapse: collapse;
-    width: 100%;
     /*margin: 0px auto;*/
     font-family: "Montserrat", sans-serif;
 }
@@ -144,6 +135,7 @@ input[type=submit] {
     background-color: #0f2269;
     color: white;
     cursor: pointer;
+    margin:8px
 }
 
 input[type=submit]:hover, button:hover {
