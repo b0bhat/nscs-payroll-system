@@ -297,7 +297,7 @@ public class Main {
       /*stmt.executeUpdate(
           "CREATE TABLE IF NOT EXISTS employees (id varchar(40), name varchar(40), position varchar(10), role varchar(40),"
               + "team varchar(40), status boolean, startdate date, enddate date)");*/
-      String sql = "SELECT * FROM records";
+      String sql = "SELECT * FROM records ORDER BY \"workDate\" DESC";
       ResultSet rs = stmt.executeQuery(sql);
 
       ArrayList<Record> output = new ArrayList<Record>();
@@ -338,7 +338,7 @@ String biweeklyTool(Map<String, Object> model) {
     }*/
 
     String sql = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\", \"clientName\" "
-    + " FROM records GROUP BY \"employeeName\", \"workType\", \"clientName\"";
+    + " FROM records GROUP BY \"employeeName\", \"workType\", \"clientName\" ORDER BY \"employeeName\" ASC";
     ResultSet rs = stmt.executeQuery(sql);
 
     ArrayList<Biweekly> output = new ArrayList<Biweekly>();
@@ -369,7 +369,7 @@ String biweeklyTool(Map<String, Object> model) {
 String recordListUser(Map<String, Object> model) {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
-    String sql = "SELECT * FROM records WHERE \"employeeName\" = '" + logID + "'";
+    String sql = "SELECT * FROM records WHERE \"employeeName\" = '" + logID + "'ORDER BY \"workDate\" DESC";
     System.out.println(sql);
     ResultSet rs = stmt.executeQuery(sql);
 
