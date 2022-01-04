@@ -407,7 +407,9 @@ public String handleRecordAdd(Map<String, Object> model, Record record) throws E
 public String deleteRecord(Map<String, Object> model, @RequestParam String e_id) {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
+    System.out.println(e_id);
     String search = "SELECT * FROM records WHERE \"recordID\" = '" + e_id + "'";
+    System.out.println(search);
     ResultSet rs = stmt.executeQuery(search);
     Record ret = new Record();
     if (rs.next()) {
@@ -426,7 +428,7 @@ public String deleteRecord(Map<String, Object> model, @RequestParam String e_id)
           + sqlDate + "','del','" +
           ret.getRecordID() + "')";
 
-      System.out.println(save);
+      //System.out.println(save);
       stmt.executeQuery(save);
 
       String sql = "DELETE FROM records WHERE \"recordID\" =?";
