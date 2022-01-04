@@ -94,7 +94,7 @@ public class Main {
         String compareName = rs.getString("employeeName");
         String comparePassword = rs.getString("password");
         if (employeeName.equals(compareName) && password.equals(comparePassword)) {
-          System.out.println("user: " + employeeName + ", " + password);
+          //System.out.println("user: " + employeeName + ", " + password);
           flag = true;
           logID = employeeName;
           return "redirect:/user/home";
@@ -410,27 +410,31 @@ public String deleteRecord(Map<String, Object> model, @RequestParam String e_id)
     String search = "SELECT * FROM records WHERE \"recordID\" = '" + e_id + "'";
     ResultSet rs = stmt.executeQuery(search);
     Record ret = new Record();
-    ret.setEmployeeName(rs.getString("employeeName"));
-    ret.setClientName(rs.getString("clientName"));
-    ret.setRecordID(rs.getString("recordID"));
-    ret.setWorkHours(rs.getFloat("workHours"));
-    ret.setWorkType(rs.getString("workType"));
-    ret.setWorkDate(rs.getDate("workDate"));
-    java.sql.Date sqlDate = new Date(System.currentTimeMillis());
+    if (rs.next()) {
+      ret.setEmployeeName(rs.getString("employeeName"));
+      ret.setClientName(rs.getString("clientName"));
+      ret.setRecordID(rs.getString("recordID"));
+      ret.setWorkHours(rs.getFloat("workHours"));
+      ret.setWorkType(rs.getString("workType"));
+      ret.setWorkDate(rs.getDate("workDate"));
+      java.sql.Date sqlDate = new Date(System.currentTimeMillis());
 
-    String save = "INSERT INTO oldRecords VALUES ('"
-        + UUID.randomUUID().toString().replace("-", "") + "','"
-        + ret.getClientName() + "','" + ret.getWorkHours() + "','" + ret.getWorkType() + "','"
-        + ret.getWorkDate() + "','" + ret.getEmployeeName() + "','"
-        + sqlDate + "','del','" +
-        ret.getRecordID() + "')";
-        System.out.println(save);
-        stmt.executeQuery(save);
-    String sql = "DELETE FROM records WHERE \"recordID\" =?";
-    PreparedStatement ps = connection.prepareStatement(sql);
-    ps.setString(1, e_id);
-    ps.executeUpdate();
-    System.out.println(ps);
+      String save = "INSERT INTO oldRecords VALUES ('"
+          + UUID.randomUUID().toString().replace("-", "") + "','"
+          + ret.getClientName() + "','" + ret.getWorkHours() + "','" + ret.getWorkType() + "','"
+          + ret.getWorkDate() + "','" + ret.getEmployeeName() + "','"
+          + sqlDate + "','del','" +
+          ret.getRecordID() + "')";
+
+      System.out.println(save);
+      stmt.executeQuery(save);
+
+      String sql = "DELETE FROM records WHERE \"recordID\" =?";
+      PreparedStatement ps = connection.prepareStatement(sql);
+      ps.setString(1, e_id);
+      ps.executeUpdate();
+      System.out.println(ps);
+    }
 
     return "redirect:/user/home";
   } catch (Exception e) {
