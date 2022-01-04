@@ -429,8 +429,9 @@ public String deleteRecord(Map<String, Object> model, @RequestParam String e_id)
           + sqlDate + "','del','" +
           ret.getRecordID() + "')";
 
-      //System.out.println(save);
+      System.out.println(save);
       stmt.executeQuery(save);
+      System.out,println(save);
 
       String sql = "DELETE FROM records WHERE \"recordID\" =?";
       PreparedStatement ps = connection.prepareStatement(sql);
