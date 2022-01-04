@@ -419,7 +419,7 @@ public String deleteRecord(Map<String, Object> model, @RequestParam String e_id)
       ret.setWorkDate(rs.getDate("workDate"));
       java.sql.Date sqlDate = new Date(System.currentTimeMillis());
 
-      String save = "INSERT INTO oldRecords VALUES ('"
+      String save = "INSERT INTO \"oldRecords\" VALUES ('"
           + UUID.randomUUID().toString().replace("-", "") + "','"
           + ret.getClientName() + "','" + ret.getWorkHours() + "','" + ret.getWorkType() + "','"
           + ret.getWorkDate() + "','" + ret.getEmployeeName() + "','"
