@@ -434,8 +434,8 @@ public String deleteRecord(Map<String, Object> model, @RequestParam String e_id)
       String sql = "DELETE FROM records WHERE \"recordID\" =?";
       PreparedStatement ps = connection.prepareStatement(sql);
       ps.setString(1, e_id);
-      ps.executeUpdate();
       System.out.println(ps);
+      ps.executeUpdate();
     }
 
     return "redirect:/user/home";
