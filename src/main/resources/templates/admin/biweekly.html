@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'header')}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/employees.css" />
+    <title>Biweekly Tool</title>
+</head>
+
+<header></header>
+
+<body>
+    <div class="data-table">
+      <table id="myTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Client</th>
+              <th>Work Hours</th>
+              <th>Work Type</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr th:each="record : ${biweekly}">
+              <td th:text="${record.employeeName}"></td>
+              <td th:text="${record.clientName}"></td>
+              <td th:text="${record.workHours}"></td>
+              <td th:text="${record.workType}"></td>
+
+              <!--<td>
+                <button><a th:href="@{/employees/edit?rid={name}(name = ${employee.getName()})}">Edit</a></button>
+              </td>
+              <td>
+                <button><a th:href="@{/admin/deleteRecord?e_id={id}(id=${record.recordID})}"><i class="bi bi-trash"></i>Delete</a></button>
+              </td>-->
+            </tr>
+
+          </tbody>
+      </table>
+    </div>
+
+</body>
+
+</html>

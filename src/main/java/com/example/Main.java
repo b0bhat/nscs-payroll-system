@@ -323,6 +323,46 @@ public class Main {
     }
   }
 
+//==================================== TOOLS ====================================//
+
+@GetMapping("/admin/biweekly")
+String biweeklyTool(Map<String, Object> model) {
+  try (Connection connection = dataSource.getConnection()) {
+    Statement stmt = connection.createStatement();
+    /*
+    String list = "SELECT \"employeeName\" FROM login";
+    ResultSet rsl = stmt.executeQuery(list);
+    ArrayList<String> elist = new ArrayList<String>();
+    while (rsl.next()) {
+      elist.add(rsl.getString("employeeName"));
+    }*/
+
+    String sql = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\", \"clientName\" "
+    + " FROM records GROUP BY \"employeeName\", \"workType\", \"clientName\"";
+    ResultSet rs = stmt.executeQuery(sql);
+
+    ArrayList<Biweekly> output = new ArrayList<Biweekly>();
+    while (rs.next()) {
+      Biweekly ret = new Biweekly();
+      ret.setEmployeeName(rs.getString("employeeName"));
+      ret.setClientName(rs.getString("clientName"));
+      ret.setWorkHours(rs.getFloat("workHours"));
+      ret.setWorkType(rs.getString("workType"));
+      output.add(ret);
+    }
+    model.put("biweekly", output);
+    if (flag && logID == "admin") {
+      return "admin/biweekly";
+    } else {
+      return "nouser";
+    }
+  } catch (Exception e) {
+    model.put("message", e.getMessage());
+    return "error";
+  }
+}
+
+
 //==================================== USER ====================================//
 
 @GetMapping("/user/home")
@@ -396,6 +436,16 @@ public String handleRecordAdd(Map<String, Object> model, Record record) throws E
         + record.getWorkType() + "','" + record.getWorkDate() + "','" + record.getEmployeeName() + "')";
 
     stmt.executeUpdate(sql);
+
+    java.sql.Date sqlDate = new Date(System.currentTimeMillis());
+    String save = "INSERT INTO \"oldRecords\" VALUES ('"
+        + UUID.randomUUID().toString().replace("-", "") + "','"
+        + record.getClientName() + "','" + record.getWorkHours() + "','" + record.getWorkType() + "','"
+        + record.getWorkDate() + "','" + record.getEmployeeName() + "','"
+        + sqlDate + "','add','" +
+        record.getRecordID() + "')";
+    stmt.executeUpdate(save);
+
     return "redirect:/user/home";
   } catch (Exception e) {
     model.put("message", e.getMessage());
@@ -419,9 +469,8 @@ public String deleteRecord(Map<String, Object> model, @RequestParam String e_id)
       ret.setWorkHours(rs.getFloat("workHours"));
       ret.setWorkType(rs.getString("workType"));
       ret.setWorkDate(rs.getDate("workDate"));
+
       java.sql.Date sqlDate = new Date(System.currentTimeMillis());
-
-
       String save = "INSERT INTO \"oldRecords\" VALUES ('"
           + UUID.randomUUID().toString().replace("-", "") + "','"
           + ret.getClientName() + "','" + ret.getWorkHours() + "','" + ret.getWorkType() + "','"
