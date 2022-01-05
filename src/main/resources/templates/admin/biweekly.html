@@ -12,37 +12,56 @@
 <header></header>
 
 <body>
-    <div class="data-table">
-      <table id="myTable">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Client</th>
-              <th>Work Hours</th>
-              <th>Work Type</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
+  <form action="#" method="post" th:action="@{biweekly}" th:object="${date}" class="formtemplate">
+    <h1>Pick Date</h1>
+      <li>
+        <label for="startDate">Start Date</label>
+        <input type="date" th:value="${startDate}" name="startDate" required />
+      </li>
+      <li>
+        <label for="endDate">End Date</label>
+        <input type="date" th:value="${endDate}" name="endDate" required />
+      </li>
+      <li>
+        <span>
+          <input type="submit" value="Submit" />
+        </span>
+      </li>
+  </form>
 
-          <tbody>
-            <tr th:each="record : ${biweekly}">
-              <td th:text="${record.employeeName}"></td>
-              <td th:text="${record.clientName}"></td>
-              <td th:text="${record.workHours}"></td>
-              <td th:text="${record.workType}"></td>
+  <div class="data-table">
+    <table id="myTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Client</th>
+            <th>Work Hours</th>
+            <th>Work Type</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
 
-              <!--<td>
-                <button><a th:href="@{/employees/edit?rid={name}(name = ${employee.getName()})}">Edit</a></button>
-              </td>
-              <td>
-                <button><a th:href="@{/admin/deleteRecord?e_id={id}(id=${record.recordID})}"><i class="bi bi-trash"></i>Delete</a></button>
-              </td>-->
-            </tr>
+        <tbody>
+          <tr th:each="record : ${biweekly}">
+            <td th:text="${record.employeeName}"></td>
+            <td th:text="${record.clientName}"></td>
+            <td th:text="${record.workHours}"></td>
+            <td th:text="${record.workType}"></td>
 
-          </tbody>
-      </table>
-    </div>
+            <!--<td>
+              <button><a th:href="@{/employees/edit?rid={name}(name = ${employee.getName()})}">Edit</a></button>
+            </td>
+            <td>
+              <button><a th:href="@{/admin/deleteRecord?e_id={id}(id=${record.recordID})}"><i class="bi bi-trash"></i>Delete</a></button>
+            </td>-->
+          </tr>
+
+        </tbody>
+    </table>
+  </div>
+  <script>
+  </script>
 
 </body>
 

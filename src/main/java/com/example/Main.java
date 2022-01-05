@@ -44,6 +44,9 @@ import java.io.*;
 public class Main {
   boolean flag = false;
   String logID = new String();
+  java.sql.Date baseDate = java.sql.Date.valueOf("2000-01-01");
+  Date startDate = baseDate;
+  Date endDate = baseDate;
 
   @Value("${spring.datasource.url}")
   private String dbUrl;
@@ -234,7 +237,7 @@ public class Main {
     }
   }
 
-//==================================== Work Types ====================================//
+//==================================== WORK TYPES ====================================//
 
     @GetMapping("/admin/worktypes")
     String workTypeList(Map<String, Object> model) {
@@ -329,17 +332,15 @@ public class Main {
 String biweeklyTool(Map<String, Object> model) {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
-    /*
-    String list = "SELECT \"employeeName\" FROM login";
-    ResultSet rsl = stmt.executeQuery(list);
-    ArrayList<String> elist = new ArrayList<String>();
-    while (rsl.next()) {
-      elist.add(rsl.getString("employeeName"));
-    }*/
-
-    String sql = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\", \"clientName\" "
-    + " FROM records GROUP BY \"employeeName\", \"workType\", \"clientName\" ORDER BY \"employeeName\" ASC";
-    ResultSet rs = stmt.executeQuery(sql);
+    String sql;
+    if (startDate == baseDate || endDate == baseDate) {
+      sql = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\", \"clientName\" "
+      + " FROM records GROUP BY \"employeeName\", \"workType\", \"clientName\" ORDER BY \"employeeName\" ASC";
+    } else {
+      sql = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\", \"clientName\" "
+      + " FROM records WHERE (\"workDate\" >= '" + startDate + "' AND \"workDate\" <= '" + endDate + "') "
+      + "GROUP BY \"employeeName\", \"workType\", \"clientName\" ORDER BY \"employeeName\" ASC";
+    } ResultSet rs = stmt.executeQuery(sql);
 
     ArrayList<Biweekly> output = new ArrayList<Biweekly>();
     while (rs.next()) {
@@ -351,11 +352,35 @@ String biweeklyTool(Map<String, Object> model) {
       output.add(ret);
     }
     model.put("biweekly", output);
+
+    dateRange date = new dateRange();
+    if (startDate == baseDate || endDate == baseDate) {
+      java.sql.Date curDate = new Date(System.currentTimeMillis());
+      date.setStartDate(curDate);
+      date.setEndDate(curDate);
+    } else {
+      date.setStartDate(startDate);
+      date.setEndDate(endDate);
+    }
+    model.put("date", date);
+
     if (flag && logID == "admin") {
       return "admin/biweekly";
     } else {
       return "nouser";
     }
+  } catch (Exception e) {
+    model.put("message", e.getMessage());
+    return "error";
+  }
+}
+
+@PostMapping(path = "/admin/biweekly", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+public String handleBiweeklyDate(Map<String, Object> model, dateRange date) throws Exception {
+  try (Connection connection = dataSource.getConnection()) {
+    startDate = date.getStartDate();
+    endDate = date.getEndDate();
+    return "redirect:/admin/biweekly";
   } catch (Exception e) {
     model.put("message", e.getMessage());
     return "error";
