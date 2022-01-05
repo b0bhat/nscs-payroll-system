@@ -5,24 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
-    <title>Past Records</title>
+    <title>User Records</title>
 </head>
 
 <header></header>
 
 <body>
     <div class="data-table">
+      <h1>Records</h1>
       <span class="add-employee">
           <button class="add"><a th:href="@{/user/addRecord}"><i class="bi bi-person-plus"></i>Add New Record</a></button>
       </span>
       <table id="myTable">
           <thead>
             <tr>
-              <th>Name</th>
+              <!--<th>Name</th>-->
               <th>Client</th>
-              <th>Work Hours</th>
-              <th>Work Type</th>
-              <th>Work Date</th>
+              <th>Hours</th>
+              <th>Type</th>
+              <th>Date</th>
               <th></th>
               <th></th>
             </tr>
@@ -30,7 +31,7 @@
 
           <tbody>
             <tr th:each="record : ${records}">
-              <td th:text="${record.employeeName}"></td>
+              <!--<td th:text="${record.employeeName}"></td>-->
               <td th:text="${record.clientName}"></td>
               <td th:text="${record.workHours}"></td>
               <td th:text="${record.workType}"></td>
