@@ -334,19 +334,18 @@ String biweeklyTool(Map<String, Object> model) {
     Statement stmt = connection.createStatement();
     String sql;
     if (startDate == baseDate || endDate == baseDate) {
-      sql = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\", \"clientName\" "
-      + " FROM records GROUP BY \"employeeName\", \"workType\", \"clientName\" ORDER BY \"employeeName\" ASC";
+      sql = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\" "
+      + " FROM records GROUP BY \"employeeName\", \"workType\" ORDER BY \"employeeName\" ASC";
     } else {
-      sql = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\", \"clientName\" "
+      sql = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\" "
       + " FROM records WHERE (\"workDate\" >= '" + startDate + "' AND \"workDate\" <= '" + endDate + "') "
-      + "GROUP BY \"employeeName\", \"workType\", \"clientName\" ORDER BY \"employeeName\" ASC";
+      + "GROUP BY \"employeeName\", \"workType\" ORDER BY \"employeeName\" ASC";
     } ResultSet rs = stmt.executeQuery(sql);
 
     ArrayList<Biweekly> output = new ArrayList<Biweekly>();
     while (rs.next()) {
       Biweekly ret = new Biweekly();
       ret.setEmployeeName(rs.getString("employeeName"));
-      ret.setClientName(rs.getString("clientName"));
       ret.setWorkHours(rs.getFloat("workHours"));
       ret.setWorkType(rs.getString("workType"));
       output.add(ret);

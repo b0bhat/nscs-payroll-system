@@ -12,29 +12,22 @@
 <header></header>
 
 <body>
-  <form action="#" method="post" th:action="@{biweekly}" th:object="${date}" class="formtemplate">
-    <h1>Pick Date</h1>
-      <li>
-        <label for="startDate">Start Date</label>
-        <input type="date" th:value="${startDate}" name="startDate" required />
-      </li>
-      <li>
-        <label for="endDate">End Date</label>
-        <input type="date" th:value="${endDate}" name="endDate" required />
-      </li>
-      <li>
-        <span>
-          <input type="submit" value="Submit" />
-        </span>
-      </li>
-  </form>
-
   <div class="data-table">
+    <form action="#" method="post" th:action="@{biweekly}" th:object="${date}" class="formtemplate">
+      <h1>Biweekly</h1>
+          <label for="startDate">Start Date</label>
+          <input type="date" th:value="${startDate}" name="startDate" id="startDate" required />
+          <label for="endDate">End Date</label>
+          <input type="date" th:value="${endDate}" name="endDate" id="endDate" required />
+          <span>
+            <input type="submit" value="Submit" />
+          </span>
+    </form>
+    <h1>Biweekly Report</h1>
     <table id="myTable">
         <thead>
           <tr>
             <th>Name</th>
-            <th>Client</th>
             <th>Work Hours</th>
             <th>Work Type</th>
             <th></th>
@@ -45,7 +38,6 @@
         <tbody>
           <tr th:each="record : ${biweekly}">
             <td th:text="${record.employeeName}"></td>
-            <td th:text="${record.clientName}"></td>
             <td th:text="${record.workHours}"></td>
             <td th:text="${record.workType}"></td>
 
@@ -61,6 +53,8 @@
     </table>
   </div>
   <script>
+    document.getElementById('startDate').value = new Date().toDateInputValue();
+    document.getElementById('endDate').value = new Date().toDateInputValue();
   </script>
 
 </body>
