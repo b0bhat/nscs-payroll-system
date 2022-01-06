@@ -9,6 +9,13 @@
     <title>Biweekly Tool</title>
 </head>
 
+<script>
+  //document.getElementById('startDate').value = new Date().toDateInputValue();
+  //document.getElementById('endDate').value = new Date().toDateInputValue();
+  const diffTime = Math.abs(document.getElementById('endDate') - document.getElementById('startDate'));
+  document.getElementById('diff').value = new String(Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
+</script>
+
 <header></header>
 
 <body>
@@ -47,12 +54,6 @@
         </tbody>
     </table>
   </div>
-  <script>
-    //document.getElementById('startDate').value = new Date().toDateInputValue();
-    //document.getElementById('endDate').value = new Date().toDateInputValue();
-    const diffTime = Math.abs(document.getElementById('endDate') - document.getElementById('startDate'));
-    document.getElementById('diff').value = new String(Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
-  </script>
 
 </body>
 
