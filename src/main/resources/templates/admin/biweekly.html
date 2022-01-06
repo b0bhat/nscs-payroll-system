@@ -20,10 +20,11 @@
           <label for="endDate">End Date</label>
           <input type="date" th:value="${endDate}" name="endDate" id="endDate" required />
           <span>
+            <span id='diff'> - </span>
             <input type="submit" value="Submit" />
           </span>
     </form>
-    <h1>Biweekly Report</h1>
+    <h2>Biweekly Report</h2>
     <table id="myTable">
         <thead>
           <tr>
@@ -41,26 +42,16 @@
             <td th:text="${record.workHours}"></td>
             <td th:text="${record.workType}"></td>
 
-            <!--<td>
-              <button><a th:href="@{/employees/edit?rid={name}(name = ${employee.getName()})}">Edit</a></button>
-            </td>
-            <td>
-              <button><a th:href="@{/admin/deleteRecord?e_id={id}(id=${record.recordID})}"><i class="bi bi-trash"></i>Delete</a></button>
-            </td>-->
           </tr>
 
         </tbody>
     </table>
   </div>
   <script>
-    document.getElementById('startDate').value = new Date().toDateInputValue();
-    document.getElementById('endDate').value = new Date().toDateInputValue();
-
-    var tableElements = document.getElementById("myTable");
-    for(var j = 0; j < tableElements.rows.length; j++){
-        var row = tableElements.rows.item(j);
-        row.style.backgroundColor = "yellow";
-    }
+    //document.getElementById('startDate').value = new Date().toDateInputValue();
+    //document.getElementById('endDate').value = new Date().toDateInputValue();
+    const diffTime = Math.abs(document.getElementById('endDate') - document.getElementById('startDate'));
+    document.getElementById('diff').value = new String(Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
   </script>
 
 </body>

@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/stylesheets/employees.css" />
-    <title>Biweekly Tool</title>
+    <title>Monthly Tool</title>
 </head>
 
 <header></header>
 
 <body>
   <div class="data-table">
-    <form action="#" method="post" th:action="@{biweekly}" th:object="${date}" class="formtemplate">
-      <h1>Biweekly</h1>
+    <form action="#" method="post" th:action="@{monthyl}" th:object="${date}" class="formtemplate">
+      <h1>Monthly</h1>
           <label for="startDate">Start Date</label>
           <input type="date" th:value="${startDate}" name="startDate" id="startDate" required />
           <label for="endDate">End Date</label>
@@ -23,7 +23,7 @@
             <input type="submit" value="Submit" />
           </span>
     </form>
-    <h1>Biweekly Report</h1>
+    <h2>Monthly Report</h2>
     <table id="myTable">
         <thead>
           <tr>
