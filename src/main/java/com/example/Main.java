@@ -413,7 +413,7 @@ String monthlyTool(Map<String, Object> model) {
       ArrayList<Monthly> records = new ArrayList<Monthly>();
       int num = 0;
       while (rs.next()) {
-        int++;
+        num++;
         Monthly ret = new Monthly();
         System.out.println("monthly \n");
         ret.setEmployeeName(rs.getString("employeeName"));
