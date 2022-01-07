@@ -44,9 +44,9 @@
                   </thead>
                   <tbody>
                     <tr th:each="record : ${monthlylist.records}">
-                      <td th:text="${record.employeeName}">employeeName</td>
-                      <td th:text="${record.workDate}">workDate</td>
-                      <td th:text="${record.workHours}">workHours</td>
+                      <p th:text="${record.employeeName}"></p>
+                      <p th:text="${record.workDate}"></p>
+                      <p th:text="${record.workHours}"></p>
                     </tr>
                   </tbody>
               </table>
