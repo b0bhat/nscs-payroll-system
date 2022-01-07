@@ -31,29 +31,30 @@
     <h2>Monthly Report</h2>
     <table id="myTable">
         <thead>
-          <tr>
-            <th>Name</th>
-            <th>Work Date</th>
-            <th>Work Hours</th>
-            <th></th>
-            <th></th>
-          </tr>
+        <tr><th>Client</th></tr>
         </thead>
-
         <tbody>
-          <tr th:each="record : ${monthly}">
-            <td th:text="${record.employeeName}"></td>
-            <td th:text="${record.workDate}"></td>
-            <td th:text="${record.workHours}"></td>
-
-            <!--<td>
-              <button><a th:href="@{/employees/edit?rid={name}(name = ${employee.getName()})}">Edit</a></button>
-            </td>
+          <tr th:each="client : ${clientList}">
+            <td th:text="${client}"></td>
             <td>
-              <button><a th:href="@{/admin/deleteRecord?e_id={id}(id=${record.recordID})}"><i class="bi bi-trash"></i>Delete</a></button>
-            </td>-->
+            <table id="myTable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Work Date</th>
+                    <th>Work Hours</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="record : ${monthly}">
+                    <td th:text="${record.employeeName}"></td>
+                    <td th:text="${record.workDate}"></td>
+                    <td th:text="${record.workHours}"></td>
+                  </tr>
+                </tbody>
+            </table>
+            </td>
           </tr>
-
         </tbody>
     </table>
   </div>

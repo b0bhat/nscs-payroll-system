@@ -396,7 +396,7 @@ String monthlyTool(Map<String, Object> model) {
     while (rsc.next()) {
       String client = rsc.getString("clientName");
       clientList.add(client);
-    }
+    } model.put("clientList", clientList);
 
     for (String client : clientList) {
       String sql;
@@ -414,10 +414,10 @@ String monthlyTool(Map<String, Object> model) {
         Monthly ret = new Monthly();
         ret.setEmployeeName(rs.getString("employeeName"));
         ret.setWorkHours(rs.getFloat("workHours"));
-        ret.setWorkDate(rs.getDate("workType"));
+        ret.setWorkDate(rs.getDate("workDate"));
         output.add(ret);
       }
-      model.put("monthly", output);
+      model.put(client, output);
     }
 
     dateRange date = new dateRange();
