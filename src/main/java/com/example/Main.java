@@ -398,7 +398,7 @@ String monthlyTool(Map<String, Object> model) {
       String client = rsc.getString("clientName");
       clientList.add(client);
     }
-
+    ArrayList<MonthlyList> allList = new ArrayList<MonthlyList>();
     for (String client : clientList) {
       String sql;
       if (startDate == baseDate || endDate == baseDate) {
@@ -422,8 +422,9 @@ String monthlyTool(Map<String, Object> model) {
       MonthlyList output = new MonthlyList();
       output.setRecords(records);
       output.setClientName(client);
-      model.put("allList", output);
+      allList.add(output);
     }
+    model.put("allList", allList);
 
     dateRange date = new dateRange();
     if (startDate == baseDate || endDate == baseDate) {
