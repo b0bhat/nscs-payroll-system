@@ -401,12 +401,12 @@ String monthlyTool(Map<String, Object> model) {
     for (String client : clientList) {
       String sql;
       if (startDate == baseDate || endDate == baseDate) {
-        sql = "SELECT \"employeeName\", \"workType\", \"workDate\" "
-        + "FROM records WHERE \"clientName\" = '" + client + "' ORDER BY \"clientName\" ASC";
+        sql = "SELECT \"employeeName\", \"workHours\", \"workDate\" "
+        + "FROM records WHERE \"clientName\" = '" + client + "' ORDER BY \"clientName\", \"workDate\" ASC";
       } else {
-        sql = "SELECT \"employeeName\", \"workType\", \"workDate\" "
+        sql = "SELECT \"employeeName\", \"workHours\", \"workDate\" "
         + "FROM records WHERE \"clientName\" = '" + client + "' AND (\"workDate\" >= '" + startDate + "' AND \"workDate\" <= '" + endDate + "') "
-        + "ORDER BY \"clientName\" ASC";
+        + "ORDER BY \"clientName\", \"workDate\" ASC";
       } ResultSet rs = stmt.executeQuery(sql);
 
       ArrayList<Monthly> output = new ArrayList<Monthly>();
