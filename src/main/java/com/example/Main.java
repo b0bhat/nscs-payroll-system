@@ -410,17 +410,17 @@ String monthlyTool(Map<String, Object> model) {
         + "ORDER BY \"clientName\", \"workDate\" ASC";
       } ResultSet rs = stmt.executeQuery(sql);
       System.out.println("clients \n");
-      ArrayList<Monthly> monthly = new ArrayList<Monthly>();
+      ArrayList<Monthly> records = new ArrayList<Monthly>();
       while (rs.next()) {
         Monthly ret = new Monthly();
         System.out.println("monthly \n");
         ret.setEmployeeName(rs.getString("employeeName"));
         ret.setWorkHours(rs.getFloat("workHours"));
         ret.setWorkDate(rs.getDate("workDate"));
-        monthly.add(ret);
+        records.add(ret);
       }
       MonthlyList output = new MonthlyList();
-      output.setMonthly(monthly);
+      output.setRecords(records);
       output.setClientName(client);
       model.put("allList", output);
     }
