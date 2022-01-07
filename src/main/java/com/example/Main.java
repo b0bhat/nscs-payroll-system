@@ -411,7 +411,9 @@ String monthlyTool(Map<String, Object> model) {
       } ResultSet rs = stmt.executeQuery(sql);
       System.out.println("clients \n");
       ArrayList<Monthly> records = new ArrayList<Monthly>();
+      int num = 0;
       while (rs.next()) {
+        int++;
         Monthly ret = new Monthly();
         System.out.println("monthly \n");
         ret.setEmployeeName(rs.getString("employeeName"));
@@ -420,11 +422,12 @@ String monthlyTool(Map<String, Object> model) {
         records.add(ret);
       }
       MonthlyList output = new MonthlyList();
-      output.setRecords(records);
-      output.setClientName(client);
-      allList.add(output);
-    }
-    model.put("allList", allList);
+      if (num != 0) {
+        output.setRecords(records);
+        output.setClientName(client);
+        allList.add(output);
+      }
+    } model.put("allList", allList);
 
     dateRange date = new dateRange();
     if (startDate == baseDate || endDate == baseDate) {
