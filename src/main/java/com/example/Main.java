@@ -394,6 +394,7 @@ String monthlyTool(Map<String, Object> model) {
     ResultSet rsc = stmt.executeQuery(select);
     ArrayList<String> clientList = new ArrayList<String>();
     while (rsc.next()) {
+      System.out.println("client \n");
       String client = rsc.getString("clientName");
       clientList.add(client);
     }
@@ -408,10 +409,11 @@ String monthlyTool(Map<String, Object> model) {
         + "FROM records WHERE \"clientName\" = '" + client + "' AND (\"workDate\" >= '" + startDate + "' AND \"workDate\" <= '" + endDate + "') "
         + "ORDER BY \"clientName\", \"workDate\" ASC";
       } ResultSet rs = stmt.executeQuery(sql);
-
+      System.out.println("clients \n");
       ArrayList<Monthly> monthly = new ArrayList<Monthly>();
       while (rs.next()) {
         Monthly ret = new Monthly();
+        System.out.println("monthly \n");
         ret.setEmployeeName(rs.getString("employeeName"));
         ret.setWorkHours(rs.getFloat("workHours"));
         ret.setWorkDate(rs.getDate("workDate"));
