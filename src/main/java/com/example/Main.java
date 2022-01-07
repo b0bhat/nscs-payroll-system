@@ -386,6 +386,73 @@ public String handleBiweeklyDate(Map<String, Object> model, dateRange date) thro
   }
 }
 
+@GetMapping("/admin/monthly")
+String monthlyTool(Map<String, Object> model) {
+  try (Connection connection = dataSource.getConnection()) {
+    Statement stmt = connection.createStatement();
+    String select = "SELECT * FROM clients";
+    ResultSet rsc = stmt.executeQuery(select);
+    ArrayList<String> clientList = new ArrayList<String>();
+    while (rsc.next()) {
+      String client = rsc.getString("clientName");
+      clientList.add(client);
+    }
+
+    for (String client : clientList) {
+      String sql;
+      if (startDate == baseDate || endDate == baseDate) {
+        sql = "SELECT \"employeeName\", \"workType\", \"workDate\" "
+        + "FROM records WHERE \"clientName\" = '" + client + "' ORDER BY \"clientName\" ASC";
+      } else {
+        sql = "SELECT \"employeeName\", \"workType\", \"workDate\" "
+        + "FROM records WHERE \"clientName\" = '" + client + "' AND (\"workDate\" >= '" + startDate + "' AND \"workDate\" <= '" + endDate + "') "
+        + "ORDER BY \"clientName\" ASC";
+      } ResultSet rs = stmt.executeQuery(sql);
+
+      ArrayList<Monthly> output = new ArrayList<Monthly>();
+      while (rs.next()) {
+        Monthly ret = new Monthly();
+        ret.setEmployeeName(rs.getString("employeeName"));
+        ret.setWorkHours(rs.getFloat("workHours"));
+        ret.setWorkDate(rs.getDate("workType"));
+        output.add(ret);
+      }
+      model.put("monthly", output);
+    }
+
+    dateRange date = new dateRange();
+    if (startDate == baseDate || endDate == baseDate) {
+      java.sql.Date curDate = new Date(System.currentTimeMillis());
+      date.setStartDate(curDate);
+      date.setEndDate(curDate);
+    } else {
+      date.setStartDate(startDate);
+      date.setEndDate(endDate);
+    }
+    model.put("date", date);
+
+    if (flag && logID == "admin") {
+      return "admin/monthly";
+    } else {
+      return "nouser";
+    }
+  } catch (Exception e) {
+    model.put("message", e.getMessage());
+    return "error";
+  }
+}
+
+@PostMapping(path = "/admin/monthly", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+public String handleMonthlySubmit(Map<String, Object> model, dateRange date) throws Exception {
+  try (Connection connection = dataSource.getConnection()) {
+    startDate = date.getStartDate();
+    endDate = date.getEndDate();
+    return "redirect:/admin/monthly";
+  } catch (Exception e) {
+    model.put("message", e.getMessage());
+    return "error";
+  }
+}
 
 //==================================== USER ====================================//
 
@@ -427,12 +494,17 @@ public String returnRecordAdd(Map<String, Object> model) throws Exception {
 
     String sql = "SELECT * FROM \"workTypes\"";
     ResultSet rs = stmt.executeQuery(sql);
-
     ArrayList<String> output = new ArrayList<String>();
     while (rs.next()) {
       output.add(rs.getString("workType"));
-    }
-    model.put("workTypes", output);
+    } model.put("workTypes", output);
+
+    String sql_c = "SELECT * FROM clients";
+    ResultSet rs_c = stmt.executeQuery(sql_c);
+    ArrayList<String> output_c = new ArrayList<String>();
+    while (rs_c.next()) {
+      output_c.add(rs_c.getString("clients"));
+    } model.put("clients", output_c);
 
     Record record = new Record();
     model.put("record", record);

@@ -17,8 +17,11 @@
       <h1>Add Record</h1>
       <text>Fill in all fields.</text>
       <li>
-        <label for="clientName">Client Name</label>
-        <input type="text" th:field="*{clientName}" id="clientName" required />
+        <label for="clientName">Client Name  </label>
+        <select name="clientName" th:field="*{clientName}" id="clientName" required>
+          <option value="0">Select Client...</option>
+          <option th:each="client : ${clients}" th:value="${client}" th:text="${client}"></option>
+        </select>
       </li>
       <li>
         <label for="workHours">Work Hours </label>

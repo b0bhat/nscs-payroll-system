@@ -11,9 +11,14 @@
 
 <header></header>
 
+<script>
+  document.getElementById('startDate').value = new Date().toISOString().slice(0, 10);
+  document.getElementById('endDate').value = new Date().toISOString().slice(0, 10);
+</script>
+
 <body>
   <div class="data-table">
-    <form action="#" method="post" th:action="@{monthyl}" th:object="${date}" class="formtemplate">
+    <form action="#" method="post" th:action="@{monthly}" th:object="${date}" class="formtemplate">
       <h1>Monthly</h1>
           <label for="startDate">Start Date</label>
           <input type="date" th:value="${startDate}" name="startDate" id="startDate" required />
@@ -28,18 +33,18 @@
         <thead>
           <tr>
             <th>Name</th>
+            <th>Work Date</th>
             <th>Work Hours</th>
-            <th>Work Type</th>
             <th></th>
             <th></th>
           </tr>
         </thead>
 
         <tbody>
-          <tr th:each="record : ${biweekly}">
+          <tr th:each="record : ${monthly}">
             <td th:text="${record.employeeName}"></td>
+            <td th:text="${record.workDate}"></td>
             <td th:text="${record.workHours}"></td>
-            <td th:text="${record.workType}"></td>
 
             <!--<td>
               <button><a th:href="@{/employees/edit?rid={name}(name = ${employee.getName()})}">Edit</a></button>
@@ -52,10 +57,6 @@
         </tbody>
     </table>
   </div>
-  <script>
-    document.getElementById('startDate').value = new Date().toDateInputValue();
-    document.getElementById('endDate').value = new Date().toDateInputValue();
-  </script>
 
 </body>
 
