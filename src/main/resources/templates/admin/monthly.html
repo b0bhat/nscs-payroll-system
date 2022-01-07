@@ -33,7 +33,7 @@
         <tbody th:each="monthlylist : ${allList}">
           <tr>
             <td th:text="${monthlylist.clientName}"></td>
-            <td>
+            <!--<td>
               <table>
                   <thead>
                     <tr>
@@ -44,13 +44,13 @@
                   </thead>
                   <tbody>
                     <tr th:each="record : ${monthlylist.records}">
-                      <p th:text="${record.employeeName}"></p>
-                      <p th:text="${record.workDate}"></p>
-                      <p th:text="${record.workHours}"></p>
+                      <td th:text="${record.employeeName}">employeeName</td>
+                      <td th:text="${record.workDate}">workDate</td>
+                      <td th:text="${record.workHours}">workHours</td>
                     </tr>
                   </tbody>
               </table>
-            </td>
+            </td>-->
           </tr>
         </tbody>
     </table>
