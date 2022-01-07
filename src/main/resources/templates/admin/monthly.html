@@ -19,8 +19,8 @@
   }
 
   function cal(){
-    if(document.getElementById("startDate")){
-      document.getElementById("numdays2").value=GetDays();
+    if(document.getElementById("endDate")){
+      document.getElementById("numdays2").value = GetDays();
     }
   }
 </script>
@@ -30,9 +30,9 @@
     <form action="#" method="post" th:action="@{monthly}" th:object="${date}" class="formtemplate">
       <h1>Monthly</h1>
           <label for="startDate">Start Date</label>
-          <input type="date" th:value="${startDate}" name="startDate" id="startDate" required />
+          <input type="date" th:value="${startDate}" name="startDate" id="startDate" onchange="cal()" required />
           <label for="endDate">End Date</label>
-          <input type="date" th:value="${endDate}" name="endDate" id="endDate" required />
+          <input type="date" th:value="${endDate}" name="endDate" id="endDate" onchange="cal()" required />
           <div id="numdays"><label class="form">Number of days:</label>
             <input type="text" class="textbox" id="numdays2" name="numdays"/></div>
           <span>
