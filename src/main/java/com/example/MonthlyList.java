@@ -4,18 +4,18 @@ import java.util.ArrayList;
 public class MonthlyList {
 
     // PROPERTIES
-    private ArrayList<Monthly> record = new ArrayList<Monthly>();
+    private ArrayList<Monthly> records = new ArrayList<Monthly>();
     private String clientName;
 
-    public void setMonthly(ArrayList<Monthly> record) {
-        this.record = record;
+    public void setRecords(ArrayList<Monthly> records) {
+        this.records = records;
     }
     public void setClientName(String clientName) {
         this.clientName = clientName;
     }
 
-    public ArrayList<Monthly> getMonthly() {
-        return this.record;
+    public ArrayList<Monthly> getRecords() {
+        return this.records;
     }
     public String getClientName() {
         return this.clientName;

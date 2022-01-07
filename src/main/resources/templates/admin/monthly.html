@@ -34,22 +34,22 @@
           <tr th:each="client : ${allList}" th:id="'client' + ${client.clientName}">
             <td th:text="${client.clientName}"></td>
             <td>
-            <table id="myTable">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Work Date</th>
-                    <th>Work Hours</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr th:each="record : ${client.monthly}">
-                    <td th:text="${record.employeeName}"></td>
-                    <td th:text="${record.workDate}"></td>
-                    <td th:text="${record.workHours}"></td>
-                  </tr>
-                </tbody>
-            </table>
+              <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Work Date</th>
+                      <th>Work Hours</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="record : ${client.records}">
+                      <td th:text="${record.employeeName}">employeeName</td>
+                      <td th:text="${record.workDate}">workDate</td>
+                      <td th:text="${record.workHours}">workHours</td>
+                    </tr>
+                  </tbody>
+              </table>
             </td>
           </tr>
         </tbody>
