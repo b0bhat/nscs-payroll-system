@@ -512,7 +512,7 @@ public String returnRecordAdd(Map<String, Object> model) throws Exception {
     ResultSet rs_c = stmt.executeQuery(sql_c);
     ArrayList<String> output_c = new ArrayList<String>();
     while (rs_c.next()) {
-      output_c.add(rs_c.getString("clients"));
+      output_c.add(rs_c.getString("clientName"));
     } model.put("clients", output_c);
 
     Record record = new Record();
