@@ -31,7 +31,7 @@
     <h2>Monthly Report</h2>
     <table id="myTable">
         <tbody>
-          <tr th:each="client : ${allList}">
+          <tr th:each="client : ${allList}" th:id="'client' + ${client.clientName}">
             <td th:text="${client.clientName}"></td>
             <td>
             <table id="myTable">
@@ -43,7 +43,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr th:each="record : ${client.record}">
+                  <tr th:each="record : ${client.monthly}">
                     <td th:text="${record.employeeName}"></td>
                     <td th:text="${record.workDate}"></td>
                     <td th:text="${record.workHours}"></td>
