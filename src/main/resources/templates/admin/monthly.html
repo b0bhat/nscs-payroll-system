@@ -30,8 +30,8 @@
     </form>
     <h2>Monthly Report</h2>
     <table id="myTable">
-        <tbody>
-          <tr th:each="monthlylist : ${allList}">
+        <tbody th:each="monthlylist : ${allList}">
+          <tr>
             <td th:text="${monthlylist.clientName}"></td>
             <td>
               <table>
