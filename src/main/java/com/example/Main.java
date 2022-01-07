@@ -396,7 +396,7 @@ String monthlyTool(Map<String, Object> model) {
     while (rsc.next()) {
       String client = rsc.getString("clientName");
       clientList.add(client);
-    } model.put("clientList", clientList);
+    }
 
     for (String client : clientList) {
       String sql;
@@ -409,15 +409,18 @@ String monthlyTool(Map<String, Object> model) {
         + "ORDER BY \"clientName\", \"workDate\" ASC";
       } ResultSet rs = stmt.executeQuery(sql);
 
-      ArrayList<Monthly> output = new ArrayList<Monthly>();
+      ArrayList<Monthly> monthly = new ArrayList<Monthly>();
       while (rs.next()) {
         Monthly ret = new Monthly();
         ret.setEmployeeName(rs.getString("employeeName"));
         ret.setWorkHours(rs.getFloat("workHours"));
         ret.setWorkDate(rs.getDate("workDate"));
-        output.add(ret);
+        monthly.add(ret);
       }
-      model.put(client, output);
+      MonthlyList output = new MonthlyList();
+      output.setMonthly(monthly);
+      output.setClientName(client);
+      model.put("allList", output);
     }
 
     dateRange date = new dateRange();
