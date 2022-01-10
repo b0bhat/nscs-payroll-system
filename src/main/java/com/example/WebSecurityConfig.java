@@ -16,7 +16,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/").permitAll()
+				.antMatchers("/", "/error", "/nouser").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public UserDetailsService userDetailsService() {
 		UserDetails user =
 			 User.withDefaultPasswordEncoder()
-				.username("user")
+				.employeeName("user")
 				.password("password")
 				.roles("USER")
 				.build();
