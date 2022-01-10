@@ -68,15 +68,14 @@ public class Main {
   }
 
   @RequestMapping("/")
-  String index(Map<String, Object> model) {
+  String index(Map<String, Object> model, Map<String, Object> employeeDetails) {
     return "redirect:/login";
   }
 
   @GetMapping("/login")
-  String loginPageHandler(Map<String, Object> model) {
+  String loginPageHandler(Map<String, Object> model, Map<String, Object> employeeDetails) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      flag = false;
       Employee user = new Employee();
       model.put("user", user);
       return "login";
@@ -87,7 +86,7 @@ public class Main {
   }
 
   @PostMapping(path = "/login", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-  public String login(Map<String, Object> model, Employee user) throws Exception {
+  public String login(Map<String, Object> model, Employee user, Map<String, Object> employeeDetails) throws Exception {
     String employeeName = user.getName();
     String password = user.getPassword();
     System.out.println("login: " + employeeName + ", " + password);
@@ -95,6 +94,7 @@ public class Main {
     if (employeeName.equals("admin") && password.equals("123")){
       flag = true;
       logID = "admin";
+      employeeDetails.put("logID", logID);
       return "redirect:/admin/records"; //CHANGE TO MAINPAGE FOR EACH LOGIN TYPE
     }
 
@@ -110,6 +110,7 @@ public class Main {
           System.out.println("user: " + employeeName + ", " + password);
           flag = true;
           logID = employeeName;
+          employeeDetails.put("logID", logID);
           return "redirect:/user/home";
         }
       } return "nouser";
@@ -620,7 +621,7 @@ public String deleteRecord(Map<String, Object> model, @RequestParam String e_id)
       return new HikariDataSource(config);
     }
   }
-
+/*
   @Configuration
   @EnableWebSecurity
   public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -651,6 +652,6 @@ public String deleteRecord(Map<String, Object> model, @RequestParam String e_id)
 
   		return new InMemoryUserDetailsManager(user);
   	}
-  }
+  }*/
 
 }
