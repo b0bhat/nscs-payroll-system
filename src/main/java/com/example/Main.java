@@ -50,7 +50,7 @@ import java.sql.Date;
 import java.sql.*;
 import java.io.*;
 
-@Scope(value = WebApplicationContext.SCOPE_SESSION)
+@Scope("session")
 @Controller
 @SpringBootApplication
 public class Main {
