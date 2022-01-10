@@ -29,6 +29,7 @@ import org.w3c.dom.ranges.Range;
 import org.springframework.http.MediaType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 /*
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -49,6 +50,7 @@ import java.sql.Date;
 import java.sql.*;
 import java.io.*;
 
+@Scope(value = WebApplicationContext.SCOPE_SESSION)
 @Controller
 @SpringBootApplication
 public class Main {
