@@ -74,7 +74,6 @@ public class Main {
 
   @GetMapping("/login")
   String loginPageHandler(Map<String, Object> model) {
-    System.out.println("LOAD");
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
       flag = false;
@@ -91,6 +90,7 @@ public class Main {
   public String login(Map<String, Object> model, Employee user) throws Exception {
     String employeeName = user.getName();
     String password = user.getPassword();
+    System.out.println("login: " + employeeName + ", " + password);
 
     if (employeeName.equals("admin") && password.equals("123")){
       flag = true;
@@ -107,7 +107,7 @@ public class Main {
         String compareName = rs.getString("employeeName");
         String comparePassword = rs.getString("password");
         if (employeeName.equals(compareName) && password.equals(comparePassword)) {
-          //System.out.println("user: " + employeeName + ", " + password);
+          System.out.println("user: " + employeeName + ", " + password);
           flag = true;
           logID = employeeName;
           return "redirect:/user/home";

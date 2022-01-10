@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<head>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+</head>
+  <body>
+    <div class="container">
+      <h2>ERROR</h2>
+      <p>Please try again, and contact admin if problem persists.</p>
+      <p th:text="${message}">Exception message</p>
+      <span class="add-employee">
+          <button class="add"><a th:href="@{/login}">Return to Login</a></button>
+      </span>
+    </div>
+  </body>
+
+</html>
