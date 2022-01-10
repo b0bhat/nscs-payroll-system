@@ -20,7 +20,7 @@
         <form action="#" method="post" th:action="@{/login}" th:object="${user}">
             <div class="cred">
                 <label for="username">Username</label> <br>
-                <input type="text" id="username" th:field="*{username}" required > <br>
+                <input type="text" id="username" th:field="*{name}" required > <br>
 
                 <label for="password">Password</label> <br>
                 <input type="password" id="password" th:field="*{password}" required > <br>
