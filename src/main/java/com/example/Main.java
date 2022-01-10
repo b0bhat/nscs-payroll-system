@@ -95,7 +95,7 @@ public class Main {
     if (employeeName.equals("admin") && password.equals("123")){
       flag = true;
       logID = "admin";
-      employeeDetails.put("logID", logID);
+      employeeDetails.put("logID", "admin");
       return "redirect:/admin/records"; //CHANGE TO MAINPAGE FOR EACH LOGIN TYPE
     }
 
@@ -111,7 +111,8 @@ public class Main {
           System.out.println("user: " + employeeName + ", " + password);
           flag = true;
           logID = employeeName;
-          employeeDetails.put("logID", logID);
+          employeeDetails.put("logID", employeeName);
+          System.out.println("det: " + employeeDetails);
           return "redirect:/user/home";
         }
       } return "nouser";
@@ -142,7 +143,7 @@ public class Main {
         output.add(emp);
       }
       model.put("employees", output);
-      System.out.println(employeeDetails);
+      System.out.println("det: " + employeeDetails);
       if (employeeDetails.get("logID") == "admin") {
         return "admin/employees";
       } else {
