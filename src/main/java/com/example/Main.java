@@ -70,11 +70,13 @@ public class Main {
 
   @RequestMapping("/")
   String index(Map<String, Object> model, Map<String, Object> employeeDetails) {
+    System.out.println("/: " + employeeDetails);
     return "redirect:/login";
   }
 
   @GetMapping("/login")
   String loginPageHandler(Map<String, Object> model, Map<String, Object> employeeDetails) {
+    System.out.println("loginpre: " + employeeDetails);
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
       Employee user = new Employee();
@@ -112,7 +114,7 @@ public class Main {
           flag = true;
           logID = employeeName;
           employeeDetails.put("logID", employeeName);
-          System.out.println("det: " + employeeDetails);
+          System.out.println("loginpost: " + employeeDetails);
           return "redirect:/user/home";
         }
       } return "nouser";
