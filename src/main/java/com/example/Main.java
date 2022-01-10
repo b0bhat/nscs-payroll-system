@@ -98,6 +98,7 @@ public class Main {
       flag = true;
       logID = "admin";
       employeeDetails.put("logID", "admin");
+      System.out.println("loginpost: " + employeeDetails);
       return "redirect:/admin/records"; //CHANGE TO MAINPAGE FOR EACH LOGIN TYPE
     }
 
