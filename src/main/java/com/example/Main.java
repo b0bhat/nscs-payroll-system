@@ -124,7 +124,7 @@ public class Main {
 //==================================== EMPLOYEES ====================================//
 
   @GetMapping("/admin/employees")
-  String employeeList(Map<String, Object> model) {
+  String employeeList(Map<String, Object> model, Map<String, Object> employeeDetails) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
@@ -142,7 +142,7 @@ public class Main {
         output.add(emp);
       }
       model.put("employees", output);
-      if (flag && logID == "admin") {
+      if (employeeDetails.get("logID") == "admin") {
         return "admin/employees";
       } else {
         return "nouser";
@@ -154,7 +154,7 @@ public class Main {
   }
 
   @GetMapping("/admin/addEmployee")
-  public String returnEmployeeAdd(Map<String, Object> model) throws Exception {
+  public String returnEmployeeAdd(Map<String, Object> model, Map<String, Object> employeeDetails) throws Exception {
     Employee employee = new Employee();
     model.put("employee", employee);
     if (flag && logID == "admin") {
@@ -165,7 +165,7 @@ public class Main {
   }
 
   @PostMapping(path = "/admin/addEmployee", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-  public String handleEmployeeAdd(Map<String, Object> model, Employee employee) throws Exception {
+  public String handleEmployeeAdd(Map<String, Object> model, Employee employee, Map<String, Object> employeeDetails) throws Exception {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
@@ -181,7 +181,7 @@ public class Main {
   }
 
   @GetMapping("/admin/deleteEmployee")
-  public String deleteEmployee(Map<String, Object> model, @RequestParam String e_id) {
+  public String deleteEmployee(Map<String, Object> model, @RequestParam String e_id, Map<String, Object> employeeDetails) {
     try (Connection connection = dataSource.getConnection()) {
       String sql = "DELETE FROM login WHERE \"employeeName\" =?";
       PreparedStatement ps = connection.prepareStatement(sql);
@@ -199,7 +199,7 @@ public class Main {
 //==================================== CLIENTS ====================================//
 
   @GetMapping("/admin/clients")
-  String clientList(Map<String, Object> model) {
+  String clientList(Map<String, Object> model, Map<String, Object> employeeDetails) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
@@ -223,7 +223,7 @@ public class Main {
   }
 
   @GetMapping("/admin/addClient")
-  public String returnClientAdd(Map<String, Object> model) throws Exception {
+  public String returnClientAdd(Map<String, Object> model, Map<String, Object> employeeDetails) throws Exception {
     String client = new String();
     model.put("client", client);
     if (flag && logID == "admin") {
@@ -234,7 +234,7 @@ public class Main {
   }
 
   @PostMapping(path = "/admin/addClient", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-  public String handleClientAdd(Map<String, Object> model, @RequestParam String client) throws Exception {
+  public String handleClientAdd(Map<String, Object> model, @RequestParam String client, Map<String, Object> employeeDetails) throws Exception {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
@@ -252,7 +252,7 @@ public class Main {
 //==================================== WORK TYPES ====================================//
 
     @GetMapping("/admin/worktypes")
-    String workTypeList(Map<String, Object> model) {
+    String workTypeList(Map<String, Object> model, Map<String, Object> employeeDetails) {
       try (Connection connection = dataSource.getConnection()) {
         Statement stmt = connection.createStatement();
 
@@ -276,7 +276,7 @@ public class Main {
     }
 
     @GetMapping("/admin/addWorkType")
-    public String returnWorkTypeAdd(Map<String, Object> model) throws Exception {
+    public String returnWorkTypeAdd(Map<String, Object> model, Map<String, Object> employeeDetails) throws Exception {
       String workType = new String();
       model.put("workType", workType);
       if (flag && logID == "admin") {
@@ -287,7 +287,7 @@ public class Main {
     }
 
     @PostMapping(path = "/admin/addWorkType", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-    public String handleWorkTypeAdd(Map<String, Object> model, @RequestParam String workType) throws Exception {
+    public String handleWorkTypeAdd(Map<String, Object> model, @RequestParam String workType, Map<String, Object> employeeDetails) throws Exception {
       try (Connection connection = dataSource.getConnection()) {
         Statement stmt = connection.createStatement();
 
@@ -305,7 +305,7 @@ public class Main {
 //==================================== RECORDS ====================================//
 
   @GetMapping("/admin/records")
-  String recordListAll(Map<String, Object> model) {
+  String recordListAll(Map<String, Object> model, Map<String, Object> employeeDetails) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
@@ -341,7 +341,7 @@ public class Main {
 //==================================== TOOLS ====================================//
 
 @GetMapping("/admin/biweekly")
-String biweeklyTool(Map<String, Object> model) {
+String biweeklyTool(Map<String, Object> model, Map<String, Object> employeeDetails) {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
     String sql;
@@ -387,7 +387,7 @@ String biweeklyTool(Map<String, Object> model) {
 }
 
 @PostMapping(path = "/admin/biweekly", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-public String handleBiweeklyDate(Map<String, Object> model, dateRange date) throws Exception {
+public String handleBiweeklyDate(Map<String, Object> model, dateRange date, Map<String, Object> employeeDetails) throws Exception {
   try (Connection connection = dataSource.getConnection()) {
     startDate = date.getStartDate();
     endDate = date.getEndDate();
@@ -399,7 +399,7 @@ public String handleBiweeklyDate(Map<String, Object> model, dateRange date) thro
 }
 
 @GetMapping("/admin/monthly")
-String monthlyTool(Map<String, Object> model) {
+String monthlyTool(Map<String, Object> model, Map<String, Object> employeeDetails) {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
     String select = "SELECT * FROM clients";
@@ -464,7 +464,7 @@ String monthlyTool(Map<String, Object> model) {
 }
 
 @PostMapping(path = "/admin/monthly", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-public String handleMonthlySubmit(Map<String, Object> model, dateRange date) throws Exception {
+public String handleMonthlySubmit(Map<String, Object> model, dateRange date, Map<String, Object> employeeDetails) throws Exception {
   try (Connection connection = dataSource.getConnection()) {
     startDate = date.getStartDate();
     endDate = date.getEndDate();
@@ -478,7 +478,7 @@ public String handleMonthlySubmit(Map<String, Object> model, dateRange date) thr
 //==================================== USER ====================================//
 
 @GetMapping("/user/home")
-String recordListUser(Map<String, Object> model) {
+String recordListUser(Map<String, Object> model, Map<String, Object> employeeDetails) {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
     String sql = "SELECT * FROM records WHERE \"employeeName\" = '" + logID + "'ORDER BY \"workDate\" DESC";
@@ -509,7 +509,7 @@ String recordListUser(Map<String, Object> model) {
 }
 
 @GetMapping("/user/addRecord")
-public String returnRecordAdd(Map<String, Object> model) throws Exception {
+public String returnRecordAdd(Map<String, Object> model, Map<String, Object> employeeDetails) throws Exception {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
 
@@ -541,7 +541,7 @@ public String returnRecordAdd(Map<String, Object> model) throws Exception {
 }
 
 @PostMapping(path = "/user/addRecord", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-public String handleRecordAdd(Map<String, Object> model, Record record) throws Exception {
+public String handleRecordAdd(Map<String, Object> model, Record record, Map<String, Object> employeeDetails) throws Exception {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
     final String UniqueID = UUID.randomUUID().toString().replace("-", "");
@@ -571,7 +571,7 @@ public String handleRecordAdd(Map<String, Object> model, Record record) throws E
 }
 
 @GetMapping("/user/deleteRecord")
-public String deleteRecord(Map<String, Object> model, @RequestParam String e_id) {
+public String deleteRecord(Map<String, Object> model, @RequestParam String e_id, Map<String, Object> employeeDetails) {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
     //System.out.println(e_id);
