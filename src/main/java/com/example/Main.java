@@ -142,6 +142,7 @@ public class Main {
         output.add(emp);
       }
       model.put("employees", output);
+      System.out.println(employeeDetails);
       if (employeeDetails.get("logID") == "admin") {
         return "admin/employees";
       } else {
