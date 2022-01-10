@@ -27,6 +27,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.ranges.Range;
 import org.springframework.http.MediaType;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
@@ -65,6 +74,7 @@ public class Main {
 
   @GetMapping("/login")
   String loginPageHandler(Map<String, Object> model) {
+    System.out.println("LOAD");
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
       flag = false;
@@ -609,6 +619,38 @@ public String deleteRecord(Map<String, Object> model, @RequestParam String e_id)
       config.setJdbcUrl(dbUrl);
       return new HikariDataSource(config);
     }
+  }
+
+  @Configuration
+  @EnableWebSecurity
+  public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+  	@Override
+  	protected void configure(HttpSecurity http) throws Exception {
+  		http
+  			.authorizeRequests()
+  				.antMatchers("/", "/error", "/nouser").permitAll()
+  				.anyRequest().authenticated()
+  				.and()
+  			.formLogin()
+  				.loginPage("/login")
+  				.permitAll()
+  				.and()
+  			.logout()
+  				.permitAll();
+  	}
+
+  	@Bean
+  	@Override
+  	public UserDetailsService userDetailsService() {
+  		UserDetails user =
+  			 User.withDefaultPasswordEncoder()
+  				.username("bobman")
+  				.password("123")
+  				.roles("USER")
+  				.build();
+
+  		return new InMemoryUserDetailsManager(user);
+  	}
   }
 
 }
