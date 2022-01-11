@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
-@Scope("session")
+@Scope(value = "session",  proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class LoggedUserManagementService {
 
     private String name;

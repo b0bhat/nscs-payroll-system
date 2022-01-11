@@ -52,7 +52,6 @@ import java.sql.Date;
 import java.sql.*;
 import java.io.*;
 
-@Controller
 @SpringBootApplication
 public class Main {
   boolean flag = false;
@@ -62,7 +61,7 @@ public class Main {
   Date endDate = baseDate;
 
   private final LoggedUserManagementService userService;
-  public Main(LoggedUserManagementService userService) {
+  public login(LoggedUserManagementService userService) {
      this.userService = userService;
   }
 
