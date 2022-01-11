@@ -61,9 +61,8 @@ public class Main {
   Date endDate = baseDate;
 
   private final LoggedUserManagementService userService;
-  public login(LoggedUserManagementService userService) {
+  public Main(LoggedUserManagementService userService) {
      this.userService = userService;
-     return userService;
   }
 
 
