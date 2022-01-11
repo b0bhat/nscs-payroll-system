@@ -63,6 +63,7 @@ public class Main {
   private final LoggedUserManagementService userService;
   public login(LoggedUserManagementService userService) {
      this.userService = userService;
+     return userService;
   }
 
 
