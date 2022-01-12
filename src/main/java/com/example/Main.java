@@ -52,6 +52,7 @@ import java.sql.Date;
 import java.sql.*;
 import java.io.*;
 
+@Controller
 @SpringBootApplication
 public class Main {
   boolean flag = false;
@@ -59,12 +60,9 @@ public class Main {
   java.sql.Date baseDate = java.sql.Date.valueOf("2000-01-01");
   Date startDate = baseDate;
   Date endDate = baseDate;
-
-  private final LoggedUserManagementService userService;
-  public Main(LoggedUserManagementService userService) {
-     this.userService = userService;
-  }
-
+/*
+  @Autowired
+  private LoggedUserManagementService userService;*/
 
   @Value("${spring.datasource.url}")
   private String dbUrl;
@@ -105,7 +103,7 @@ public class Main {
       return "redirect:/admin/records"; //CHANGE TO MAINPAGE FOR EACH LOGIN TYPE
     }
 
-    LoginController loginController = new LoginController(userService);
+    //LoginController loginController = new LoginController(userService);
 
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
@@ -114,10 +112,7 @@ public class Main {
       while (rs.next()) {
         String compareName = rs.getString("employeeName");
         String comparePassword = rs.getString("password");
-        loginController.setName(employeeName);
-        loginController.setPassword(password);
-        boolean loggedIn = loginController.login(compareName, comparePassword);
-        if (loggedIn) {
+        if (employeeName.equals(compareName) && password.equals(comparePassword)) {
           System.out.println("user: " + compareName + ", " + comparePassword);
           flag = true;
           logID = employeeName;
@@ -151,7 +146,7 @@ public class Main {
         output.add(emp);
       }
       model.put("employees", output);
-      if (userService.getName() == "admin") {
+      if (flag && logID == "admin") {
         return "admin/employees";
       } else {
         return "nouser";
