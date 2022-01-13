@@ -48,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired
   protected void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 	  auth.jdbcAuthentication()
-      .dataSource(dataSource2)
+      .dataSource2(dataSource2)
       .usersByUsernameQuery("SELECT employeeName, password, true FROM login WHERE \"employeeName\" = ?")
       .authoritiesByUsernameQuery("SELECT 'USER' FROM login WHERE \"employeeName\" = ?");
 	  /*
@@ -97,7 +97,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   }
   
   @Bean
-  public DataSource dataSource() throws SQLException {
+  public DataSource dataSource2() throws SQLException {
     if (dbUrl == null || dbUrl.isEmpty()) {
       return new HikariDataSource();
     } else {
