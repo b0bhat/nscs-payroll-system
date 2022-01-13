@@ -38,26 +38,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   public AuthenticationSuccessHandler appAuthenticationSuccessHandler(){
        return new AppAuthenticationSuccessHandler();
   }
-
-  @Value("${spring.datasource.url}")
-  private String dbUrl;
-
-  @Autowired
-  private DataSource dataSource2;
   
   @Autowired
   protected void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-	  auth.jdbcAuthentication()
-      .dataSource(dataSource2)
-      .usersByUsernameQuery("SELECT employeeName, password, true FROM login WHERE \"employeeName\" = ?")
-      .authoritiesByUsernameQuery("SELECT 'USER' FROM login WHERE \"employeeName\" = ?");
-	  /*
+	  
 	  auth.inMemoryAuthentication()
       .withUser("user1").password(passwordEncoder().encode("123")).roles("USER")
       .and()
       .withUser("bobman").password(passwordEncoder().encode("123")).roles("USER")
       .and()
-      .withUser("admin").password(passwordEncoder().encode("123")).roles("ADMIN");*/
+      .withUser("admin").password(passwordEncoder().encode("123")).roles("ADMIN");
   }
   
   @Autowired
@@ -74,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     .authorizeRequests()
 	    .antMatchers("/admin/**").hasRole("ADMIN")
 	    .antMatchers("/user/**").hasRole("USER")
-	    .antMatchers("/stylesheets/style.css", "/", "/login*", "/error*", "/nouser").permitAll()
+	    .antMatchers("/stylesheets/style.css", "/", "/login", "/error", "/nouser").permitAll()
 	    .anyRequest().authenticated()
 	    .and()
     .formLogin()
