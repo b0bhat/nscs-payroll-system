@@ -38,16 +38,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   public AuthenticationSuccessHandler appAuthenticationSuccessHandler(){
        return new AppAuthenticationSuccessHandler();
   }
+  @Value("${spring.datasource.url}")
+  private String dbUrl;
+  @Autowired DataSource dataSource;
   
   @Autowired
   protected void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-	  
+	  auth.jdbcAuthentication()
+      .dataSource(dataSource)
+      .usersByUsernameQuery("SELECT \"employeeName\", password, true" + " from login where \"employeeName\"=?")
+      .authoritiesByUsernameQuery("SELECT 'USER' FROM login where \"employeeName\"=?");
+	  /*
 	  auth.inMemoryAuthentication()
-      .withUser("user1").password(passwordEncoder().encode("123")).roles("USER")
+      .withUser("AW").password(passwordEncoder().encode("AW")).roles("USER")
       .and()
       .withUser("bobman").password(passwordEncoder().encode("123")).roles("USER")
       .and()
-      .withUser("admin").password(passwordEncoder().encode("123")).roles("ADMIN");
+      .withUser("admin").password(passwordEncoder().encode("123")).roles("ADMIN");*/
   }
   
   @Autowired
