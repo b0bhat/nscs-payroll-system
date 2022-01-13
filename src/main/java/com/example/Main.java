@@ -77,6 +77,13 @@ public class Main {
     return "redirect:/login";
   }
 
+  @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
+    public String login(Map<String, Object> model) {
+        return "/login";
+    }
+
+
+/*
   @GetMapping("/login")
   String loginPageHandler(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
@@ -93,11 +100,9 @@ public class Main {
 
   //@PostMapping(path = "/login", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
   //public String login(Map<String, Object> model, Employee user) throws Exception {
-  @PostMapping("/login")
-  public String login(Map<String, Object> model) throws Exception {
 	System.out.println("post");
 	return "redirect:/admin/clients";
-    /*String employeeName = user.getName();
+    String employeeName = user.getName();
     String password = user.getPassword();
     System.out.println("login: " + employeeName + ", " + password);
     if (employeeName.equals("admin") && password.equals("123")){
@@ -125,8 +130,8 @@ public class Main {
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
-    }*/
-  }
+    }
+  }*/
 
 //==================================== EMPLOYEES ====================================//
 
