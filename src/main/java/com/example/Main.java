@@ -619,37 +619,4 @@ public String deleteRecord(Map<String, Object> model, @RequestParam String e_id)
     }
   }
 
-/*
-  @Configuration
-  @EnableWebSecurity
-  public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-  	@Override
-  	protected void configure(HttpSecurity http) throws Exception {
-  		http
-  			.authorizeRequests()
-  				.antMatchers("/", "/error", "/nouser").permitAll()
-  				.anyRequest().authenticated()
-  				.and()
-  			.formLogin()
-  				.loginPage("/login")
-  				.permitAll()
-  				.and()
-  			.logout()
-  				.permitAll();
-  	}
-
-  	@Bean
-  	@Override
-  	public UserDetailsService userDetailsService() {
-  		UserDetails user =
-  			 User.withDefaultPasswordEncoder()
-  				.username("bobman")
-  				.password("123")
-  				.roles("USER")
-  				.build();
-
-  		return new InMemoryUserDetailsManager(user);
-  	}
-  }*/
-
 }
