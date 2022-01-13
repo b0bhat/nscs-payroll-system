@@ -71,7 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 }
             }
         })
-	    .defaultSuccessUrl("/admin/clients", false)
+	    //.defaultSuccessUrl("/admin/clients", false)
 	    .failureUrl("/nouser.html")
   	.and()
   	.exceptionHandling().accessDeniedPage("/nouser");
