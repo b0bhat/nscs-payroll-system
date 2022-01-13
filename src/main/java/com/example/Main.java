@@ -77,7 +77,7 @@ public class Main {
     return "redirect:/login";
   }
 
-  @GetMapping
+  @RequestMapping("/login")
     public String getLoginPage() {
         return "login";
     }
