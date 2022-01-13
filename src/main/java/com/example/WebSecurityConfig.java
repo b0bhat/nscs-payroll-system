@@ -38,25 +38,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   public AuthenticationSuccessHandler appAuthenticationSuccessHandler(){
        return new AppAuthenticationSuccessHandler();
   }
-  
+  /*
   @Value("${postgres://auaitxqyiisnvi:551b9daa9ff01f53183c0b48855a0043189e38249ab97382c5399360f56af6dc@ec2-52-54-167-8.compute-1.amazonaws.com:5432/dd3k7h39t68knm}")
   private String dbUrl;
-  @Autowired DataSource dataSource;
+  @Autowired DataSource dataSource;*/
   
   
   @Autowired
   protected void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-	  auth.jdbcAuthentication()
+	  /*auth.jdbcAuthentication()
       .dataSource(dataSource)
       .usersByUsernameQuery("SELECT \"employeeName\", password, true" + " from login where \"employeeName\"=?")
       .authoritiesByUsernameQuery("SELECT 'USER' FROM login where \"employeeName\"=?");
-	  /*
+	  */
 	  auth.inMemoryAuthentication()
       .withUser("AW").password(passwordEncoder().encode("AW")).roles("USER")
       .and()
       .withUser("bobman").password(passwordEncoder().encode("123")).roles("USER")
       .and()
-      .withUser("admin").password(passwordEncoder().encode("123")).roles("ADMIN");*/
+      .withUser("admin").password(passwordEncoder().encode("123")).roles("ADMIN");
   }
   
   @Autowired
