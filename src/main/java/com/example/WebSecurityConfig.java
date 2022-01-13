@@ -21,11 +21,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       return new BCryptPasswordEncoder();
   }
 
-  @Bean
-  public AuthenticationSuccessHandler appAuthenticationSuccessHandler(){
-       return new AppAuthenticationSuccessHandler();
-  }
-
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
   auth.inMemoryAuthentication()
