@@ -25,14 +25,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.w3c.dom.ranges.Range;
 import org.springframework.http.MediaType;
+/*
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-/*
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -49,7 +48,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 import java.sql.Date;
-import java.sql.*;
 import java.io.*;
 
 @Controller
@@ -82,7 +80,7 @@ public class Main {
   @GetMapping("/login")
   String loginPageHandler(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
-      Statement stmt = connection.createStatement();
+      //Statement stmt = connection.createStatement();
       Employee user = new Employee();
       model.put("user", user);
       return "login";
@@ -132,9 +130,6 @@ public class Main {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
-      /*stmt.executeUpdate(
-          "CREATE TABLE IF NOT EXISTS employees (id varchar(40), name varchar(40), position varchar(10), role varchar(40),"
-              + "team varchar(40), status boolean, startdate date, enddate date)");*/
       String sql = "SELECT * FROM login";
       ResultSet rs = stmt.executeQuery(sql);
 
@@ -313,9 +308,6 @@ public class Main {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
-      /*stmt.executeUpdate(
-          "CREATE TABLE IF NOT EXISTS employees (id varchar(40), name varchar(40), position varchar(10), role varchar(40),"
-              + "team varchar(40), status boolean, startdate date, enddate date)");*/
       String sql = "SELECT * FROM records ORDER BY \"workDate\" DESC";
       ResultSet rs = stmt.executeQuery(sql);
 
