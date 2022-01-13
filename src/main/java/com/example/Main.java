@@ -76,7 +76,7 @@ public class Main {
   String index(Map<String, Object> model) {
     return "redirect:/login";
   }
-  /*
+  
   @GetMapping("/login")
   String loginPageHandler(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
@@ -121,7 +121,7 @@ public class Main {
       model.put("message", e.getMessage());
       return "error";
     }
-  }*/
+  }
 
 //==================================== EMPLOYEES ====================================//
 
