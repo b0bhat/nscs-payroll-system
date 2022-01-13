@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -17,6 +18,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   public PasswordEncoder passwordEncoder() {
       return new BCryptPasswordEncoder();
+  }
+  
+  @Bean
+  public AuthenticationSuccessHandler appAuthenticationSuccessHandler(){
+       return new AppAuthenticationSuccessHandler();
   }
 
   @Override
@@ -43,6 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     .formLogin()
 	    .loginPage("/login.html")
 	    .loginProcessingUrl("/")
+	    .successHandler(appAuthenticationSuccessHandler())
 	    .defaultSuccessUrl("/admin/clients.html", true)
 	    .failureUrl("/nouser.html");
 	    //.failureHandler(authenticationFailureHandler())
