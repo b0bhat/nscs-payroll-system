@@ -202,6 +202,7 @@ public class Main {
 
   @GetMapping("/admin/clients")
   String clientList(Map<String, Object> model) {
+	System.out.println("admin clients");
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
