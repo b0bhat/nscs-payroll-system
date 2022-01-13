@@ -34,22 +34,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   http
     .csrf().disable()
     .authorizeRequests()
-    .antMatchers("/admin/**").hasRole("ADMIN")
-    .antMatchers("/user/**").hasRole("USER")
-    .antMatchers("/stylesheets/style.css").permitAll()
-    .antMatchers("/login*", "/error.html", "/nouser.html", "/admin/clients.html").permitAll()
-    .anyRequest().authenticated()
-    .and()
+	    .antMatchers("*/admin/**").hasRole("ADMIN")
+	    .antMatchers("*/user/**").hasRole("USER")
+	    .antMatchers("/stylesheets/style.css").permitAll()
+	    .antMatchers("/login*", "/error.html", "/nouser.html", "/admin/clients.html").permitAll()
+	    .anyRequest().authenticated()
+	    .and()
     .formLogin()
-    .loginPage("/login.html")
-    .loginProcessingUrl("/")
-    .defaultSuccessUrl("/admin/clients.html", true)
-    .failureUrl("/error.html")
-    //.failureHandler(authenticationFailureHandler())
-    .and()
+	    .loginPage("/login.html")
+	    .loginProcessingUrl("/")
+	    .defaultSuccessUrl("/admin/clients.html", true)
+	    .failureUrl("/nouser.html");
+	    //.failureHandler(authenticationFailureHandler())
+	    /*.and()
     .logout()
-    .logoutUrl("/logout.html")
-    .deleteCookies("JSESSIONID");
-   	//.logoutSuccessHandler(logoutSuccessHandler());
+	    .logoutUrl("/logout.html")
+	    .deleteCookies("JSESSIONID");
+	   	//.logoutSuccessHandler(logoutSuccessHandler());*/
   }
 }

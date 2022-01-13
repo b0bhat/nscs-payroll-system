@@ -54,7 +54,7 @@ import java.io.*;
 @SpringBootApplication
 public class Main {
   boolean flag = true;
-  String logID = "admin";
+  String logID = "admin"; //fix me
   java.sql.Date baseDate = java.sql.Date.valueOf("2000-01-01");
   Date startDate = baseDate;
   Date endDate = baseDate;
