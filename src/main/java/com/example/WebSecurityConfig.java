@@ -1,4 +1,11 @@
 package com.example;
+import java.io.IOException;
+import java.util.Set;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -6,6 +13,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -42,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     .authorizeRequests()
 	    .antMatchers("/admin/**").hasRole("ADMIN")
 	    .antMatchers("/user/**").hasRole("USER")
-	    .antMatchers("/stylesheets/style.css", "/", "/login*", "/error.html", "/nouser.html", "/admin/clients.html").permitAll()
+	    .antMatchers("/stylesheets/style.css", "/", "/login*", "/error.html", "/nouser.html").permitAll()
 	    .anyRequest().authenticated()
 	    .and()
     .formLogin()
@@ -50,10 +59,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    .loginProcessingUrl("/login")
 	    .usernameParameter("username")
 	    .passwordParameter("password")
-	    .successForwardUrl("/admin/clients")
-	    //.successHandler(appAuthenticationSuccessHandler())
+	    //.successForwardUrl("/admin/clients")
+	    .successHandler(new AuthenticationSuccessHandler() {
+            @Override
+            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException  {
+                Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
+                if (roles.contains("ADMIN")) {
+                    response.sendRedirect("admin/clients.html");
+                } else if (roles.contains("USER")) {
+                    response.sendRedirect("user/home.html");
+                }
+            }
+        })
 	    .defaultSuccessUrl("/admin/clients", false)
-	    .failureUrl("/nouser.html");
+	    .failureUrl("/nouser.html")
+  	.and()
+  	.exceptionHandling().accessDeniedPage("/nouser");
   		//.failureHandler(authenticationFailureHandler())
 	    /*.and()
     .logout()
