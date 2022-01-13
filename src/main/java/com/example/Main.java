@@ -76,7 +76,7 @@ public class Main {
   String index(Map<String, Object> model) {
     return "redirect:/login";
   }
-  
+
   @GetMapping("/login")
   String loginPageHandler(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
@@ -91,8 +91,10 @@ public class Main {
     }
   }
 
-  @PostMapping(path = "/login", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-  public String login(Map<String, Object> model, Employee user) throws Exception {
+  //@PostMapping(path = "/login", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+  //public String login(Map<String, Object> model, Employee user) throws Exception {
+  @PostMapping("/login")
+  public String login(Map<String, Object> model) throws Exception {
 	System.out.println("post");
 	return "redirect:/admin/clients";
     /*String employeeName = user.getName();
