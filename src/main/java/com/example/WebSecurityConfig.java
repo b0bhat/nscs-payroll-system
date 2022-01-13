@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @ComponentScan
-public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Bean
   public PasswordEncoder passwordEncoder() {
@@ -36,13 +36,13 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
     .authorizeRequests()
     .antMatchers("/admin/**").hasRole("ADMIN")
     .antMatchers("/user/**").hasRole("USER")
-    .antMatchers("/js/**", "/css/**").permitAll()
-    .antMatchers("/login*").permitAll()
+    .antMatchers("/stylesheets/style.css").permitAll()
+    .antMatchers("/login*", "/error.html", "/nouser.html").permitAll()
     .anyRequest().authenticated()
     .and()
     .formLogin()
     .loginPage("/login.html")
-    .loginProcessingUrl("/perform_login")
+    .loginProcessingUrl("/")
     .defaultSuccessUrl("/admin/clients.html", true)
     .failureUrl("/error.html")
     //.failureHandler(authenticationFailureHandler())
