@@ -85,15 +85,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    .deleteCookies("JSESSIONID");
 	   	//.logoutSuccessHandler(logoutSuccessHandler());*/
   }
-  
-  @Bean
-  public DataSource dataSource2() throws SQLException {
-    if (dbUrl == null || dbUrl.isEmpty()) {
-      return new HikariDataSource();
-    } else {
-      HikariConfig config = new HikariConfig();
-      config.setJdbcUrl(dbUrl);
-      return new HikariDataSource(config);
-    }
-  }
+
 }
