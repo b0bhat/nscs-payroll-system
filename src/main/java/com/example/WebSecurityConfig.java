@@ -19,7 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   public PasswordEncoder passwordEncoder() {
       return new BCryptPasswordEncoder();
   }
-  
+
   @Bean
   public AuthenticationSuccessHandler appAuthenticationSuccessHandler(){
        return new AppAuthenticationSuccessHandler();
@@ -48,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    .and()
     .formLogin()
 	    .loginPage("/login.html")
-	    //.loginProcessingUrl("/")
+	    .loginProcessingUrl("/login.html")
 	    //.successHandler(appAuthenticationSuccessHandler())
 	    .defaultSuccessUrl("/admin/clients.html", true)
 	    .failureUrl("/nouser.html");
