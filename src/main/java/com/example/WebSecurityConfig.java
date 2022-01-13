@@ -48,8 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    .and()
     .formLogin()
 	    .loginPage("/login.html")
-	    .loginProcessingUrl("/")
-	    .successHandler(appAuthenticationSuccessHandler())
+	    //.loginProcessingUrl("/")
+	    //.successHandler(appAuthenticationSuccessHandler())
 	    .defaultSuccessUrl("/admin/clients.html", true)
 	    .failureUrl("/nouser.html");
 	    //.failureHandler(authenticationFailureHandler())
