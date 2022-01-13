@@ -64,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     .authorizeRequests()
 	    .antMatchers("/admin/**").hasRole("ADMIN")
 	    .antMatchers("/user/**").hasRole("USER")
-	    .antMatchers("/stylesheets/style.css", "/", "/login", "/error", "/nouser").permitAll()
+	    .antMatchers("/stylesheets/style.css", "/", "/login*", "/error", "/nouser").permitAll()
 	    .anyRequest().authenticated()
 	    .and()
     .formLogin()
@@ -85,5 +85,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    .deleteCookies("JSESSIONID");
 	   	//.logoutSuccessHandler(logoutSuccessHandler());*/
   }
+  
 
 }
