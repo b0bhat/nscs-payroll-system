@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    .loginPage("/login.html")
 	    .loginProcessingUrl("/login.html")
 	    //.successHandler(appAuthenticationSuccessHandler())
-	    .defaultSuccessUrl("/admin/clients.html", true)
+	    .defaultSuccessUrl("/admin/clients.html", false)
 	    .failureUrl("/nouser.html");
 	    //.failureHandler(authenticationFailureHandler())
 	    /*.and()
