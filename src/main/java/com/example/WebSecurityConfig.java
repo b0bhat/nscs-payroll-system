@@ -1,4 +1,5 @@
 package com.example;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       .withUser("admin").password(passwordEncoder().encode("123")).roles("ADMIN");
   }
   
+  @Autowired
   SecurityHandler securityHandler;
 
   @Override
