@@ -4,13 +4,10 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.context.annotation.ScopedProxyMode;
 
 @Component
 public class SecurityHandler implements AuthenticationSuccessHandler {
