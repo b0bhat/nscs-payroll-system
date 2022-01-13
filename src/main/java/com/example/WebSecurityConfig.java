@@ -40,18 +40,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   http
     .csrf().disable()
     .authorizeRequests()
-	    .antMatchers("*/admin/**").hasRole("ADMIN")
-	    .antMatchers("*/user/**").hasRole("USER")
-	    .antMatchers("/stylesheets/style.css").permitAll()
-	    .antMatchers("/login*", "/error.html", "/nouser.html", "/admin/clients.html").permitAll()
+	    .antMatchers("/stylesheets/style.css, /login*", "/error.html", "/nouser.html", "/admin/clients.html").permitAll()
 	    .anyRequest().authenticated()
 	    .and()
     .formLogin()
 	    .loginPage("/login.html")
 	    .loginProcessingUrl("/login.html")
-	    //.successHandler(appAuthenticationSuccessHandler())
+	    .successHandler(appAuthenticationSuccessHandler())
 	    .defaultSuccessUrl("/admin/clients.html", false)
-	    .failureUrl("/nouser.html");
+	    //.failureUrl("/nouser.html");
 	    //.failureHandler(authenticationFailureHandler())
 	    /*.and()
     .logout()
