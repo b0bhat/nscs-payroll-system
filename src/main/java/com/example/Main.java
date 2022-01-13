@@ -39,6 +39,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;*/
+import org.springframework.security.core.Authentication;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
@@ -73,7 +74,8 @@ public class Main {
   }
 
   @RequestMapping("/")
-  String index(Map<String, Object> model) {
+  String index(Map<String, Object> model, Authentication authentication) {
+	  System.out.println(authentication.getName());
     return "redirect:/login";
   }
 
@@ -209,7 +211,6 @@ public class Main {
 
   @GetMapping("/admin/clients")
   String clientList(Map<String, Object> model) {
-	System.out.println("admin clients");
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
