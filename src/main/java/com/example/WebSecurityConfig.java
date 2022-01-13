@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     .authorizeRequests()
 	    .antMatchers("/admin/**").hasRole("ADMIN")
 	    .antMatchers("/user/**").hasRole("USER")
-	    .antMatchers("/stylesheets/style.css", "/", "/login*", "/error*", "/nouser*").permitAll()
+	    .antMatchers("/stylesheets/style.css", "/", "/login*", "/error", "/nouser").permitAll()
 	    .anyRequest().authenticated()
 	    .and()
     .formLogin()
@@ -57,9 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    //.successForwardUrl("/admin/clients")
 	    .successHandler(securityHandler)
 	    //.defaultSuccessUrl("/admin/clients", false)
-	    .failureUrl("/nouser*")
+	    .failureUrl("/nouser")
   	.and()
-  	.exceptionHandling().accessDeniedPage("/nouser*");
+  	.exceptionHandling().accessDeniedPage("/nouser");
   		//.failureHandler(authenticationFailureHandler())
 	    /*.and()
     .logout()
