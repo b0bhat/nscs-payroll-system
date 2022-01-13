@@ -57,9 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    //.successForwardUrl("/admin/clients")
 	    .successHandler(securityHandler)
 	    //.defaultSuccessUrl("/admin/clients", false)
-	    .failureUrl("/nouser.html")
+	    .failureUrl("/nouser*")
   	.and()
-  	.exceptionHandling().accessDeniedPage("/nouser");
+  	.exceptionHandling().accessDeniedPage("/nouser*");
   		//.failureHandler(authenticationFailureHandler())
 	    /*.and()
     .logout()
