@@ -42,7 +42,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
     .formLogin()
     .loginPage("/login.html")
     .loginProcessingUrl("/perform_login")
-    .defaultSuccessUrl("/user/home.html", true)
+    .defaultSuccessUrl("/admin/clients.html", true)
     .failureUrl("/error.html")
     //.failureHandler(authenticationFailureHandler())
     .and()
