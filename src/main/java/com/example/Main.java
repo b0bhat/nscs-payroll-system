@@ -55,7 +55,6 @@ import java.io.*;
 @SpringBootApplication
 public class Main {
   boolean flag = true;
-  String logID = "admin"; //fix me
   java.sql.Date baseDate = java.sql.Date.valueOf("2000-01-01");
   Date startDate = baseDate;
   Date endDate = baseDate;
@@ -73,6 +72,13 @@ public class Main {
     SpringApplication.run(Main.class, args);
   }
 
+  @RequestMapping("/authCheck")
+  String authCheck(Authentication authentication) {
+	  System.out.println(authentication.getName());
+    return "redirect:/login";
+  }
+
+  
   @RequestMapping("/")
   String index(Map<String, Object> model, Authentication authentication) {
 	  System.out.println(authentication.getName());
@@ -153,7 +159,7 @@ public class Main {
         output.add(emp);
       }
       model.put("employees", output);
-      if (flag && logID == "admin") {
+      if (flag) {
         return "admin/employees";
       } else {
         return "nouser";
@@ -168,7 +174,7 @@ public class Main {
   public String returnEmployeeAdd(Map<String, Object> model) throws Exception {
     Employee employee = new Employee();
     model.put("employee", employee);
-    if (flag && logID == "admin") {
+    if (flag) {
       return "admin/addEmployee";
     } else {
       return "error";
@@ -222,7 +228,7 @@ public class Main {
         output.add(rs.getString("clientName"));
       }
       model.put("clients", output);
-      if (flag && logID == "admin") {
+      if (flag) {
         return "admin/clients";
       } else {
         return "nouser";
@@ -237,7 +243,7 @@ public class Main {
   public String returnClientAdd(Map<String, Object> model) throws Exception {
     String client = new String();
     model.put("client", client);
-    if (flag && logID == "admin") {
+    if (flag) {
       return "admin/addClient";
     } else {
       return "error";
@@ -275,7 +281,7 @@ public class Main {
           output.add(rs.getString("workType"));
         }
         model.put("workTypes", output);
-        if (flag && logID == "admin") {
+        if (flag) {
           return "admin/worktypes";
         } else {
           return "nouser";
@@ -290,7 +296,7 @@ public class Main {
     public String returnWorkTypeAdd(Map<String, Object> model) throws Exception {
       String workType = new String();
       model.put("workType", workType);
-      if (flag && logID == "admin") {
+      if (flag) {
         return "admin/addWorkType";
       } else {
         return "error";
@@ -335,7 +341,7 @@ public class Main {
         output.add(ret);
       }
       model.put("records", output);
-      if (flag && logID == "admin") {
+      if (flag) {
         return "admin/records";
       } else {
         return "nouser";
@@ -383,7 +389,7 @@ String biweeklyTool(Map<String, Object> model) {
     }
     model.put("date", date);
 
-    if (flag && logID == "admin") {
+    if (flag) {
       return "admin/biweekly";
     } else {
       return "nouser";
@@ -460,7 +466,7 @@ String monthlyTool(Map<String, Object> model) {
     }
     model.put("date", date);
 
-    if (flag && logID == "admin") {
+    if (flag) {
       return "admin/monthly";
     } else {
       return "nouser";
@@ -486,10 +492,10 @@ public String handleMonthlySubmit(Map<String, Object> model, dateRange date) thr
 //==================================== USER ====================================//
 
 @GetMapping("/user/home")
-String recordListUser(Map<String, Object> model) {
+String recordListUser(Map<String, Object> model, Authentication authentication) {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
-    String sql = "SELECT * FROM records WHERE \"employeeName\" = '" + logID + "'ORDER BY \"workDate\" DESC";
+    String sql = "SELECT * FROM records WHERE \"employeeName\" = '" + authentication.getName() + "'ORDER BY \"workDate\" DESC";
     System.out.println(sql);
     ResultSet rs = stmt.executeQuery(sql);
 
@@ -549,12 +555,12 @@ public String returnRecordAdd(Map<String, Object> model) throws Exception {
 }
 
 @PostMapping(path = "/user/addRecord", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-public String handleRecordAdd(Map<String, Object> model, Record record) throws Exception {
+public String handleRecordAdd(Map<String, Object> model, Record record, Authentication authentication) throws Exception {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
     final String UniqueID = UUID.randomUUID().toString().replace("-", "");
     record.setRecordID(UniqueID);
-    record.setEmployeeName(logID);
+    record.setEmployeeName(authentication.getName());
 
     String sql = "INSERT INTO records VALUES ('"
         + record.getRecordID() + "','" + record.getClientName() + "','" + record.getWorkHours() + "','"
