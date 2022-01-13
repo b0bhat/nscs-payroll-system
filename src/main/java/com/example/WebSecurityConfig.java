@@ -1,5 +1,13 @@
 package com.example;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +20,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -28,14 +39,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
        return new AppAuthenticationSuccessHandler();
   }
 
+  @Value("${spring.datasource.url}")
+  private String dbUrl;
+
+  @Autowired
+  private DataSource dataSource;
+  
   @Autowired
   protected void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-  auth.inMemoryAuthentication()
+	  auth.jdbcAuthentication()
+      .dataSource(dataSource)
+      .usersByUsernameQuery("SELECT employeeName, password, true FROM login WHERE \"employeeName\" = ?")
+      .authoritiesByUsernameQuery("SELECT 'USER' FROM login WHERE \"employeeName\" = ?");
+	  /*
+	  auth.inMemoryAuthentication()
       .withUser("user1").password(passwordEncoder().encode("123")).roles("USER")
       .and()
       .withUser("bobman").password(passwordEncoder().encode("123")).roles("USER")
       .and()
-      .withUser("admin").password(passwordEncoder().encode("123")).roles("ADMIN");
+      .withUser("admin").password(passwordEncoder().encode("123")).roles("ADMIN");*/
   }
   
   @Autowired
@@ -56,8 +78,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    .anyRequest().authenticated()
 	    .and()
     .formLogin()
-	    .loginPage("/login")
-	    .loginProcessingUrl("/login")
+	    .loginPage("/login*")
+	    .loginProcessingUrl("/login*")
 	    .usernameParameter("username")
 	    .passwordParameter("password")
 	    //.successForwardUrl("/admin/clients")
@@ -72,5 +94,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    .logoutUrl("/logout.html")
 	    .deleteCookies("JSESSIONID");
 	   	//.logoutSuccessHandler(logoutSuccessHandler());*/
+  }
+  
+  @Bean
+  public DataSource dataSource() throws SQLException {
+    if (dbUrl == null || dbUrl.isEmpty()) {
+      return new HikariDataSource();
+    } else {
+      HikariConfig config = new HikariConfig();
+      config.setJdbcUrl(dbUrl);
+      return new HikariDataSource(config);
+    }
   }
 }
