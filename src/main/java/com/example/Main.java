@@ -77,9 +77,9 @@ public class Main {
     return "redirect:/login";
   }
 
-  @RequestMapping(value = {"/login"}, method = RequestMethod.POST)
-    public String login(Map<String, Object> model) {
-        return "/login";
+  @GetMapping
+    public String getLoginPage() {
+        return "login";
     }
 
 
