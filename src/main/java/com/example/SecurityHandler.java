@@ -19,9 +19,9 @@ public class SecurityHandler implements AuthenticationSuccessHandler {
     	 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
          String role = auth.getAuthorities().toString();
          System.out.println(auth);
-        if (role.contains("ADMIN")) {
+        if (role.contains("ROLE_ADMIN")) {
             response.sendRedirect("/admin/clients");
-        } else if (role.contains("USER")) {
+        } else if (role.contains("ROLE_USER")) {
             response.sendRedirect("/user/home");
         } else response.sendRedirect("/nouser");
     }
