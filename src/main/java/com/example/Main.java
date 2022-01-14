@@ -51,7 +51,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 import java.sql.Date;
-import java.io.*;
 
 @Controller
 @SpringBootApplication
@@ -187,7 +186,7 @@ public class Main {
   public String handleEmployeeAdd(Map<String, Object> model, Employee employee) throws Exception {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-
+      employee.setPassword(new BCryptPasswordEncoder().encode(employee.getPassword()));
       String sql = "INSERT INTO login VALUES ('"
           + employee.getName() + "','" + employee.getPassword() + "')";
 
