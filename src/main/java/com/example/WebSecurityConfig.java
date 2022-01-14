@@ -26,10 +26,10 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @ComponentScan
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-  /*@Bean
+  @Bean
   public PasswordEncoder passwordEncoder() {
       return new BCryptPasswordEncoder();
-  }*/
+  }
 
   @Bean
   public AuthenticationSuccessHandler appAuthenticationSuccessHandler(){
@@ -43,6 +43,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
   protected void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+	  String encoded = new BCryptPasswordEncoder().encode("123");
+	  System.out.println(encoded);
 	  auth.jdbcAuthentication()
       .dataSource(dataSource)
       .usersByUsernameQuery("SELECT \"employeeName\" AS username, password, true AS enabled" + " from login where \"employeeName\"=?")
