@@ -26,6 +26,11 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @ComponentScan
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+  /*@Bean
+  public PasswordEncoder passwordEncoder() {
+      return new BCryptPasswordEncoder();
+  }*/
+
   @Bean
   public AuthenticationSuccessHandler appAuthenticationSuccessHandler(){
        return new AppAuthenticationSuccessHandler();
