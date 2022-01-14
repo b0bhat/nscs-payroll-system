@@ -41,7 +41,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   private String dbUrl;*/
   @Autowired DataSource dataSource;
 
-
   @Autowired
   protected void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 	  String encoded = new BCryptPasswordEncoder().encode("123");

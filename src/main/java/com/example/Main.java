@@ -68,9 +68,6 @@ public class Main {
 
   @Autowired
   private DataSource dataSource;
-  
-  @Autowired
-  private BCryptPasswordEncoder encoder;
 
   public static void main(String[] args) throws Exception {
     SpringApplication.run(Main.class, args);
