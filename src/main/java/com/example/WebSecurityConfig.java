@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
@@ -29,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Bean
   public PasswordEncoder passwordEncoder() {
-      return new BCryptPasswordEncoder();
+      return new BCryptPasswordEncoder(10);
   }
 
   @Bean
@@ -43,10 +44,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
   protected void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+	  
 	  //String encoded = new BCryptPasswordEncoder().encode("123");
 	  //System.out.println("\n\n" + encoded + "\n\n");
 	  //PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	  auth.jdbcAuthentication()
+	  .passwordEncoder(passwordEncoder())
       .dataSource(dataSource)
       .usersByUsernameQuery("SELECT \"employeeName\" AS username, password, true AS enabled" + " from login where \"employeeName\"=?")
       .authoritiesByUsernameQuery("SELECT \"employeeName\", 'USER' AS authority FROM login where \"employeeName\"=?");
