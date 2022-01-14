@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired
   protected void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 	  String encoded = new BCryptPasswordEncoder().encode("123");
-	  System.out.println(encoded);
+	  System.out.println("\n\n" + encoded + "\n\n");
 	  auth.jdbcAuthentication()
       .dataSource(dataSource)
       .usersByUsernameQuery("SELECT \"employeeName\" AS username, password, true AS enabled" + " from login where \"employeeName\"=?")
