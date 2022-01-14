@@ -52,7 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	  .passwordEncoder(passwordEncoder())
       .dataSource(dataSource)
       .usersByUsernameQuery("SELECT \"employeeName\", password, 1" + " from login where \"employeeName\"=?")
-      .authoritiesByUsernameQuery("SELECT \"employeeName\", 'ROLE_USER' AS authority FROM login where \"employeeName\"=?");
+      .authoritiesByUsernameQuery("SELECT \"employeeName\", 'ROLE_USER' AS authority FROM login where \"employeeName\"=?")
+      .withUser("admin").password(passwordEncoder().encode("123")).roles("ADMIN");
 	  /*
 	  auth.inMemoryAuthentication()
       .withUser("AW").password(passwordEncoder().encode("AW")).roles("USER")
@@ -74,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   http
     .csrf().disable()
     .authorizeRequests()
-      .antMatchers("/login", "/error", "/nouser", "/", "/logout").permitAll()
+      	.antMatchers("/login", "/error", "/nouser", "/", "/logout").permitAll()
 	    .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 	    .antMatchers("/user/**").access("hasRole('ROLE_USER')")
 	    .antMatchers("/stylesheets/style.css", "/login*", "/error", "/nouser", "/", "/logout").permitAll()
