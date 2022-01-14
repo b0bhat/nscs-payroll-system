@@ -32,7 +32,12 @@
           <label for="endDate">End Date</label>
           <input type="date" th:value="${endDate}" name="endDate" id="endDate" required />
           <span>
-            <span id='diff'> - </span>
+           <table id="myTable"><tbody>
+            <tr th:each="dates : ${date}">
+            <td th:text="${dates.startDate}"></td>
+            <td th:text="${dates.endDate}"></td>
+          	</tr>
+          	</tbody></table>
             <input type="submit" value="Submit" />
           </span>
     </form>
