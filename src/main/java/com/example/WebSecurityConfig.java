@@ -43,20 +43,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
   protected void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-	  String encoded = new BCryptPasswordEncoder().encode("123");
+	  //String encoded = new BCryptPasswordEncoder().encode("123");
 	  //System.out.println("\n\n" + encoded + "\n\n");
 	  //PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-	  auth.jdbcAuthentication()
+	  /*auth.jdbcAuthentication()
       .dataSource(dataSource)
       .usersByUsernameQuery("SELECT \"employeeName\" AS username, password, true AS enabled" + " from login where \"employeeName\"=?")
       .authoritiesByUsernameQuery("SELECT \"employeeName\", 'USER' AS authority FROM login where \"employeeName\"=?");
-	  /*
+	  */
 	  auth.inMemoryAuthentication()
       .withUser("AW").password(passwordEncoder().encode("AW")).roles("USER")
       .and()
       .withUser("bobman").password(passwordEncoder().encode("123")).roles("USER")
       .and()
-      .withUser("admin").password(passwordEncoder().encode("123")).roles("ADMIN");*/
+      .withUser("admin").password(passwordEncoder().encode("123")).roles("ADMIN");
   }
 
   @Autowired
