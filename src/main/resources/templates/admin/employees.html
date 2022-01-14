@@ -12,9 +12,6 @@
 <header></header>
 
 <script>
-function beep() {
-  confirm("Are you sure you want to delete this employee? All associated records will also be deleted!");
-}
 </script>
 
 
@@ -39,7 +36,7 @@ function beep() {
                 <button><a th:href="@{/employees/edit?rid={name}(name = ${employee.getName()})}">Edit</a></button>
               </td>-->
               <td>
-                <button onclick="beep()"><a th:href="@{/admin/deleteEmployee?e_id={id}(id=${employee.name})}"><i class="bi bi-trash"></i>Delete</a></button>
+                <button><a onclick="return confirm('Are you sure you want to delete this employee? All associated records will also be deleted!');" th:href="@{/admin/deleteEmployee?e_id={id}(id=${employee.name})}"><i class="bi bi-trash"></i>Delete</a></button>
               </td>
             </tr>
 
