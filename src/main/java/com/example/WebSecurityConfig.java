@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 	  auth.jdbcAuthentication()
       .dataSource(dataSource)
-      .usersByUsernameQuery("SELECT \"employeeName\" AS username, CONCAT('{noop}',password), true AS enabled" + " from login where \"employeeName\"=?")
+      .usersByUsernameQuery("SELECT \"employeeName\" AS username, password, true AS enabled" + " from login where \"employeeName\"=?")
       .authoritiesByUsernameQuery("SELECT \"employeeName\", 'USER' AS authority FROM login where \"employeeName\"=?");
 	  /*
 	  auth.inMemoryAuthentication()
