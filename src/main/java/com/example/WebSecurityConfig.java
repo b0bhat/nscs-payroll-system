@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CsrfFilter;
@@ -44,11 +45,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired
   protected void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 	  String encoded = new BCryptPasswordEncoder().encode("123");
-	  System.out.println("\n\n" + encoded + "\n\n");
+	  //System.out.println("\n\n" + encoded + "\n\n");
+	  //PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	  auth.jdbcAuthentication()
       .dataSource(dataSource)
       .usersByUsernameQuery("SELECT \"employeeName\" AS username, password, true AS enabled" + " from login where \"employeeName\"=?")
-      .authoritiesByUsernameQuery("SELECT \"employeeName\", 'USER' AS authority FROM login where \"employeeName\"=?");
+      .authoritiesByUsernameQuery("SELECT \"employeeName\", 'USER' AS authority FROM login where \"employeeName\"=?")
+      .passwordEncoder(new BCryptPasswordEncoder());
 	  /*
 	  auth.inMemoryAuthentication()
       .withUser("AW").password(passwordEncoder().encode("AW")).roles("USER")

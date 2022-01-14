@@ -40,6 +40,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;*/
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
@@ -67,6 +68,9 @@ public class Main {
 
   @Autowired
   private DataSource dataSource;
+  
+  @Autowired
+  private BCryptPasswordEncoder encoder;
 
   public static void main(String[] args) throws Exception {
     SpringApplication.run(Main.class, args);
