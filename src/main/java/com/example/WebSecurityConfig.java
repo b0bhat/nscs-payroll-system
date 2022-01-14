@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	  auth.jdbcAuthentication()
 	  .passwordEncoder(passwordEncoder())
       .dataSource(dataSource)
-      .usersByUsernameQuery("SELECT \"employeeName\" AS username, password, true AS enabled" + " from login where \"employeeName\"=?")
+      .usersByUsernameQuery("SELECT \"employeeName\", password, 1" + " from login where \"employeeName\"=?")
       .authoritiesByUsernameQuery("SELECT \"employeeName\", 'USER' AS authority FROM login where \"employeeName\"=?");
 	  /*
 	  auth.inMemoryAuthentication()
