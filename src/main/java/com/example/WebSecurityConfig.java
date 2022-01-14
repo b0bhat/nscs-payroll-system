@@ -52,8 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	  .passwordEncoder(passwordEncoder())
       .dataSource(dataSource)
       .usersByUsernameQuery("SELECT \"employeeName\", password, 1" + " from login where \"employeeName\"=?")
-      .authoritiesByUsernameQuery("SELECT \"employeeName\", 'ROLE_USER' AS authority FROM login where \"employeeName\"=?")
-      .withUser("admin").password(passwordEncoder().encode("123")).roles("ADMIN");
+      .authoritiesByUsernameQuery("SELECT \"employeeName\", 'ROLE_USER' AS authority FROM login where \"employeeName\"=?");
 	  /*
 	  auth.inMemoryAuthentication()
       .withUser("AW").password(passwordEncoder().encode("AW")).roles("USER")
