@@ -63,9 +63,6 @@ public class Main {
 /*
   @Autowired
   private LoggedUserManagementService userService;*/
-
-  @Autowired
-  private PasswordEncoder passwordEncoder;
   
   @Value("${spring.datasource.url}")
   private String dbUrl;
