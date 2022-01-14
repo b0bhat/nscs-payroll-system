@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <head>
+  <meta name="google-signin-client_id" content="857298202446-ueki5o9kei1p78hbsumsb06n5l9rhcbc.apps.googleusercontent.com">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
 </head>
-  <body>
-    <div class="container">
-      <h2>ERROR</h2>
-      <p>Please try again, and contact admin if problem persists.</p>
-      <p th:text="${message}">Exception message</p>
-      <span class="add-employee">
-          <button class="add"><a th:href="@{/login}">Return to Login</a></button>
-      </span>
-    </div>
-  </body>
+
+<body>
+  <div class="cred">
+    <h2>ERROR</h2>
+    <p>Please try again, and contact admin if problem persists.</p>
+    <p>If you are unable to login, try clearing your cookies for this page.</p>
+    <p th:text="${message}">Exception message</p>
+    <span class="add-employee">
+       <button class="add"><a th:href="@{/login}">Return to Login</a></button>
+    </span>
+  </div>
+</body>
 
 </html>

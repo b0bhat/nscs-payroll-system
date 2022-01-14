@@ -87,11 +87,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    //.defaultSuccessUrl("/admin/clients", false)
 	    .failureUrl("/nouser")
   	.and()
-  	.exceptionHandling().accessDeniedPage("/nouser");
+  	  .exceptionHandling().accessDeniedPage("/nouser")
   		//.failureHandler(authenticationFailureHandler())
-	    /*.and()
+	    .and()
     .logout()
 	    .logoutUrl("/logout.html")
+	    .logoutSuccessUrl("/login")
+	    .invalidateHttpSession(true)  
 	    .deleteCookies("JSESSIONID");
 	   	//.logoutSuccessHandler(logoutSuccessHandler());*/
   }
