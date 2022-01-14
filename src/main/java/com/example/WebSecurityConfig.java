@@ -42,8 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Value("${postgres://auaitxqyiisnvi:551b9daa9ff01f53183c0b48855a0043189e38249ab97382c5399360f56af6dc@ec2-52-54-167-8.compute-1.amazonaws.com:5432/dd3k7h39t68knm}")
   private String dbUrl;
   @Autowired DataSource dataSource;*/
-  
-  
+
+
   @Autowired
   protected void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 	  /*auth.jdbcAuthentication()
@@ -58,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       .and()
       .withUser("admin").password(passwordEncoder().encode("123")).roles("ADMIN");
   }
-  
+
   @Autowired
   SecurityHandler securityHandler;
 
@@ -73,8 +73,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     .authorizeRequests()
 	    .antMatchers("/admin/**").hasRole("ADMIN")
 	    .antMatchers("/user/**").hasRole("USER")
+      .anyRequest().authenticated()
 	    .antMatchers("/stylesheets/style.css", "/", "/login*", "/error", "/nouser").permitAll()
-	    .anyRequest().authenticated()
 	    .and()
     .formLogin()
 	    .loginPage("/login")
@@ -94,6 +94,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    .deleteCookies("JSESSIONID");
 	   	//.logoutSuccessHandler(logoutSuccessHandler());*/
   }
-  
+
 
 }
