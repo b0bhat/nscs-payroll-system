@@ -355,7 +355,7 @@ public class Main {
         ret.setWorkHours(rs2.getFloat("workHours"));
         ret.setWorkType(rs2.getString("workType"));
         ret.setWorkDate(rs2.getDate("workDate"));
-        output.add(ret);
+        output2.add(ret);
       }
       model.put("records2", output2);
       
@@ -452,10 +452,10 @@ String monthlyTool(Map<String, Object> model) {
       String sql;
       if (startDate == baseDate || endDate == baseDate) {
         sql = "SELECT \"employeeName\", \"workHours\", \"workDate\" "
-        + "FROM records WHERE \"clientName\" = '" + clientList.get(i) + "' ORDER BY \"clientName\", \"employeeName\",\"workDate\" ASC";
+        + "FROM records WHERE \"clientName\" = '" + clientList.get(i-1) + "' ORDER BY \"clientName\", \"employeeName\",\"workDate\" ASC";
       } else {
         sql = "SELECT \"employeeName\", \"workHours\", \"workDate\" "
-        + "FROM records WHERE \"clientName\" = '" + clientList.get(i) + "' AND (\"workDate\" >= '" + startDate + "' AND \"workDate\" <= '" + endDate + "') "
+        + "FROM records WHERE \"clientName\" = '" + clientList.get(i-1) + "' AND (\"workDate\" >= '" + startDate + "' AND \"workDate\" <= '" + endDate + "') "
         + "ORDER BY \"clientName\", \"employeeName\",\"workDate\" ASC";
       } ResultSet rs = stmt.executeQuery(sql);
       System.out.println("clients \n");
@@ -474,8 +474,8 @@ String monthlyTool(Map<String, Object> model) {
       
       if (num != 0) {
         output.setRecords(records);
-        output.setClientName(clientList.get(i));
-        output.setTotalHours(totalList.get(i));
+        output.setClientName(clientList.get(i-1));
+        output.setTotalHours(totalList.get(i-1));
         allList.add(output);
       }
     } model.put("allList", allList);
