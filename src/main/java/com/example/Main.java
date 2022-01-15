@@ -342,6 +342,23 @@ public class Main {
         output.add(ret);
       }
       model.put("records", output);
+      
+      String sql2 = "SELECT * FROM records ORDER BY \"employeeName\", \"workDate\" DESC";
+      ResultSet rs2 = stmt.executeQuery(sql2);
+
+      ArrayList<Record> output2 = new ArrayList<Record>();
+      while (rs2.next()) {
+        Record ret = new Record();
+        ret.setEmployeeName(rs2.getString("employeeName"));
+        ret.setClientName(rs2.getString("clientName"));
+        ret.setRecordID(rs2.getString("recordID"));
+        ret.setWorkHours(rs2.getFloat("workHours"));
+        ret.setWorkType(rs2.getString("workType"));
+        ret.setWorkDate(rs2.getDate("workDate"));
+        output.add(ret);
+      }
+      model.put("records2", output2);
+      
       if (flag) {
         return "admin/records";
       } else {
@@ -417,24 +434,29 @@ public String handleBiweeklyDate(Map<String, Object> model, dateRange date) thro
 String monthlyTool(Map<String, Object> model) {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
-    String select = "SELECT * FROM clients";
+    String select = "SELECT \"clientName\", SUM(\"workHours\") AS \"totalHours\" FROM records GROUP BY \"clientName\" ORDER BY \"clientName\"";
     ResultSet rsc = stmt.executeQuery(select);
     ArrayList<String> clientList = new ArrayList<String>();
+    ArrayList<Float> totalList = new ArrayList<Float>();
+    int n = 0;
     while (rsc.next()) {
       System.out.println("client \n");
       String client = rsc.getString("clientName");
+      Float total = rsc.getFloat("totalHours");
       clientList.add(client);
+      totalList.add(total);
+      n++;
     }
     ArrayList<MonthlyList> allList = new ArrayList<MonthlyList>();
-    for (String client : clientList) {
+    for (int i = 1; i <= n; i++) {
       String sql;
       if (startDate == baseDate || endDate == baseDate) {
         sql = "SELECT \"employeeName\", \"workHours\", \"workDate\" "
-        + "FROM records WHERE \"clientName\" = '" + client + "' ORDER BY \"clientName\", \"workDate\" ASC";
+        + "FROM records WHERE \"clientName\" = '" + clientList.get(i) + "' ORDER BY \"clientName\", \"employeeName\",\"workDate\" ASC";
       } else {
         sql = "SELECT \"employeeName\", \"workHours\", \"workDate\" "
-        + "FROM records WHERE \"clientName\" = '" + client + "' AND (\"workDate\" >= '" + startDate + "' AND \"workDate\" <= '" + endDate + "') "
-        + "ORDER BY \"clientName\", \"workDate\" ASC";
+        + "FROM records WHERE \"clientName\" = '" + clientList.get(i) + "' AND (\"workDate\" >= '" + startDate + "' AND \"workDate\" <= '" + endDate + "') "
+        + "ORDER BY \"clientName\", \"employeeName\",\"workDate\" ASC";
       } ResultSet rs = stmt.executeQuery(sql);
       System.out.println("clients \n");
       ArrayList<Monthly> records = new ArrayList<Monthly>();
@@ -449,9 +471,11 @@ String monthlyTool(Map<String, Object> model) {
         records.add(ret);
       }
       MonthlyList output = new MonthlyList();
+      
       if (num != 0) {
         output.setRecords(records);
-        output.setClientName(client);
+        output.setClientName(clientList.get(i));
+        output.setTotalHours(totalList.get(i));
         allList.add(output);
       }
     } model.put("allList", allList);

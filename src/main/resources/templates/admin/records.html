@@ -21,7 +21,6 @@
               <th>Work Hours</th>
               <th>Work Type</th>
               <th>Work Date</th>
-              <th>recordID</th>
               <th></th>
               <th></th>
             </tr>
@@ -31,10 +30,9 @@
             <tr th:each="record : ${records}">
               <td th:text="${record.employeeName}"></td>
               <td th:text="${record.clientName}"></td>
-              <td th:text="${record.workHours}"></td>
+              <td th:text="${record.workHours}" align='right'></td>
               <td th:text="${record.workType}"></td>
               <td th:text="${record.workDate}"></td>
-              <td th:text="${record.recordID}"></td>
 
               <!--<td>
                 <button><a th:href="@{/employees/edit?rid={name}(name = ${employee.getName()})}">Edit</a></button>
@@ -42,6 +40,31 @@
               <td>
                 <button><a th:href="@{/admin/deleteRecord?e_id={id}(id=${record.recordID})}"><i class="bi bi-trash"></i>Delete</a></button>
               </td>-->
+            </tr>
+
+          </tbody>
+      </table>
+    </div>
+    
+    <div class="data-table">
+      <table id="myTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Client</th>
+              <th>Work Hours</th>
+              <th>Work Type</th>
+              <th>Work Date</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr th:each="record : ${records2}">
+              <td th:text="${record.employeeName}"></td>
+              <td th:text="${record.clientName}"></td>
+              <td th:text="${record.workHours}" align='right'></td>
+              <td th:text="${record.workType}"></td>
+              <td th:text="${record.workDate}"></td>
             </tr>
 
           </tbody>

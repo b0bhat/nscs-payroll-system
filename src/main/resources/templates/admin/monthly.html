@@ -36,6 +36,12 @@
           <div id="numdays"><label class="form">Number of days:</label>
             <input type="text" class="textbox" id="numdays2" name="numdays"/></div>
           <span>
+          <table id="myTable"><tbody>
+            <tr th:each="dates : ${date}">
+            <td th:text="${dates.startDate}"></td>
+            <td th:text="${dates.endDate}"></td>
+          	</tr>
+          	</tbody></table>
             <input type="submit" value="Submit" />
           </span>
     </form>
@@ -44,6 +50,7 @@
         <tbody th:each="monthlylist : ${allList}">
           <tr>
             <td th:text="${monthlylist.clientName}"></td>
+            <td th:text="${monthlylist.totalHours}"></td>
             <td>
               <table>
                   <tbody>
