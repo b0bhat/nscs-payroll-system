@@ -343,7 +343,7 @@ public class Main {
       }
       model.put("records", output);
       
-      String sql2 = "SELECT * FROM records ORDER BY \"employeeName\", \"workDate\" DESC";
+      String sql2 = "SELECT * FROM records ORDER BY \"employeeName\", \"clientName\", \"workDate\" DESC";
       ResultSet rs2 = stmt.executeQuery(sql2);
 
       ArrayList<Record> output2 = new ArrayList<Record>();

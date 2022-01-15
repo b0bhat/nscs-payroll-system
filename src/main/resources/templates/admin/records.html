@@ -30,7 +30,7 @@
             <tr th:each="record : ${records}">
               <td th:text="${record.employeeName}"></td>
               <td th:text="${record.clientName}"></td>
-              <td th:text="${record.workHours}" align='right'></td>
+              <td th:text="${#numbers.formatDecimal(record.workHours, 0, 'COMMA', 2, 'POINT')}" align='right'></td>
               <td th:text="${record.workType}"></td>
               <td th:text="${record.workDate}"></td>
 
