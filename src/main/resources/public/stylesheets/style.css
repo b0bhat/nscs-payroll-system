@@ -78,7 +78,6 @@ input[type=text], input[type=password], input[type=date], input[type=number], se
 .data-table {
 	float: left;
     overflow-y: auto;
-    max-height: 700px;
     margin: 10px;
 }
 

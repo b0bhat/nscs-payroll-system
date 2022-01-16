@@ -13,6 +13,7 @@
 
 <body>
     <div class="data-table">
+    <h1>Records - Date</h1>
       <table id="myTable">
           <thead>
             <tr>
@@ -45,7 +46,15 @@
           </tbody>
       </table>
     </div>
-    
+    <h1>Records - Employees</h1>
+         <div class="search-form">
+             <input 
+			  type="text" 
+			  id="myInput" 
+			  onkeyup="myFunction()" 
+			  placeholder="Filter by name..." 
+			  title="Filter">
+         </div>  
     <div class="data-table">
       <table id="myTable">
           <thead>
@@ -62,7 +71,7 @@
             <tr th:each="record : ${records2}">
               <td th:text="${record.employeeName}"></td>
               <td th:text="${record.clientName}"></td>
-              <td th:text="${record.workHours}" align='right'></td>
+              <td th:text="${#numbers.formatDecimal(record.workHours, 0, 'COMMA', 2, 'POINT')}" align='right'></td>
               <td th:text="${record.workType}"></td>
               <td th:text="${record.workDate}"></td>
             </tr>
@@ -72,5 +81,22 @@
     </div>
 
 </body>
+
+<script>
+const myFunction = () => {
+	  const trs = document.querySelectorAll('#myTable tr:not(.header)')
+	  const filter = document.querySelector('#myInput').value
+	  const regex = new RegExp(filter, 'i')
+	  const isFoundInTds = td => regex.test(td.innerHTML)
+	  const isFound = childrenArr => childrenArr.some(isFoundInTds)
+	  const setTrStyleDisplay = ({ style, children }) => {
+	    style.display = isFound([
+	      ...children // <-- All columns
+	    ]) ? '' : 'none' 
+	  }
+	  
+	  trs.forEach(setTrStyleDisplay)
+	}
+	</script>
 
 </html>
