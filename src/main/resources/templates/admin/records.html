@@ -11,7 +11,7 @@
 
 <header></header>
 <script>
-function myFunction = () => {
+const myFunction = () => {
 	  const trs = document.querySelectorAll('#myTable tr:not(.header)')
 	  const filter = document.querySelector('#myInput').value
 	  const regex = new RegExp(filter, 'i')
@@ -29,7 +29,7 @@ function myFunction = () => {
 
 <body>
     <div class="data-table">
-    <h1>Records - Date</h1>
+    <h1>Records - Date + Employee</h1>
       <table id="myTable">
           <thead>
             <tr>
@@ -62,15 +62,14 @@ function myFunction = () => {
           </tbody>
       </table>
     </div>
-    <h1>Records - Employees</h1>
-         <div class="search-form">
-             <input 
-			  type="text" 
-			  id="myInput" 
-			  onkeyup="myFunction()" 
-			  placeholder="Filter by name..." 
-			  title="Filter">
-         </div>  
+        <div class="search-form">
+            <input 
+		  type="text" 
+		  id="myInput" 
+		  onkeyup="myFunction()" 
+		  placeholder="Filter by name..." 
+		  title="Filter">
+        </div>  
     <div class="data-table">
       <table id="myTable">
           <thead>
