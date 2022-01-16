@@ -11,7 +11,7 @@
 
 <header></header>
 <script>
-const myFunction = () => {
+function myFunction() {
 	  const trs = document.querySelectorAll('#myTable tr:not(.header)')
 	  const filter = document.querySelector('#myInput').value
 	  const regex = new RegExp(filter, 'i')
@@ -24,7 +24,7 @@ const myFunction = () => {
 	  }
 	  
 	  trs.forEach(setTrStyleDisplay)
-	}
+	};
 </script>
 
 <body>
