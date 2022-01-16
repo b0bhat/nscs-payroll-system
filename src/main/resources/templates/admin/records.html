@@ -12,25 +12,31 @@
 <header></header>
 <script>
 function myFunction() {
-	  const trs = document.querySelectorAll('#myTable tr:not(.header)')
-	  const filter = document.querySelector('#myInput').value
-	  const regex = new RegExp(filter, 'i')
-	  const isFoundInTds = td => regex.test(td.innerHTML)
-	  const isFound = childrenArr => childrenArr.some(isFoundInTds)
-	  const setTrStyleDisplay = ({ style, children }) => {
-	    style.display = isFound([
-	      ...children // <-- All columns
-	    ]) ? '' : 'none' 
-	  }
-	  
-	  trs.forEach(setTrStyleDisplay)
-	};
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
 </script>
 
 <body>
     <div class="data-table">
     <h1>Records - Date + Employee</h1>
-      <table id="myTable">
+      <table id="myTable2">
           <thead>
             <tr>
               <th>Name</th>
