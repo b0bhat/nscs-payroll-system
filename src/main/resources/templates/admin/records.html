@@ -55,7 +55,7 @@ function myFunction() {
               <td th:text="${record.employeeName}"></td>
               <td th:text="${record.clientName}"></td>
               <td th:text="${#numbers.formatDecimal(record.workHours, 0, 'COMMA', 2, 'POINT')}"
-    			th:style="${record.workHours le 1} ? 'background: #003333' : (${record.workHours le 1.5} ? 'background:yellow;' : (${record.workHours le 2} ? 'background:orange;' : 'background:red'))"
+    			th:style="${record.workHours le 1} ? 'background: #E5F3B6' : (${record.workHours le 1.5} ? 'background: #D1F3B6;' : (${record.workHours le 2} ? 'background: #BCF3B6;' : (${record.workHours le 3} ? 'background: #B6F3DF;' : 'background: #B6E9F3;'))"
     			align='right'></td>
               <td th:text="${record.workType}"></td>
               <td th:text="${record.workDate}"></td>
