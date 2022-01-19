@@ -343,7 +343,7 @@ public class Main {
       }
       model.put("records", output);
       
-      String sql2 = "SELECT * FROM records ORDER BY \"employeeName\", \"clientName\", \"workDate\" DESC";
+      String sql2 = "SELECT * FROM records ORDER BY \"employeeName\", \"clientName\", \"workDate\", \"workType\" DESC";
       ResultSet rs2 = stmt.executeQuery(sql2);
 
       ArrayList<Record> output2 = new ArrayList<Record>();
@@ -451,10 +451,10 @@ String monthlyTool(Map<String, Object> model) {
     for (int i = 1; i <= n; i++) {
       String sql;
       if (startDate == baseDate || endDate == baseDate) {
-        sql = "SELECT \"employeeName\", \"workHours\", \"workDate\" "
+        sql = "SELECT \"employeeName\", \"workHours\", \"workDate\", \"workType\" "
         + "FROM records WHERE \"clientName\" = '" + clientList.get(i-1) + "' ORDER BY \"clientName\", \"employeeName\",\"workDate\" ASC";
       } else {
-        sql = "SELECT \"employeeName\", \"workHours\", \"workDate\" "
+        sql = "SELECT \"employeeName\", \"workHours\", \"workDate\", \"workType\" "
         + "FROM records WHERE \"clientName\" = '" + clientList.get(i-1) + "' AND (\"workDate\" >= '" + startDate + "' AND \"workDate\" <= '" + endDate + "') "
         + "ORDER BY \"clientName\", \"employeeName\",\"workDate\" ASC";
       } ResultSet rs = stmt.executeQuery(sql);
@@ -468,6 +468,7 @@ String monthlyTool(Map<String, Object> model) {
         ret.setEmployeeName(rs.getString("employeeName"));
         ret.setWorkHours(rs.getFloat("workHours"));
         ret.setWorkDate(rs.getDate("workDate"));
+        ret.setWorkType(rs.getString("workType"));
         records.add(ret);
       }
       MonthlyList output = new MonthlyList();

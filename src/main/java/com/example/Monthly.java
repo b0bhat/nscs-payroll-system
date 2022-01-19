@@ -6,6 +6,7 @@ public class Monthly {
     private String employeeName;
     private float workHours;
     private Date workDate;
+    private String workType;
 
     public void setWorkHours(float workHours) {
         this.workHours = workHours;
@@ -16,6 +17,9 @@ public class Monthly {
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
+    public void setWorkType(String workType) {
+        this.workType = workType;
+    }
 
     public float getWorkHours() {
         return this.workHours;
@@ -25,6 +29,9 @@ public class Monthly {
     }
     public String getEmployeeName() {
         return this.employeeName;
+    }
+    public String getWorkType() {
+        return this.workType;
     }
 
 }
