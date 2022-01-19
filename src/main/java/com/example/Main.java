@@ -673,10 +673,10 @@ public String handleChangePassword(Map<String, Object> model, Employee employee,
     BCryptPasswordEncoder b = new BCryptPasswordEncoder();
     String user = authentication.getName();
     while (rs.next()) {
-    	System.out.println("\n|" + user + "|\n|" + rs.getString("employeeName"));
+    	System.out.println("\n|" + user + "|\n|" + rs.getString("employeeName") + "|");
     	//System.out.println(b.matches(employee.getName(), rs.getString("password")));
     	System.out.println(user == rs.getString("employeeName"));
-    	if (user == rs.getString("employeeName")) {
+    	if (user.equals(rs.getString("employeeName"))) {
     		System.out.println(user == rs.getString("employeeName"));
 	    	if (b.matches(employee.getName(), rs.getString("password"))) {
 	    		change = "UPDATE login SET password = '" + b.encode(employee.getPassword()) + "' WHERE \"employeeName\" = '" + authentication.getName() + "'";
