@@ -675,6 +675,7 @@ public String handleChangePassword(Map<String, Object> model, Employee employee,
     	System.out.println("\n" + employee.getName() + "\n" + rs.getString("password") + "\n" + authentication.getName() + "\n" + rs.getString("employeeName"));
     	//System.out.println(b.matches(employee.getName(), rs.getString("password")));
     	if (authentication.getName() == rs.getString("employeeName")) {
+    		System.out.println("YES");
 	    	if (b.matches(employee.getName(), rs.getString("password"))) {
 	    		System.out.println("YES");
 	    		change = "UPDATE login SET password = '" + b.encode(employee.getPassword()) + "' WHERE \"employeeName\" = '" + authentication.getName() + "'";
