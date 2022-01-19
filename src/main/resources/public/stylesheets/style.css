@@ -123,6 +123,9 @@ button {
     background-color: #F25B5B;
     color: white;
     cursor: pointer;
+}.button a {
+    display: block;
+    padding:10px;
 }
 
 input[type=submit] {
