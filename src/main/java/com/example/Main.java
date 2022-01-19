@@ -668,7 +668,6 @@ public String handleChangePassword(Map<String, Object> model, Employee employee,
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
     String sql = "SELECT * FROM login";
-    stmt.executeUpdate(sql);
     ResultSet rs = stmt.executeQuery(sql);
     String change = "";
     while (rs.next()) {
