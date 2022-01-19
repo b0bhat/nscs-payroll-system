@@ -123,10 +123,10 @@ button {
     background-color: #F25B5B;
     color: white;
     cursor: pointer;
-    display: block;
 }
-.cancel {
-	display: block;
+a {
+    text-decoration:none;
+    display: block;
 }
 
 input[type=submit] {
