@@ -670,9 +670,11 @@ public String handleChangePassword(Map<String, Object> model, Employee employee,
     String sql = "SELECT * FROM login";
     ResultSet rs = stmt.executeQuery(sql);
     String change = "";
+    BCryptPasswordEncoder b = new BCryptPasswordEncoder();
     while (rs.next()) {
-    	System.out.println(employee.getName() + "\n" + rs.getString("password") + "\n" + authentication.getName() + "\n" + rs.getString("employeeName"));
-    	if ((new BCryptPasswordEncoder().matches(employee.getName(), rs.getString("password"))) && authentication.getName() == rs.getString("employeeName")) {
+    	System.out.println("\n" + employee.getName() + "\n" + rs.getString("password") + "\n" + authentication.getName() + "\n" + rs.getString("employeeName"));
+    	if ((b.matches(employee.getName(), rs.getString("password"))) && (authentication.getName() == rs.getString("employeeName"))) {
+    		System.out.println(b.matches(employee.getName(), rs.getString("password")));
     		change = "UPDATE login SET password = '" + new BCryptPasswordEncoder().encode(employee.getPassword()) + "' WHERE \"employeeName\" = '" + authentication.getName() + "'";
     		System.out.println(change);
     		break;
