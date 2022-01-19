@@ -47,7 +47,7 @@
                 <button><a th:href="@{/employees/edit?rid={name}(name = ${employee.getName()})}">Edit</a></button>
               </td>-->
               <td>
-                <button><a th:href="@{/user/deleteRecord?e_id={id}(id=${record.recordID})}"><i class="bi bi-trash"></i>Delete</a></button>
+                <button><a onclick="return confirm('Are you sure you want to delete this record?');" th:href="@{/user/deleteRecord?e_id={id}(id=${record.recordID})}"><i class="bi bi-trash"></i>Delete</a></button>
               </td>
             </tr>
 

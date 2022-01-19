@@ -652,6 +652,41 @@ public String deleteRecord(Map<String, Object> model, @RequestParam String e_id)
   }
 }
 
+@GetMapping("/user/password")
+public String returnChangePassword(Map<String, Object> model) throws Exception {
+    Employee employee = new Employee();
+    model.put("employee", employee);
+    if (flag) {
+      return "user/password";
+    } else {
+      return "nouser";
+    }
+}
+
+@PostMapping(path = "/user/password", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+public String handleChangePassword(Map<String, Object> model, Employee employee, Authentication authentication) throws Exception {
+  try (Connection connection = dataSource.getConnection()) {
+    Statement stmt = connection.createStatement();
+    String sql = "SELECT * FROM login";
+    stmt.executeUpdate(sql);
+    ResultSet rs = stmt.executeQuery(sql);
+    String change = "";
+    while (rs.next()) {
+    	if ((new BCryptPasswordEncoder().matches(employee.getName(), rs.getString("password"))) && authentication.getName() == rs.getString("employeeName")) {
+    		change = "UPDATE login SET password = '" + new BCryptPasswordEncoder().encode(employee.getPassword()) + "' WHERE \"employeeName\" = '" + authentication.getName() + "'";
+    		break;
+    	}
+    } if (change != "") {
+    	stmt.executeUpdate(change);
+    	return "redirect:/user/home";
+    } else return "error";
+
+  } catch (Exception e) {
+    model.put("message", e.getMessage());
+    return "error";
+  }
+}
+
   @Bean
   public DataSource dataSource() throws SQLException {
     if (dbUrl == null || dbUrl.isEmpty()) {
