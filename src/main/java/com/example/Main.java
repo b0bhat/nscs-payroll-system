@@ -149,7 +149,7 @@ public class Main {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
-      String sql = "SELECT * FROM login";
+      String sql = "SELECT * FROM login ORDER BY \"employeeName\"";
       ResultSet rs = stmt.executeQuery(sql);
 
       ArrayList<Employee> output = new ArrayList<Employee>();
