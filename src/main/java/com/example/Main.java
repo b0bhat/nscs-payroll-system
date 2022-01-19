@@ -82,7 +82,7 @@ public class Main {
   
   @RequestMapping("/")
   String index(Map<String, Object> model, Authentication authentication) {
-	  System.out.println(authentication.getName());
+	  //System.out.println(authentication.getName());
     return "redirect:/login";
   }
 
@@ -205,7 +205,7 @@ public class Main {
       PreparedStatement ps = connection.prepareStatement(sql);
       ps.setString(1, e_id);
       ps.executeUpdate();
-      System.out.println(ps);
+      //System.out.println(ps);
 
       return "redirect:/admin/employees";
     } catch (Exception e) {
@@ -440,7 +440,7 @@ String monthlyTool(Map<String, Object> model) {
     ArrayList<Float> totalList = new ArrayList<Float>();
     int n = 0;
     while (rsc.next()) {
-      System.out.println("client \n");
+      //System.out.println("client \n");
       String client = rsc.getString("clientName");
       Float total = rsc.getFloat("totalHours");
       clientList.add(client);
@@ -458,13 +458,13 @@ String monthlyTool(Map<String, Object> model) {
         + "FROM records WHERE \"clientName\" = '" + clientList.get(i-1) + "' AND (\"workDate\" >= '" + startDate + "' AND \"workDate\" <= '" + endDate + "') "
         + "ORDER BY \"clientName\", \"employeeName\",\"workDate\" ASC";
       } ResultSet rs = stmt.executeQuery(sql);
-      System.out.println("clients \n");
+      //System.out.println("clients \n");
       ArrayList<Monthly> records = new ArrayList<Monthly>();
       int num = 0;
       while (rs.next()) {
         num++;
         Monthly ret = new Monthly();
-        System.out.println("monthly \n");
+        //System.out.println("monthly \n");
         ret.setEmployeeName(rs.getString("employeeName"));
         ret.setWorkHours(rs.getFloat("workHours"));
         ret.setWorkDate(rs.getDate("workDate"));
@@ -522,7 +522,7 @@ String recordListUser(Map<String, Object> model, Authentication authentication) 
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
     String sql = "SELECT * FROM records WHERE \"employeeName\" = '" + authentication.getName() + "'ORDER BY \"workDate\" DESC";
-    System.out.println(sql);
+    //System.out.println(sql);
     ResultSet rs = stmt.executeQuery(sql);
 
     ArrayList<Record> output = new ArrayList<Record>();
