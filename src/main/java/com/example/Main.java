@@ -677,7 +677,7 @@ public String handleChangePassword(Map<String, Object> model, Employee employee,
     		break;
     	}
     } if (change != "") {
-    	stmt.executeUpdate(change);
+    	stmt.execute(change);
     	return "redirect:/user/home";
     } else return "error";
 
