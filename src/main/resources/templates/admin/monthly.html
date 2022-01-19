@@ -57,8 +57,8 @@
                     <tr th:each="record : ${monthlylist.records}">
                       <td th:text="${record.employeeName}">employeeName</td>
                       <td th:text="${record.workDate}">workDate</td>
-                      <td th:text="${record.workHours}">workHours</td>
-                      <td th:text="${record.workType}">workHours</td>
+                      <td th:text="${#numbers.formatDecimal(record.workHours, 0, 'COMMA', 2, 'POINT')}" align='right'></td>
+                      <td th:text="${record.workType}">workType</td>
                     </tr>
                   </tbody>
               </table>
