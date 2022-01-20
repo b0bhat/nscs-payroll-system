@@ -12,20 +12,16 @@
 <header></header>
 
 <body>
-  <section class="home-section">
+  <section class="screen">
 
     <form action="#" method="post" th:action="@{addClient}" th:object="${client}" class="formtemplate">
       <h1>Add Client</h1>
-        <li>
           <label for="name">Client Name</label>
           <input type="text" th:value="${client}" name="client" required />
-        </li>
-        <li>
           <span>
             <button class="cancel"><a th:href="@{/admin/clients}">Cancel</a></button>
             <input type="submit" value="Save" />
           </span>
-        </li>
     </form>
   </section>
 
