@@ -61,12 +61,17 @@ label {
 }
 
 .screen{
-	border: 5px solid;
-  	background-color: f2f2f2;    
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	text-align: left;
+	float: left;
+    overflow-y: auto;
+  	background-color: #f2f2f2;    
   	text-align: center;
-  	padding: 10px;
+  	padding: 20px;
+  	margin: 20px;
     border-radius: 1px;
-    box-shadow: 1px 1px 5px 5px #cccccc;
+    box-shadow: 1px 1px 2px 2px #cccccc;
 }
 
 input[type=text], input[type=password], input[type=date], input[type=number], select {

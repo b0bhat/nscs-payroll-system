@@ -18,7 +18,6 @@
 <body>
     <section class="screen">
         <form th:action="@{/login}" method="post">
-            <div class="cred">
                 <label for="username">Username</label> <br>
                 <input type="text" id="username" name='username' required > <br>
 
@@ -26,7 +25,6 @@
                 <input type="password" id="password" name='password' required > <br>
 
                 <input type="submit" name='submit' value="Login">
-            </div>
         </form>
     </section>
     <!-- <span><div class="g-signin2"></div> <button onclick="signOut()">Sign out</button> </span>
