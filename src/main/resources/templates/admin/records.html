@@ -31,11 +31,18 @@ function myFunction() {
     }
   }
 }*/
+var colors = ["red", "blue", "green","orange","yellow","violet","lightblue","cyan","magenta"];
+function RandomColor() {
+  var x = document.querySelector('table');
+  x.querySelectorAll('tr > td').forEach(e => e.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)])
+
+}
 </script>
 
 <body>
     <div class="data-table">
     <h1>Records By Date</h1>
+    <button onclick="RandomColor()">Try it</button>
       <table id="myTable2">
           <thead>
             <tr>
