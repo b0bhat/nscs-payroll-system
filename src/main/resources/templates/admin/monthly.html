@@ -18,7 +18,7 @@
 <body>
   <div class="screen">
     <form action="#" method="post" th:action="@{monthly}" th:object="${date}" class="formtemplate">
-      <h1>Monthly</h1>
+      <h2>Monthly</h2>
           <label for="startDate">Start Date</label>
           <input type="date" th:value="${startDate}" name="startDate" id="startDate" onchange="cal()" required />
           <label for="endDate">End Date</label>
@@ -34,8 +34,8 @@
           </span>
     </form>
     <br>
-    <h2>Monthly Report</h2>
     <table id="myTable">
+    <h2>Monthly Report</h2>
         <tbody th:each="monthlylist : ${allList}">
           <tr>
             <td th:text="${monthlylist.clientName}"></td>

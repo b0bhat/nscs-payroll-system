@@ -15,10 +15,13 @@
   <section class="screen">
 
     <form action="#" method="post" th:action="@{addClient}" th:object="${client}" class="formtemplate">
-      <h1>Add Client</h1>
-          <label for="name">Client Name</label>
-          <input type="text" th:value="${client}" name="client" required />
-          <br>
+      <h2>Add Client</h2>
+      	<table class="form">
+      	<tr>
+          <td><label for="name">Client Name</label></td>
+          <td><input type="text" th:value="${client}" name="client" required /></td>
+          </tr>
+          </table>
           <span>
             <button class="cancel"><a th:href="@{/admin/clients}">Cancel</a></button>
             <input type="submit" value="Save" />

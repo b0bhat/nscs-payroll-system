@@ -26,7 +26,7 @@
 <body>
   <div class="screen">
     <form action="#" method="post" th:action="@{biweekly}" th:object="${date}" class="formtemplate">
-      <h1>Biweekly</h1>
+      <h2>Biweekly</h2>
           <label for="startDate">Start Date</label>
           <input type="date" th:value="${startDate}" name="startDate" id="startDate" required />
           <label for="endDate">End Date</label>
@@ -41,8 +41,8 @@
             <input type="submit" value="Submit" />
           </span>
     </form>
-    <h2>Biweekly Report</h2>
     <table id="myTable">
+    <h2>Biweekly Report</h2>
         <thead>
           <tr>
             <th>Name</th>

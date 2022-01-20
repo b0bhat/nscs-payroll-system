@@ -15,10 +15,13 @@
   <section class="screen">
 
     <form action="#" method="post" th:action="@{addWorkType}" th:object="${workType}" class="formtemplate">
-      <h1>Add Work Type</h1>
-          <label for="workType">Work Type Name</label>
-          <input type="text" th:value="${workType}" name="workType" required />
-          <br>
+      <h2>Add Work Type</h2>
+      <table class="form">
+      	<tr>
+          <td><label for="workType">Work Type Name</label></td>
+          <td><input type="text" th:value="${workType}" name="workType" required /></td>
+         </tr>
+        </table>
           <span>
             <button class="cancel"><a th:href="@{/admin/worktypes}">Cancel</a></button>
             <input type="submit" value="Save" />
