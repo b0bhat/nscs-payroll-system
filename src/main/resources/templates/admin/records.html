@@ -34,7 +34,7 @@ function myFunction() {
 $(document).ready(function(){
 	var colors = ["red", "blue", "green","orange","yellow","violet","lightblue","cyan","magenta"];
 	function RandomColor() {
-	  var x = document.querySelector('table');
+	  var x = document.querySelector('myTable');
 	  x.querySelectorAll('tr > td').forEach(e => e.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)])
 	} $("col").click(RandomColor());
 }
