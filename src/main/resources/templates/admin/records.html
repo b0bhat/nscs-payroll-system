@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'header')}">
 <html lang="en">
 <head>
+	<title>All Records</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/stylesheets/employees.css" />
-    <title>All Records</title>
 </head>
 
 <script>
@@ -31,6 +31,13 @@ function myFunction() {
     }
   }
 }*/
+
+var cells = document.getElementsByTagName('td'),
+colors = ['000000','FF0000','00FF00','0000FF','FFFF00','00FFFF','FF00FF','C0C0C0'];
+
+for(var i = 0; i < cells.length; i++) {
+cells[i].style.backgroundColor = '#' + colors[Math.floor(Math.random() * colors.length)];
+}
 </script>
 
 <body>
