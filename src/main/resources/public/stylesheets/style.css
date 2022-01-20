@@ -104,7 +104,6 @@ input[type=text], input[type=password], input[type=date], input[type=number], se
 	float: left;
     overflow-y: auto;
     margin: 10px;
-    text-align:right;
 }
 
 .data-table thead th {
@@ -118,6 +117,7 @@ input[type=text], input[type=password], input[type=date], input[type=number], se
 table {
     border-collapse: collapse;
     margin: 20px;
+    text-align:left;
     font-family: "Montserrat", sans-serif;
 }
 
