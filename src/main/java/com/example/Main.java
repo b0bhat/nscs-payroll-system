@@ -477,14 +477,12 @@ String monthlyTool(Map<String, Object> model) {
         ret.setWorkType(rs.getString("workType"));
         records.add(ret);
       } ResultSet rs2 = stmt.executeQuery(tot);
-      //System.out.println("clients \n");
       ArrayList<Monthly> totals = new ArrayList<Monthly>();
       while (rs2.next()) {
         Monthly ret = new Monthly();
-        //System.out.println("monthly \n");
-        ret.setEmployeeName(rs.getString("employeeName"));
-        ret.setWorkHours(rs.getFloat("workHours"));
-        ret.setWorkType(rs.getString("workType"));
+        ret.setEmployeeName(rs2.getString("employeeName"));
+        ret.setWorkHours(rs2.getFloat("workHours"));
+        ret.setWorkType(rs2.getString("workType"));
         totals.add(ret);
       }
       MonthlyList output = new MonthlyList();
