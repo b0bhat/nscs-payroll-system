@@ -62,7 +62,10 @@ label {
 }
 
 .h1{
-	margin: 20px 20px 0px 20px;
+	margin-top: 0.67em;
+  	margin-bottom: 0em;
+  	margin-left: 0.8em;
+  	margin-right: 0.8em;
 }
 
 .screen{
