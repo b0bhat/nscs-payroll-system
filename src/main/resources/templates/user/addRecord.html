@@ -11,39 +11,33 @@
 <header></header>
 
 <body>
-  <section class="data-table">
+  <section class="screen">
 
     <form action="#" method="post" th:action="@{addRecord}" th:object="${record}" class="formtemplate">
       <h1>Add Record</h1>
       <text>Fill in all fields.</text>
-      <li>
         <label for="clientName">Client Name  </label>
         <select name="clientName" th:field="*{clientName}" id="clientName" required>
           <!--<option value="0">Select Client...</option>-->
           <option th:each="client : ${clients}" th:value="${client}" th:text="${client}"></option>
         </select>
-      </li>
-      <li>
+        <br>
         <label for="workHours">Work Hours </label>
         <input type="number" min="0" step="0.05" th:field="*{workHours}" id="workHours" required />
-      </li>
-      <li>
+        <br>
         <label for="workType">Work Type  </label>
         <select name="status" th:field="*{workType}" id="workType" required>
           <!-- <option value="0">Select Worktype...</option>-->
           <option th:each="wType : ${workTypes}" th:value="${wType}" th:text="${wType}"></option>
+          <br>
         </select>
-      </li>
-      <li>
         <label for="workDate">Work Date  </label>
         <input type="date" th:field="*{workDate}" id="workDate" required />
-      </li>
-      <li>
+        <br>
         <span>
-          <input type="submit" th:formaction="@{/user/home}" ><a th:href="@{/user/home}">Cancel</a></button>
+          <input type="submit" th:formaction="@{/user/home}" ><a th:href="@{/user/home}">Cancel</a></input>
           <input type="submit" value="Save" />
         </span>
-      </li>
     </form>
   </section>
 

@@ -18,8 +18,10 @@
       <br></br>
           <label for="name">Name</label>
           <input type="text" th:field="*{name}" id="name" required />
+          <br>
           <label for="password">Password</label>
           <input type="text" th:field="*{password}" id="password" required />
+          <br>
           <span>
             <button class="cancel"><a th:href="@{/admin/employees}">Cancel</a></button>
             <input type="submit" value="Save" />

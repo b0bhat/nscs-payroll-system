@@ -182,6 +182,9 @@ a {
     background-color: rgb(89, 189, 89);
 }
 
+.formtemplate{
+	float:left;
+}
 
 /* icons */
 .bi-person-plus,
