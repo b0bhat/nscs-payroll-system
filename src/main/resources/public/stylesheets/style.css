@@ -125,8 +125,9 @@ button {
     cursor: pointer;
 }
 a {
-    text-decoration:none;
-    display: block;
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
 }
 
 input[type=submit] {

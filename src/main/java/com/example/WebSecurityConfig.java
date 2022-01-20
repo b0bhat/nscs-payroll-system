@@ -90,11 +90,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   		//.failureHandler(authenticationFailureHandler())
 	    .and()
     .logout()
-	    .logoutUrl("/logout.html")
-	    .logoutSuccessUrl("/login")
-	    .invalidateHttpSession(true)  
+	    .logoutUrl("/logout")
+	    .logoutSuccessUrl("/logout")
+	    .invalidateHttpSession(true)
 	    .deleteCookies("JSESSIONID");
-	   	//.logoutSuccessHandler(logoutSuccessHandler());*/
+	   	//.logoutSuccessHandler(logoutSuccessHandler());
   }
 
 
