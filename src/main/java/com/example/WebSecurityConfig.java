@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 
@@ -70,10 +71,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   http
     .csrf().disable()
     .authorizeRequests()
-      	.antMatchers("/login", "/error", "/nouser", "/*", "/logout").permitAll()
+      	.antMatchers("/stylesheets/style.css", "/login*", "/error", "/nouser", "/*", "/logout").permitAll()
 	    .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 	    .antMatchers("/user/**").access("hasRole('ROLE_USER')")
-	    .antMatchers("/stylesheets/style.css", "/login*").permitAll()
 	    //.anyRequest().authenticated()
 	    .and()
     .formLogin()
@@ -91,7 +91,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    .and()
     .logout()
 	    .logoutUrl("/logout")
-	    .logoutSuccessUrl("/logout")
+	    .logoutSuccessUrl("/login")
+	    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 	    .invalidateHttpSession(true)
 	    .deleteCookies("JSESSIONID");
 	   	//.logoutSuccessHandler(logoutSuccessHandler());
