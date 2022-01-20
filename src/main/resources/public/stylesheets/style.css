@@ -60,6 +60,15 @@ label {
     z-index: 1;
 }
 
+.screen{
+	border: 5px solid;
+  	background-color: f2f2f2;    
+  	text-align: center;
+  	padding: 10px;
+    border-radius: 1px;
+    box-shadow: 1px 1px 5px 5px #cccccc;
+}
+
 input[type=text], input[type=password], input[type=date], input[type=number], select {
     width: 180px;
     padding: 7px 15px;
