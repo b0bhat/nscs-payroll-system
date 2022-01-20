@@ -14,7 +14,7 @@
   <section class="screen">
 
     <form action="#" method="post" th:action="@{addRecord}" th:object="${record}" class="formtemplate">
-      <h1>Add Record</h1>
+      <h2>Add Record</h2>
       <text>Fill in all fields.</text>
       <br>
         <label for="clientName">Client Name  </label>
@@ -36,7 +36,7 @@
         <input type="date" th:field="*{workDate}" id="workDate" required />
         <br>
         <span>
-          <input type="submit" th:formaction="@{/user/home}" ><a th:href="@{/user/home}">Cancel</a></input>
+          <button th:formaction="@{/user/home}" ><a th:href="@{/user/home}">Cancel</a></button>
           <input type="submit" value="Save" />
         </span>
     </form>
