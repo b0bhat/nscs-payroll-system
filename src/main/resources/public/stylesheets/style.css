@@ -94,6 +94,11 @@ input[type=text], input[type=password], input[type=date], input[type=number], se
     box-sizing: border-box;
 }
 
+navbar{
+	background-color:#cccccc;
+	float:left;
+}
+
 /*** range ***/
 .input {
     padding-bottom: 20px;
