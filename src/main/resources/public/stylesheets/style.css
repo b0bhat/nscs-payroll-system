@@ -69,7 +69,8 @@ h1{
 }
 
 .spacing {
-	margin: 10px;
+	margin-top: 10px;
+    display: inline-block;
 }
 
 .screen{
