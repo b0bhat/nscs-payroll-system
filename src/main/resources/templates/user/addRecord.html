@@ -17,28 +17,38 @@
       <h2>Add Record</h2>
       <text>Fill in all fields.</text>
       <br>
-        <label for="clientName">Client Name  </label>
-        <select name="clientName" th:field="*{clientName}" id="clientName" required>
-          <!--<option value="0">Select Client...</option>-->
-          <option th:each="client : ${clients}" th:value="${client}" th:text="${client}"></option>
-        </select>
-        <br>
-        <label for="workHours">Work Hours </label>
-        <input type="number" min="0" step="0.05" th:field="*{workHours}" id="workHours" required />
-        <br>
-        <label for="workType">Work Type  </label>
-        <select name="status" th:field="*{workType}" id="workType" required>
-          <!-- <option value="0">Select Worktype...</option>-->
-          <option th:each="wType : ${workTypes}" th:value="${wType}" th:text="${wType}"></option>
-        </select>
-        <br>
-        <label for="workDate">Work Date  </label>
-        <input type="date" th:field="*{workDate}" id="workDate" required />
-        <br>
+      <table class="form">
+      	<tr>
+	        <td><label for="clientName">Client Name  </label></td>
+	        <td><select name="clientName" th:field="*{clientName}" id="clientName" required>
+	          <!--<option value="0">Select Client...</option>-->
+	          <option th:each="client : ${clients}" th:value="${client}" th:text="${client}"></option>
+	        </select></td>
+        </tr>
+
+		<tr>
+	        <td><label for="workHours">Work Hours </label></td>
+	        <td><input type="number" min="0" step="0.05" th:field="*{workHours}" id="workHours" required /></td>
+	    </tr>
+	    
+	    <tr>    
+	        <td><label for="workType">Work Type  </label></td>
+	        <td><select name="status" th:field="*{workType}" id="workType" required>
+	          <!-- <option value="0">Select Worktype...</option>-->
+	          <option th:each="wType : ${workTypes}" th:value="${wType}" th:text="${wType}"></option>
+	        </select></td>
+		</tr>
+		
+		<tr>
+	        <td><label for="workDate">Work Date  </label></td>
+	        <td><input type="date" th:field="*{workDate}" id="workDate" required /></td>
+        <tr>
+	</table>
         <span>
           <button th:formaction="@{/user/home}" ><a th:href="@{/user/home}">Cancel</a></button>
           <input type="submit" value="Save" />
         </span>
+        
     </form>
   </section>
 
