@@ -12,17 +12,7 @@
 <header></header>
 
 <script>
-  function GetDays(){
-    var start = new Date(document.getElementById("startDate").value);
-    var end = new Date(document.getElementById("endDate").value);
-    return parseInt((end - start) / (24 * 3600 * 1000));
-  }
 
-  function cal(){
-    if(document.getElementById("endDate")){
-      document.getElementById("numdays2").value = GetDays();
-    }
-  }
 </script>
 
 <body>
@@ -33,8 +23,6 @@
           <input type="date" th:value="${startDate}" name="startDate" id="startDate" onchange="cal()" required />
           <label for="endDate">End Date</label>
           <input type="date" th:value="${endDate}" name="endDate" id="endDate" onchange="cal()" required />
-          <div id="numdays"><label class="form">Number of days:</label>
-            <input type="text" class="textbox" id="numdays2" name="numdays"/></div>
           <span>
           <table id="myTable"><tbody>
             <tr th:each="dates : ${date}">
@@ -59,6 +47,17 @@
                       <td th:text="${record.workDate}">workDate</td>
                       <td th:text="${#numbers.formatDecimal(record.workHours, 0, 'COMMA', 2, 'POINT')}" align='right'></td>
                       <td th:text="${record.workType}">workType</td>
+                    </tr>
+                  </tbody>
+              </table>
+            </td>
+            <td>
+              <table>
+                  <tbody>
+                    <tr th:each="total : ${monthlylist.totals}">
+                      <td th:text="${total.employeeName}">employeeName</td>
+                      <td th:text="${#numbers.formatDecimal(total.workHours, 0, 'COMMA', 2, 'POINT')}" align='right'></td>
+                      <td th:text="${total.workType}">workType</td>
                     </tr>
                   </tbody>
               </table>

@@ -450,13 +450,19 @@ String monthlyTool(Map<String, Object> model) {
     ArrayList<MonthlyList> allList = new ArrayList<MonthlyList>();
     for (int i = 1; i <= n; i++) {
       String sql;
+      String tot;
       if (startDate == baseDate || endDate == baseDate) {
         sql = "SELECT \"employeeName\", \"workHours\", \"workDate\", \"workType\" "
-        + "FROM records WHERE \"clientName\" = '" + clientList.get(i-1) + "' ORDER BY \"clientName\", \"employeeName\",\"workDate\" ASC";
+        + "FROM records WHERE \"clientName\" = '" + clientList.get(i-1) + "' ORDER BY \"employeeName\",\"workDate\" ASC";
+        tot = "SELECT \"employeeName\", SUM(\"workHours\"),  \"workType\" FROM records "
+        +" WHERE \"clientName\" = '" + clientList.get(i-1) + "' GROUP BY \"employeeName\", \"workType\" ORDER BY \"employeeName\" ASC";
       } else {
         sql = "SELECT \"employeeName\", \"workHours\", \"workDate\", \"workType\" "
         + "FROM records WHERE \"clientName\" = '" + clientList.get(i-1) + "' AND (\"workDate\" >= '" + startDate + "' AND \"workDate\" <= '" + endDate + "') "
-        + "ORDER BY \"clientName\", \"employeeName\",\"workDate\" ASC";
+        + "ORDER BY \"employeeName\",\"workDate\" ASC";
+        tot = "SELECT \"employeeName\", SUM(\"workHours\"),  \"workType\" FROM records "
+        + " WHERE \"clientName\" = '" + clientList.get(i-1) + "'  AND (\"workDate\" >= '" + startDate + "' AND \"workDate\" <= '\" + endDate + \"') \""
+        + "GROUP BY \"employeeName\", \"workType\" ORDER BY \"employeeName\" ASC";
       } ResultSet rs = stmt.executeQuery(sql);
       //System.out.println("clients \n");
       ArrayList<Monthly> records = new ArrayList<Monthly>();
@@ -470,11 +476,22 @@ String monthlyTool(Map<String, Object> model) {
         ret.setWorkDate(rs.getDate("workDate"));
         ret.setWorkType(rs.getString("workType"));
         records.add(ret);
+      } ResultSet rs2 = stmt.executeQuery(tot);
+      //System.out.println("clients \n");
+      ArrayList<Monthly> totals = new ArrayList<Monthly>();
+      while (rs2.next()) {
+        Monthly ret = new Monthly();
+        //System.out.println("monthly \n");
+        ret.setEmployeeName(rs.getString("employeeName"));
+        ret.setWorkHours(rs.getFloat("workHours"));
+        ret.setWorkType(rs.getString("workType"));
+        totals.add(ret);
       }
       MonthlyList output = new MonthlyList();
       
       if (num != 0) {
         output.setRecords(records);
+        output.setTotals(totals);
         output.setClientName(clientList.get(i-1));
         output.setTotalHours(totalList.get(i-1));
         allList.add(output);
