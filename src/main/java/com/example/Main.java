@@ -481,7 +481,7 @@ String monthlyTool(Map<String, Object> model) {
       while (rs2.next()) {
         Monthly ret = new Monthly();
         ret.setEmployeeName(rs2.getString("employeeName"));
-        ret.setWorkHours(rs2.getFloat("workHours"));
+        ret.setWorkHours(rs2.getFloat("sum"));
         ret.setWorkType(rs2.getString("workType"));
         totals.add(ret);
       }
