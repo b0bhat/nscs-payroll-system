@@ -183,7 +183,7 @@ a {
 }
 
 .formtemplate{
-	float:left;
+	text-align:left;
 }
 
 /* icons */
