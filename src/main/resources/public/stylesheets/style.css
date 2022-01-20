@@ -68,8 +68,12 @@ h1{
   	margin-right: 0.8em;
 }
 
+.spacing {
+	margin: 10px;
+}
+
 .screen{
-	border: 1px solid #cccccc;
+	border: 0px solid #cccccc;
 	border-radius: 5px;
 	text-align: center;
 	float: left;

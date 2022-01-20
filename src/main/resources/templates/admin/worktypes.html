@@ -14,6 +14,9 @@
 <body>
     <div class="screen">
     <h1>Work Types</h1>
+    	<span class="spacing">
+          <button class="add"><a th:href="@{/admin/addWorkType}"><i class="bi bi-person-plus"></i>Add New Work Type</a></button>
+      </span>
       <table id="myTable">
           <thead>
             <tr>
@@ -34,9 +37,6 @@
 
           </tbody>
       </table>
-      <span class="add-employee">
-          <button class="add"><a th:href="@{/admin/addWorkType}"><i class="bi bi-person-plus"></i>Add New Work Type</a></button>
-      </span>
     </div>
 
 </body>
