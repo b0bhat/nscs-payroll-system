@@ -339,6 +339,7 @@ public class Main {
         ret.setWorkHours(rs.getFloat("workHours"));
         ret.setWorkType(rs.getString("workType"));
         ret.setWorkDate(rs.getDate("workDate"));
+        ret.setNotes(rs.getString("notes"));
         output.add(ret);
       }
       model.put("records", output);
@@ -355,6 +356,7 @@ public class Main {
         ret.setWorkHours(rs2.getFloat("workHours"));
         ret.setWorkType(rs2.getString("workType"));
         ret.setWorkDate(rs2.getDate("workDate"));
+        ret.setNotes(rs2.getString("notes"));
         output2.add(ret);
       }
       model.put("records2", output2);
@@ -549,6 +551,7 @@ String recordListUser(Map<String, Object> model, Authentication authentication) 
       ret.setWorkHours(rs.getFloat("workHours"));
       ret.setWorkType(rs.getString("workType"));
       ret.setWorkDate(rs.getDate("workDate"));
+      ret.setNotes(rs.getString("notes"));
       output.add(ret);
     }
     model.put("records", output);
@@ -605,7 +608,7 @@ public String handleRecordAdd(Map<String, Object> model, Record record, Authenti
 
     String sql = "INSERT INTO records VALUES ('"
         + record.getRecordID() + "','" + record.getClientName() + "','" + record.getWorkHours() + "','"
-        + record.getWorkType() + "','" + record.getWorkDate() + "','" + record.getEmployeeName() + "')";
+        + record.getWorkType() + "','" + record.getWorkDate() + "','" + record.getEmployeeName() + "','" + record.getNotes() + "')";
 
     stmt.executeUpdate(sql);
 

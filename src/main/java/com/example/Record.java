@@ -9,6 +9,7 @@ public class Record {
     private String workType;
     private Date workDate;
     private String employeeName;
+    private String notes;
 
     public void setRecordID(String recordID) {
         this.recordID = recordID;
@@ -28,6 +29,9 @@ public class Record {
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 
     public String getRecordID() {
         return this.recordID;
@@ -46,6 +50,9 @@ public class Record {
     }
     public String getEmployeeName() {
         return this.employeeName;
+    }
+    public String getNotes() {
+        return this.notes;
     }
 
 }

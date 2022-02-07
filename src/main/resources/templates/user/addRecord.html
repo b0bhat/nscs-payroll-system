@@ -43,6 +43,10 @@
 	        <td><label for="workDate">Work Date  </label></td>
 	        <td><input type="date" th:field="*{workDate}" id="workDate" required /></td>
         <tr>
+        <tr>
+	        <td><label for="notes">Extra Notes  </label></td>
+	        <td><input type="text" th:field="*{notes}" id="notes" required /></td>
+        <tr>
 	</table>
         <span>
           <button th:formaction="@{/user/home}" ><a th:href="@{/user/home}">Cancel</a></button>
