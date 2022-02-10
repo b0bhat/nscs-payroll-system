@@ -535,7 +535,7 @@ public String handleMonthlySubmit(Map<String, Object> model, dateRange date) thr
 //==================================== USER ====================================//
 
 @GetMapping("/user/home")
-String recordListUser(Map<String, Object> model, Authentication authentication) {
+String recordListUser(Map<String, Object> model, dateRange date, Authentication authentication) {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
     String sql = "SELECT * FROM records WHERE \"employeeName\" = '" + authentication.getName() + "'ORDER BY \"workDate\" DESC";
@@ -555,6 +555,41 @@ String recordListUser(Map<String, Object> model, Authentication authentication) 
       output.add(ret);
     }
     model.put("records", output);
+    
+    String sql2;
+    /*if (date.getStartDate()) {
+      sql2 = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\" "
+      + " FROM records WHERE \"employeeName\" = " + authentication.getName()
+      + " GROUP BY \"employeeName\", \"workType\" ORDER BY \"employeeName\" ASC";
+    } else {*/
+      sql2 = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\" "
+      + " FROM records WHERE (\"workDate\" >= '" + date.getStartDate() + "' AND \"workDate\" <= '" + date.getEndDate() + "') "
+      + "AND (\"employeeName\" = " + authentication.getName()
+      + ") GROUP BY \"employeeName\", \"workType\" ORDER BY \"employeeName\" ASC";
+    //} 
+      ResultSet rs2 = stmt.executeQuery(sql2);
+
+    ArrayList<Biweekly> output2 = new ArrayList<Biweekly>();
+    while (rs2.next()) {
+      Biweekly ret = new Biweekly();
+      ret.setEmployeeName(rs2.getString("employeeName"));
+      ret.setClientName(rs2.getString("clientName"));
+      ret.setWorkHours(rs2.getFloat("workHours"));
+      ret.setWorkType(rs2.getString("workType"));
+      output2.add(ret);
+    }
+    model.put("totals", output2);
+
+    if (startDate == baseDate || endDate == baseDate) {
+      java.sql.Date curDate = new Date(System.currentTimeMillis());
+      date.setStartDate(curDate);
+      date.setEndDate(curDate);
+    } else {
+      date.setStartDate(startDate);
+      date.setEndDate(endDate);
+    }
+    model.put("date", date);
+
     if (flag) {
       return "user/home";
     } else {
@@ -565,6 +600,19 @@ String recordListUser(Map<String, Object> model, Authentication authentication) 
     return "error";
   }
 }
+
+@PostMapping(path = "/user/home", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+public String recordListUserHandler(Map<String, Object> model, dateRange date) throws Exception {
+  try (Connection connection = dataSource.getConnection()) {
+	date.setStartDate(date.getStartDate());
+	date.setEndDate(date.getEndDate());
+    return "redirect:/user/home";
+  } catch (Exception e) {
+    model.put("message", e.getMessage());
+    return "error";
+  }
+}
+
 
 @GetMapping("/user/addRecord")
 public String returnRecordAdd(Map<String, Object> model) throws Exception {

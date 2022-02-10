@@ -18,11 +18,11 @@
 <body>
     <section class="screen">
         <form th:action="@{/login}" method="post">
-                <label for="username">Username</label> <br>
+                <label for="username">Username </label> <br>
                 <input type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd; this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"
 					id="username" name='username' required > <br>
 
-                <label for="password">Password</label> <br>
+                <label for="password">Password </label> <br>
                 <input type="password" id="password" name='password' required > <br>
 
                 <input type="submit" name='submit' value="Login">
