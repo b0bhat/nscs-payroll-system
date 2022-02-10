@@ -565,10 +565,10 @@ String recordListUser(Map<String, Object> model, dateRange date, Authentication 
       + " FROM records WHERE \"employeeName\" = " + authentication.getName()
       + " GROUP BY \"employeeName\", \"workType\" ORDER BY \"employeeName\" ASC";
     } else {*/
-      sql2 = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\" "
+      sql2 = "SELECT SUM(\"workHours\") AS \"workHours\", \"clientName\", \"employeeName\", \"workType\" "
       + " FROM records WHERE (\"workDate\" >= '" + date.getStartDate() + "' AND \"workDate\" <= '" + date.getEndDate() + "') "
       + "AND (\"employeeName\" = '" + authentication.getName()
-      + "') GROUP BY \"employeeName\", \"workType\" ORDER BY \"employeeName\" ASC";
+      + "') GROUP BY \"employeeName\", \"clientName\", \"workType\" ORDER BY \"employeeName\" ASC";
       System.out.println(sql2);
     //} 
       ResultSet rs2 = stmt.executeQuery(sql2);
