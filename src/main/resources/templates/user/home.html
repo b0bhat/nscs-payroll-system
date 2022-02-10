@@ -20,7 +20,7 @@ function convertDate(date_str) {
 </script>
 
 <body>
-	<div class="screen">
+<div class="screen">
     <form action="#" method="get" th:action="@{home}" th:object="${date}" class="formtemplate">
       <h2>Hours Calculator</h2>
           <label for="startDate">Start Date</label>
@@ -29,14 +29,14 @@ function convertDate(date_str) {
           <label for="endDate">End Date </label>
           <input type="date" th:value="${endDate}" name="endDate" id="endDate" required />
           <br>
-          <span>
+          <div class="screen">
            	<label>Currently set to: </label>
            	<br>
             <label id="date1" th:text="${date.getStartDate()}"></label>
             <br>
             <label id="date1" th:text="${date.getEndDate()}"></label><br>
             <input type="submit" value="Calculate" />
-          </span>
+          </div>
     </form>
     <h3>Total Hours</h3>
     <table id="myTable">
@@ -56,9 +56,8 @@ function convertDate(date_str) {
           </tr>
         </tbody>
     </table>
-</div>
-
-
+	</div>
+	
     <div class="screen">
       <h1>Records</h1>
       <span class="add-employee">
@@ -70,6 +69,7 @@ function convertDate(date_str) {
       <span class="add-employee">
           <button class="add"><a th:href="@{/user/password}"><i class="bi bi-person-plus"></i>Change Password</a></button>
       </span>
+      
       <table id="myTable">
           <thead>
             <tr>
