@@ -555,9 +555,10 @@ String recordListUser(Map<String, Object> model, dateRange date, Authentication 
       output.add(ret);
     }
     model.put("records", output);
-    System.out.println("\n " + date.getStartDate() + "\n + " + date.getEndDate());
+    System.out.println("\n 1:" + date.getStartDate() + "  and  " + date.getEndDate());
     if (date.getStartDate() == null) date.setStartDate(new Date(System.currentTimeMillis()));
     if (date.getEndDate() == null) date.setEndDate(new Date(System.currentTimeMillis()));
+    System.out.println("\n 2:" + date.getStartDate() + "  and  " + date.getEndDate());
     String sql2;
     /*if (date.getStartDate()) {
       sql2 = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\" "
@@ -568,6 +569,7 @@ String recordListUser(Map<String, Object> model, dateRange date, Authentication 
       + " FROM records WHERE (\"workDate\" >= '" + date.getStartDate() + "' AND \"workDate\" <= '" + date.getEndDate() + "') "
       + "AND (\"employeeName\" = " + authentication.getName().toUpperCase()
       + ") GROUP BY \"employeeName\", \"workType\" ORDER BY \"employeeName\" ASC";
+      System.out.println(sql2);
     //} 
       ResultSet rs2 = stmt.executeQuery(sql2);
 
