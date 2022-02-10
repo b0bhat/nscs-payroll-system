@@ -555,7 +555,9 @@ String recordListUser(Map<String, Object> model, dateRange date, Authentication 
       output.add(ret);
     }
     model.put("records", output);
-    
+    System.out.println("\n " + date.getStartDate() + "\n + " + date.getEndDate());
+    if (date.getStartDate() == null) date.setStartDate(new Date(System.currentTimeMillis()));
+    if (date.getEndDate() == null) date.setEndDate(new Date(System.currentTimeMillis()));
     String sql2;
     /*if (date.getStartDate()) {
       sql2 = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\" "
