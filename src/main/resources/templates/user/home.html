@@ -11,7 +11,7 @@
 <header></header>
 
 <script type="text/javascript">
-var coll = document.getElementsByClassName("collapsible");
+/*var coll = document.getElementsByClassName("collapsible");
 var i;
 
 for (i = 0; i < coll.length; i++) {
@@ -31,36 +31,11 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
 function convertDate(date_str) {
   temp_date = date_str.split("-");
   return temp_date[2] + " " + months[Number(temp_date[1]) - 1] + " " + temp_date[0];
-}
+}*/
 </script>
-<style>
-.collapsible {
-  background-color: #777;
-  color: white;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-}
 
-.active, .collapsible:hover {
-  background-color: #555;
-}
-
-.content {
-  padding: 0 18px;
-  display: none;
-  overflow: hidden;
-  background-color: #f1f1f1;
-}
-</style>
 <body>
 <div class="screen">
-	<button type="button" class="collapsible">Open Calculator</button>
-	<div class="content">
     <form action="#" method="get" th:action="@{home}" th:object="${date}" class="formtemplate">
       <h2>Hours Calculator</h2>
           <label for="startDate">Start Date</label>
@@ -96,7 +71,6 @@ function convertDate(date_str) {
           </tr>
         </tbody>
     </table>
-    </div>
 </div>
 	
     <div class="screen">
