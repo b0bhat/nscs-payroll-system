@@ -566,7 +566,7 @@ String recordListUser(Map<String, Object> model, dateRange date, Authentication 
     } else {*/
       sql2 = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\" "
       + " FROM records WHERE (\"workDate\" >= '" + date.getStartDate() + "' AND \"workDate\" <= '" + date.getEndDate() + "') "
-      + "AND (\"employeeName\" = " + authentication.getName()
+      + "AND (\"employeeName\" = " + authentication.getName().toUpperCase()
       + ") GROUP BY \"employeeName\", \"workType\" ORDER BY \"employeeName\" ASC";
     //} 
       ResultSet rs2 = stmt.executeQuery(sql2);
