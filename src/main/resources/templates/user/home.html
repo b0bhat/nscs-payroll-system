@@ -11,6 +11,47 @@
 <header></header>
 
 <body>
+	<div class="screen">
+    <form action="#" method="get" th:action="@{home}" th:object="${date}" class="formtemplate">
+      <h2>Total Hours</h2>
+          <label for="startDate">Start Date</label>
+          <input type="date" th:value="${startDate}" name="startDate" id="startDate" required />
+          <br>
+          <label for="endDate">End Date</label>
+          <input type="date" th:value="${endDate}" name="endDate" id="endDate" required />
+          <span>
+           <table id="myTable"><tbody>
+            <tr th:each="dates : ${date}">
+            <td th:text="${dates.getStartDate}"></td>
+            <td th:text="${dates.getEndDate()}"></td>
+          	</tr>
+          	</tbody></table>
+            <input type="submit" value="Submit" />
+          </span>
+    </form>
+    <table id="myTable">
+    <h2>Calculator</h2>
+        <thead>
+          <tr>
+            <th>Client</th>
+            <th>Work Hours</th>
+            <th>Work Type</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr th:each="record2 : ${totals}">
+            <td th:text="${record2.clientName}"></td>
+            <td th:text="${#numbers.formatDecimal(record2.workHours, 0, 'COMMA', 2, 'POINT')}" align='right'></td>
+            <td th:text="${record2.workType}"></td>
+          </tr>
+        </tbody>
+    </table>
+</div>
+
+
     <div class="screen">
       <h1>Records</h1>
       <span class="add-employee">
@@ -55,44 +96,6 @@
           </tbody>
       </table>
     </div>
-    <div class="screen">
-    <form action="#" method="get" th:action="@{home}" th:object="${date}" class="formtemplate">
-      <h2>Total Hours</h2>
-          <label for="startDate">Start Date</label>
-          <input type="date" th:value="${startDate}" name="startDate" id="startDate" required />
-          <label for="endDate">End Date</label>
-          <input type="date" th:value="${endDate}" name="endDate" id="endDate" required />
-          <span>
-           <table id="myTable"><tbody>
-            <tr th:each="dates : ${date}">
-            <td th:text="${dates.startDate}"></td>
-            <td th:text="${dates.endDate}"></td>
-          	</tr>
-          	</tbody></table>
-            <input type="submit" value="Submit" />
-          </span>
-    </form>
-    <table id="myTable">
-    <h2>Calculator</h2>
-        <thead>
-          <tr>
-            <th>Client</th>
-            <th>Work Hours</th>
-            <th>Work Type</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr th:each="record2 : ${totals}">
-            <td th:text="${record2.clientName}"></td>
-            <td th:text="${#numbers.formatDecimal(record2.workHours, 0, 'COMMA', 2, 'POINT')}" align='right'></td>
-            <td th:text="${record2.workType}"></td>
-          </tr>
-        </tbody>
-    </table>
-	</div>
 </body>
 
 </html>
