@@ -579,7 +579,7 @@ String recordListUser(Map<String, Object> model, dateRange date, Authentication 
       output2.add(ret);
     }
     model.put("totals", output2);
-
+    /*
     if (startDate == baseDate || endDate == baseDate) {
       java.sql.Date curDate = new Date(System.currentTimeMillis());
       date.setStartDate(curDate);
@@ -588,7 +588,7 @@ String recordListUser(Map<String, Object> model, dateRange date, Authentication 
       date.setStartDate(startDate);
       date.setEndDate(endDate);
     }
-    model.put("date", date);
+    model.put("date", date);*/
 
     if (flag) {
       return "user/home";
