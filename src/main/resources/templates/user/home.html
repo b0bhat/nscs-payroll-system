@@ -85,7 +85,7 @@
 
         <tbody>
           <tr th:each="record : ${biweekly}">
-            <td th:text="${record.employeeName}"></td>
+            <td th:text="${record.clientName}"></td>
             <td th:text="${#numbers.formatDecimal(record.workHours, 0, 'COMMA', 2, 'POINT')}" align='right'></td>
             <td th:text="${record.workType}"></td>
           </tr>
