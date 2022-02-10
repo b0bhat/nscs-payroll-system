@@ -56,7 +56,7 @@
       </table>
     </div>
     <div class="screen">
-    <form action="#" method="post" th:action="@{home}" th:object="${date}" class="formtemplate">
+    <form action="#" method="get" th:action="@{home}" th:object="${date}" class="formtemplate">
       <h2>Total Hours</h2>
           <label for="startDate">Start Date</label>
           <input type="date" th:value="${startDate}" name="startDate" id="startDate" required />
