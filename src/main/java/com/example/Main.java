@@ -534,7 +534,7 @@ public String handleMonthlySubmit(Map<String, Object> model, dateRange date) thr
 
 //==================================== USER ====================================//
 
-@GetMapping(path = "/user/home", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+@GetMapping("/user/home")
 String recordListUser(Map<String, Object> model, dateRange date, Authentication authentication) {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
@@ -614,7 +614,7 @@ public String recordListUserHandler(Map<String, Object> model, dateRange date) t
 	date.setStartDate(date.getStartDate());
 	date.setEndDate(date.getEndDate());
 	System.out.println("\n 4:" + date.getStartDate() + "  and  " + date.getEndDate());
-    return "redirect:/user/home";
+    return "user/home";
   } catch (Exception e) {
     model.put("message", e.getMessage());
     return "error";
