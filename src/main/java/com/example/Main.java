@@ -581,7 +581,7 @@ String recordListUser(Map<String, Object> model, dateRange date, Authentication 
       ret.setWorkHours(rs2.getFloat("workHours"));
       ret.setWorkType(rs2.getString("workType"));
       output2.add(ret);
-    }
+    }  
     model.put("totals", output2);
     /*
     if (startDate == baseDate || endDate == baseDate) {
