@@ -534,7 +534,7 @@ public String handleMonthlySubmit(Map<String, Object> model, dateRange date) thr
 
 //==================================== USER ====================================//
 
-@GetMapping("/user/home")
+@GetMapping(path = "/user/home", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
 String recordListUser(Map<String, Object> model, dateRange date, Authentication authentication) {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
@@ -609,10 +609,11 @@ String recordListUser(Map<String, Object> model, dateRange date, Authentication 
 @PostMapping(path = "/user/home", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
 public String recordListUserHandler(Map<String, Object> model, dateRange date) throws Exception {
   try (Connection connection = dataSource.getConnection()) {
+	
 	System.out.println("\n 3:" + date.getStartDate() + "  and  " + date.getEndDate());
 	date.setStartDate(date.getStartDate());
 	date.setEndDate(date.getEndDate());
-	 System.out.println("\n 4:" + date.getStartDate() + "  and  " + date.getEndDate());
+	System.out.println("\n 4:" + date.getStartDate() + "  and  " + date.getEndDate());
     return "redirect:/user/home";
   } catch (Exception e) {
     model.put("message", e.getMessage());
