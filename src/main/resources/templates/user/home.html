@@ -32,13 +32,13 @@ function convertDate(date_str) {
           <span>
            <table id="myTable"><tbody>
            	<tr>Currently set to: </tr>
+           	<br>
             <tr id="date1" th:text="${date.getStartDate()}"></tr>
-            <br>
-            <tr>to</tr>
-            <br>
+            <tr>  </tr>
             <tr id="date1" th:text="${date.getEndDate()}"></tr>
           	</tbody></table>
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Calculate" />
+            <br>
           </span>
     </form>
     <table id="myTable">
