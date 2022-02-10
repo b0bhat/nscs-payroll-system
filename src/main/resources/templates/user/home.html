@@ -17,8 +17,6 @@ function convertDate(date_str) {
   temp_date = date_str.split("-");
   return temp_date[2] + " " + months[Number(temp_date[1]) - 1] + " " + temp_date[0];
 }
-document.getElementById("date1").innerHTML = convertDate(document.getElementById("date1"));
-document.getElementById("date2").innerHTML = convertDate(document.getElementById("date2"));
 </script>
 
 <body>
@@ -33,8 +31,11 @@ document.getElementById("date2").innerHTML = convertDate(document.getElementById
           <br>
           <span>
            <table id="myTable"><tbody>
-           	<tr>Currently set to:</tr>
+           	<tr>Currently set to: </tr>
             <tr id="date1" th:text="${date.getStartDate()}"></tr>
+            <br>
+            <tr>to</tr>
+            <br>
             <tr id="date1" th:text="${date.getEndDate()}"></tr>
           	</tbody></table>
             <input type="submit" value="Submit" />
@@ -98,7 +99,7 @@ document.getElementById("date2").innerHTML = convertDate(document.getElementById
                 <button><a th:href="@{/employees/edit?rid={name}(name = ${employee.getName()})}">Edit</a></button>
               </td>-->
               <td>
-                <button><a onclick="return confirm('Are you sure you want to delete this record?');" th:href="@{/user/deleteRecord?e_id={id}(id=${record.recordID})}"><i class="bi bi-trash"></i> Delete</a></button>
+                <button><a onclick="return confirm('Are you sure you want to delete this record?');" th:href="@{/user/deleteRecord?e_id={id}(id=${record.recordID})}"><i class="bi bi-trash"></i>  Delete</a></button>
               </td>
             </tr>
 

@@ -234,6 +234,8 @@ a {
     color: white;
     cursor: pointer;
     -webkit-appearance: none;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .view {
