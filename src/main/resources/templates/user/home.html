@@ -20,7 +20,8 @@ function convertDate(date_str) {
 </script>
 
 <body>
-<div class="screen">
+<button type="button" class="collapsible">Open Calculator</button>
+	<div class="screen">
     <form action="#" method="get" th:action="@{home}" th:object="${date}" class="formtemplate">
       <h2>Hours Calculator</h2>
           <label for="startDate">Start Date</label>
