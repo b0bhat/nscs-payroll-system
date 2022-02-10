@@ -10,6 +10,17 @@
 
 <header></header>
 
+<script>
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+function convertDate(date_str) {
+  temp_date = date_str.split("-");
+  return temp_date[2] + " " + months[Number(temp_date[1]) - 1] + " " + temp_date[0];
+}
+document.getElementById("date1").innerHTML = convertDate(document.getElementById("date1"));
+document.getElementById("date2").innerHTML = convertDate(document.getElementById("date2"));
+</script>
+
 <body>
 	<div class="screen">
     <form action="#" method="get" th:action="@{home}" th:object="${date}" class="formtemplate">
@@ -19,10 +30,12 @@
           <br>
           <label for="endDate">End Date </label>
           <input type="date" th:value="${endDate}" name="endDate" id="endDate" required />
+          <br>
           <span>
            <table id="myTable"><tbody>
-            <tr th:text="${date.getStartDate()}"></td>
-            <tr th:text="${date.getEndDate()}"></td>
+           	<tr>Currently set to:</tr>
+            <tr id="date1" th:text="${date.getStartDate()}"></tr>
+            <tr id="date1" th:text="${date.getEndDate()}"></tr>
           	</tbody></table>
             <input type="submit" value="Submit" />
           </span>
@@ -32,18 +45,16 @@
         <thead>
           <tr>
             <th>Client</th>
-            <th>Work Hours</th>
-            <th>Work Type</th>
-            <th></th>
-            <th></th>
+            <th>Type</th>
+            <th>Hours</th>
           </tr>
         </thead>
 
         <tbody>
           <tr th:each="record2 : ${totals}">
             <td th:text="${record2.clientName}"></td>
-            <td th:text="${#numbers.formatDecimal(record2.workHours, 0, 'COMMA', 2, 'POINT')}" align='right'></td>
             <td th:text="${record2.workType}"></td>
+            <td th:text="${#numbers.formatDecimal(record2.workHours, 0, 'COMMA', 2, 'POINT')}" align='right'></td>
           </tr>
         </tbody>
     </table>
@@ -66,8 +77,8 @@
             <tr>
               <!--<th>Name</th>-->
               <th>Client</th>
-              <th>Hours</th>
               <th>Type</th>
+              <th>Hours</th>
               <th>Date</th>
               <th>Notes</th>
               <th></th>
@@ -78,8 +89,8 @@
             <tr th:each="record : ${records}">
               <!--<td th:text="${record.employeeName}"></td>-->
               <td th:text="${record.clientName}"></td>
-              <td th:text="${record.workHours}"></td>
               <td th:text="${record.workType}"></td>
+              <td th:text="${#numbers.formatDecimal(record.workHours, 0, 'COMMA', 2, 'POINT')}" align='right'></td>
               <td th:text="${record.workDate}"></td>
               <td th:text="${record.notes}"></td>
 
