@@ -30,14 +30,12 @@ function convertDate(date_str) {
           <input type="date" th:value="${endDate}" name="endDate" id="endDate" required />
           <br>
           <span>
-           <table id="myTable"><tbody>
-           	<tr>Currently set to: </tr>
+           	<label>Currently set to: </label>
            	<br>
-            <tr id="date1" th:text="${date.getStartDate()}"></tr>
+            <label id="date1" th:text="${date.getStartDate()}"></label>
             <br>
-            <tr id="date1" th:text="${date.getEndDate()}"></tr><br>
+            <label id="date1" th:text="${date.getEndDate()}"></label><br>
             <input type="submit" value="Calculate" />
-          	</tbody></table>
           </span>
     </form>
     <h3>Total Hours</h3>
