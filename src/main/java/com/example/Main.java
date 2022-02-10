@@ -555,10 +555,10 @@ String recordListUser(Map<String, Object> model, dateRange date, Authentication 
       output.add(ret);
     }
     model.put("records", output);
-    System.out.println("\n 1:" + date.getStartDate() + "  and  " + date.getEndDate());
+    //System.out.println("\n 1:" + date.getStartDate() + "  and  " + date.getEndDate());
     if (date.getStartDate() == null) date.setStartDate(new Date(System.currentTimeMillis()));
     if (date.getEndDate() == null) date.setEndDate(new Date(System.currentTimeMillis()));
-    System.out.println("\n 2:" + date.getStartDate() + "  and  " + date.getEndDate());
+    //System.out.println("\n 2:" + date.getStartDate() + "  and  " + date.getEndDate());
     String sql2;
     /*if (date.getStartDate()) {
       sql2 = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\" "
@@ -584,16 +584,9 @@ String recordListUser(Map<String, Object> model, dateRange date, Authentication 
       System.out.println(ret);
     }  
     model.put("totals", output2);
-    /*
-    if (startDate == baseDate || endDate == baseDate) {
-      java.sql.Date curDate = new Date(System.currentTimeMillis());
-      date.setStartDate(curDate);
-      date.setEndDate(curDate);
-    } else {
-      date.setStartDate(startDate);
-      date.setEndDate(endDate);
+    if (date.getStartDate() != new Date(System.currentTimeMillis())) {
+    	model.put("date", date);
     }
-    model.put("date", date);*/
 
     if (flag) {
       return "user/home";

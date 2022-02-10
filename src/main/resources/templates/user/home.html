@@ -17,14 +17,12 @@
           <label for="startDate">Start Date</label>
           <input type="date" th:value="${startDate}" name="startDate" id="startDate" required />
           <br>
-          <label for="endDate">End Date</label>
+          <label for="endDate">End Date </label>
           <input type="date" th:value="${endDate}" name="endDate" id="endDate" required />
           <span>
            <table id="myTable"><tbody>
-            <tr th:each="dates : ${date}">
-            <td th:text="${dates.getStartDate}"></td>
-            <td th:text="${dates.getEndDate()}"></td>
-          	</tr>
+            <tr th:text="${date.getStartDate()}"></td>
+            <tr th:text="${date.getEndDate()}"></td>
           	</tbody></table>
             <input type="submit" value="Submit" />
           </span>
@@ -89,7 +87,7 @@
                 <button><a th:href="@{/employees/edit?rid={name}(name = ${employee.getName()})}">Edit</a></button>
               </td>-->
               <td>
-                <button><a onclick="return confirm('Are you sure you want to delete this record?');" th:href="@{/user/deleteRecord?e_id={id}(id=${record.recordID})}"><i class="bi bi-trash"></i>Delete</a></button>
+                <button><a onclick="return confirm('Are you sure you want to delete this record?');" th:href="@{/user/deleteRecord?e_id={id}(id=${record.recordID})}"><i class="bi bi-trash"></i> Delete</a></button>
               </td>
             </tr>
 
