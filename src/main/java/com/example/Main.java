@@ -535,7 +535,7 @@ public String handleMonthlySubmit(Map<String, Object> model, dateRange date) thr
 //==================================== USER ====================================//
 
 @GetMapping("/user/home")
-String recordListUser(@RequestParam("date") Map<String, Object> model, dateRange date, Authentication authentication) {
+String recordListUser(Map<String, Object> model, dateRange date, Authentication authentication) {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
     String sql = "SELECT * FROM records WHERE \"employeeName\" = '" + authentication.getName() + "'ORDER BY \"workDate\" DESC";
