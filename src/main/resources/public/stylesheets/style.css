@@ -160,7 +160,7 @@ tbody tr:nth-of-type(even) {
 
 button {
     /*height: 32px;*/
-    padding: 4px 10px 4px 4px;
+    padding: 4px 8px 4px 8px;
     border-radius: 4px;
     border: none;
     background-color: #F25B5B;
@@ -205,10 +205,6 @@ a {
 }
 
 /* icons */
-.bi-person-plus,
-.bi-clipboard-plus {
-    padding-right: 5px;
-}
 
 .bi-pencil-fill,
 .bi-trash,
@@ -223,19 +219,6 @@ a {
 
 .edit {
     background-color: #ffb834;
-}
-
-.bi-bi-trash {
-   /*height: 32px;*/
-    padding: 4px 10px 4px 4px;
-    border-radius: 4px;
-    border: none;
-    background-color: #F25B5B;
-    color: white;
-    cursor: pointer;
-    -webkit-appearance: none;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .view {

@@ -22,7 +22,7 @@ function convertDate(date_str) {
 <body>
 	<div class="screen">
     <form action="#" method="get" th:action="@{home}" th:object="${date}" class="formtemplate">
-      <h2>Total Hours</h2>
+      <h2>Hours Calculator</h2>
           <label for="startDate">Start Date</label>
           <input type="date" th:value="${startDate}" name="startDate" id="startDate" required />
           <br>
@@ -34,7 +34,7 @@ function convertDate(date_str) {
            	<tr>Currently set to: </tr>
            	<br>
             <tr id="date1" th:text="${date.getStartDate()}"></tr>
-            <tr>, to </tr>
+            <br>
             <tr id="date1" th:text="${date.getEndDate()}"></tr>
           	</tbody></table>
             <input type="submit" value="Calculate" />
@@ -42,7 +42,7 @@ function convertDate(date_str) {
           </span>
     </form>
     <table id="myTable">
-    <h2>Calculator</h2>
+    <h2>Total Hours</h2>
         <thead>
           <tr>
             <th>Client</th>
