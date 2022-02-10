@@ -84,10 +84,10 @@
         </thead>
 
         <tbody>
-          <tr th:each="record : ${biweekly}">
-            <td th:text="${record.clientName}"></td>
-            <td th:text="${#numbers.formatDecimal(record.workHours, 0, 'COMMA', 2, 'POINT')}" align='right'></td>
-            <td th:text="${record.workType}"></td>
+          <tr th:each="record2 : ${totals}">
+            <td th:text="${record2.clientName}"></td>
+            <td th:text="${#numbers.formatDecimal(record2.workHours, 0, 'COMMA', 2, 'POINT')}" align='right'></td>
+            <td th:text="${record2.workType}"></td>
           </tr>
         </tbody>
     </table>
