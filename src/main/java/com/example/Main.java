@@ -436,7 +436,13 @@ public String handleBiweeklyDate(Map<String, Object> model, dateRange date) thro
 String monthlyTool(Map<String, Object> model) {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
-    String select = "SELECT \"clientName\", SUM(\"workHours\") AS \"totalHours\" FROM records GROUP BY \"clientName\" ORDER BY \"clientName\"";
+    String select;
+    if (startDate == baseDate || endDate == baseDate) {
+    	select = "SELECT \"clientName\", SUM(\"workHours\") AS \"totalHours\" FROM records GROUP BY \"clientName\" ORDER BY \"clientName\"";
+    } else {
+    	select = "SELECT \"clientName\", SUM(\"workHours\") AS \"totalHours\" FROM records"
+    	+ " (\"workDate\" >= '" + startDate + "' AND \"workDate\" <= '" + endDate + "') GROUP BY \"clientName\" ORDER BY \"clientName\"";
+    }
     ResultSet rsc = stmt.executeQuery(select);
     ArrayList<String> clientList = new ArrayList<String>();
     ArrayList<Float> totalList = new ArrayList<Float>();
