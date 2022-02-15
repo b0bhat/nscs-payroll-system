@@ -441,7 +441,7 @@ String monthlyTool(Map<String, Object> model) {
     	select = "SELECT \"clientName\", SUM(\"workHours\") AS \"totalHours\" FROM records GROUP BY \"clientName\" ORDER BY \"clientName\"";
     } else {
     	select = "SELECT \"clientName\", SUM(\"workHours\") AS \"totalHours\" FROM records"
-    	+ " (\"workDate\" >= '" + startDate + "' AND \"workDate\" <= '" + endDate + "') GROUP BY \"clientName\" ORDER BY \"clientName\"";
+    	+ " WHERE (\"workDate\" >= '" + startDate + "' AND \"workDate\" <= '" + endDate + "') GROUP BY \"clientName\" ORDER BY \"clientName\"";
     }
     ResultSet rsc = stmt.executeQuery(select);
     ArrayList<String> clientList = new ArrayList<String>();
