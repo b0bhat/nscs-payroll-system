@@ -575,6 +575,10 @@ String recordListUser(Map<String, Object> model, dateRange date, Authentication 
       + " FROM records WHERE (\"workDate\" >= '" + date.getStartDate() + "' AND \"workDate\" <= '" + date.getEndDate() + "') "
       + "AND (\"employeeName\" = '" + authentication.getName()
       + "') GROUP BY \"employeeName\", \"clientName\", \"workType\" ORDER BY \"employeeName\" ASC";
+      String sql3 = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\" "
+    	      + " FROM records WHERE (\"workDate\" >= '" + date.getStartDate() + "' AND \"workDate\" <= '" + date.getEndDate() + "') "
+    	      + "AND (\"employeeName\" = '" + authentication.getName()
+    	      + "') GROUP BY \"employeeName\" ORDER BY \"employeeName\" ASC";
       System.out.println(sql2);
     //} 
       ResultSet rs2 = stmt.executeQuery(sql2);
@@ -588,11 +592,15 @@ String recordListUser(Map<String, Object> model, dateRange date, Authentication 
       ret.setWorkType(rs2.getString("workType"));
       output2.add(ret);
       System.out.println(ret);
-    }  
+    } 
+    
     model.put("totals", output2);
     if (date.getStartDate() != new Date(System.currentTimeMillis())) {
     	model.put("date", date);
     }
+    
+    ResultSet rs3 = stmt.executeQuery(sql3);
+    model.put("megatotal", rs3.getString("workHours"));
 
     if (flag) {
       return "user/home";
