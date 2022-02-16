@@ -600,9 +600,9 @@ String recordListUser(Map<String, Object> model, dateRange date, Authentication 
     }
     
     ResultSet rs3 = stmt.executeQuery(sql3);
-    rs3.next();
-    model.put("megatotal", rs3.getString("workHours"));
-
+    while (rs.next()) {
+    	model.put("megatotal", rs3.getString("workHours"));
+    }
     if (flag) {
       return "user/home";
     } else {
