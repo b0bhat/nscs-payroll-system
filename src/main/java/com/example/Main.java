@@ -600,7 +600,7 @@ String recordListUser(Map<String, Object> model, dateRange date, Authentication 
     }
     
     ResultSet rs3 = stmt.executeQuery(sql3);
-    while (rs.next()) {
+    while (rs3.next()) {
     	model.put("megatotal", rs3.getString("workHours"));
     }
     if (flag) {
