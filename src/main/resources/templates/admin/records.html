@@ -98,6 +98,7 @@ $(document).ready(function(){
               <th>Work Hours</th>
               <th>Work Type</th>
               <th>Work Date</th>
+              <th>Notes</th>
             </tr>
           </thead>
 
@@ -110,6 +111,7 @@ $(document).ready(function(){
     			align='right'></td>
     		  <td th:text="${record.workType}"></td>
               <td th:text="${record.workDate}"></td>
+              <td th:text="${record.notes}"></td>
             </tr>
 
           </tbody>
