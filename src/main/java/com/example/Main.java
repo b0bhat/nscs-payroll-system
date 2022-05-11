@@ -327,7 +327,7 @@ public class Main {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
-      String sql = "SELECT * FROM records ORDER BY \"workDate\" DESC LIMIT 100";
+      String sql = "SELECT * FROM records ORDER BY \"workDate\" DESC LIMIT 1000";
       ResultSet rs = stmt.executeQuery(sql);
 
       ArrayList<Record> output = new ArrayList<Record>();
