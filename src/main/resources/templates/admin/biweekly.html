@@ -48,7 +48,7 @@
             <th>Name</th>
             <th>Work Hours</th>
             <th>Work Type</th>
-            <th></th>
+            <th>Work Days</th>
             <th></th>
           </tr>
         </thead>
@@ -58,6 +58,7 @@
             <td th:text="${record.employeeName}"></td>
             <td th:text="${#numbers.formatDecimal(record.workHours, 0, 'COMMA', 2, 'POINT')}" align='right'></td>
             <td th:text="${record.workType}"></td>
+            <td th:text="${record.workDays}"></td>
 
           </tr>
 

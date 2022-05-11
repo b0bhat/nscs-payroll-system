@@ -7,6 +7,7 @@ public class Biweekly {
     private float workHours;
     private String workType;
     private String employeeName;
+    private float workDays;
 
     public void setClientName(String clientName) {
         this.clientName = clientName;
@@ -20,6 +21,9 @@ public class Biweekly {
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
+    public void setWorkDays(float workDays) {
+        this.workDays = workDays;
+    }
 
     public String getClientName() {
         return this.clientName;
@@ -32,6 +36,9 @@ public class Biweekly {
     }
     public String getEmployeeName() {
         return this.employeeName;
+    }
+    public float getWorkDays() {
+        return this.workDays;
     }
 
 }

@@ -327,7 +327,7 @@ public class Main {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
-      String sql = "SELECT * FROM records ORDER BY \"workDate\" DESC";
+      String sql = "SELECT * FROM records ORDER BY \"workDate\" DESC LIMIT 100";
       ResultSet rs = stmt.executeQuery(sql);
 
       ArrayList<Record> output = new ArrayList<Record>();
@@ -380,10 +380,10 @@ String biweeklyTool(Map<String, Object> model) {
     Statement stmt = connection.createStatement();
     String sql;
     if (startDate == baseDate || endDate == baseDate) {
-      sql = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\" "
+      sql = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\", COUNT(DISTINCT CAST(\"workDate\" AS DATE)) AS \"workDays\" "
       + " FROM records GROUP BY \"employeeName\", \"workType\" ORDER BY \"employeeName\" ASC";
     } else {
-      sql = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\" "
+      sql = "SELECT SUM(\"workHours\") AS \"workHours\", \"employeeName\", \"workType\", COUNT(DISTINCT CAST(\"workDate\" AS DATE)) AS \"workDays\" "
       + " FROM records WHERE (\"workDate\" >= '" + startDate + "' AND \"workDate\" <= '" + endDate + "') "
       + "GROUP BY \"employeeName\", \"workType\" ORDER BY \"employeeName\" ASC";
     } ResultSet rs = stmt.executeQuery(sql);
@@ -394,6 +394,7 @@ String biweeklyTool(Map<String, Object> model) {
       ret.setEmployeeName(rs.getString("employeeName"));
       ret.setWorkHours(rs.getFloat("workHours"));
       ret.setWorkType(rs.getString("workType"));
+      ret.setWorkDays(rs.getFloat("workDays"));
       output.add(ret);
     }
     model.put("biweekly", output);
