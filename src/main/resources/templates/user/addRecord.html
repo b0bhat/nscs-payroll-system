@@ -13,6 +13,7 @@
 <script>
 
 document.getElementById("workDate").addEventListener("change", function() {
+	console.log("ahh");
     var input = this.value;
     var date2 = new Date();
     var date1 = new Date(input);
@@ -62,10 +63,12 @@ document.getElementById("workDate").addEventListener("change", function() {
 		
 		<tr>
 	        <td><label for="workDate">Work Date  </label></td>
-	        <td><input type="date" th:field="*{workDate}" id="workDate" onchange="dateDiff(event);" required />
-	        <p id=diff></p>
+	        <td><input type="date" th:field="*{workDate}" id="workDate" required />
 	        </td>
+        </tr>
         <tr>
+        	<p id=diff>i</p>
+        </tr>
         <tr>
 	        <td><label for="notes">Extra Notes (optional) </label></td>
 	        <td><input type="text" th:field="*{notes}" id="notes" /></td>
