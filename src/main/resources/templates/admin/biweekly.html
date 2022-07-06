@@ -9,18 +9,6 @@
     <title>Biweekly Tool</title>
 </head>
 
-<script>
-  //document.getElementById('startDate').value = new Date();
-  //document.getElementById('endDate').value = new Date();
-  /*const input = document.querySelector('endDate');
-  function updateClock() {
-    var diffTime = Math.abs(document.getElementById('endDate').value - document.getElementById('startDate').value);
-    var diff = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    document.getElementById('diff').textContent = diff;
-    setTimeout(updateClock, 1000);
-  } updateClock()*/
-</script>
-
 <header></header>
 
 <body>
@@ -37,6 +25,7 @@
             <td th:text="${dates.startDate}"></td>
             <td th:text="${dates.endDate}"></td>
           	</tr>
+          	<tr><td></td><p id = diff></p><td></td></tr>
           	</tbody></table>
             <input type="submit" value="Submit" />
           </span>
@@ -67,5 +56,17 @@
   </div>
 
 </body>
+
+<script>
+
+document.getElementById("endDate").addEventListener("change", function() {
+    var input = this.value;
+    var date2 = new Date(document.getElementById("startDate").value);
+    var date1 = new Date(input);
+    var diffDays = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24), 10);
+    document.getElementById("diff").innerHTML = Math.abs(diffDays);
+});
+
+</script>
 
 </html>
