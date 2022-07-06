@@ -10,6 +10,27 @@
 
 <header></header>
 
+<script>
+
+document.getElementById("workDate").addEventListener("change", function() {
+    var input = this.value;
+    var date2 = new Date();
+    var date1 = new Date(input);
+    var diffDays = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24), 10);
+    if (diffDays < -1) {
+    	document.getElementById("diff").innerHTML = Math.abs(diffDays) + " days in the future";
+    } else if (diffDays == 1) {
+    	document.getElementById("diff").innerHTML = "1 day ago";
+    } else if (diffDays == -1 ){
+    	document.getElementById("diff").innerHTML = "1 day in the future";
+    } else if (diffDays == 0) {
+    	document.getElementById("diff").innerHTML = "Today";
+    } else {
+    	document.getElementById("diff").innerHTML = diffDays + " days ago";
+    }
+});
+
+</script>
 <body>
   <section class="screen">
 
@@ -18,6 +39,14 @@
       <text>Fill in all fields.</text>
       <br>
       <table class="form">
+      	<tr>    
+	        <td><label for="workType">Work Type  </label></td>
+	        <td><select name="status" th:field="*{workType}" id="workType" required>
+	          <!-- <option value="0">Select Worktype...</option>-->
+	          <option th:each="wType : ${workTypes}" th:value="${wType}" th:text="${wType}"></option>
+	        </select></td>
+		</tr>
+      	
       	<tr>
 	        <td><label for="clientName">Client Name  </label></td>
 	        <td><select name="clientName" th:field="*{clientName}" id="clientName" required>
@@ -30,18 +59,12 @@
 	        <td><label for="workHours">Work Hours </label></td>
 	        <td><input type="number" min="0" step="0.05" th:field="*{workHours}" id="workHours" required /></td>
 	    </tr>
-	    
-	    <tr>    
-	        <td><label for="workType">Work Type  </label></td>
-	        <td><select name="status" th:field="*{workType}" id="workType" required>
-	          <!-- <option value="0">Select Worktype...</option>-->
-	          <option th:each="wType : ${workTypes}" th:value="${wType}" th:text="${wType}"></option>
-	        </select></td>
-		</tr>
 		
 		<tr>
 	        <td><label for="workDate">Work Date  </label></td>
-	        <td><input type="date" th:field="*{workDate}" id="workDate" required /></td>
+	        <td><input type="date" th:field="*{workDate}" id="workDate" onchange="dateDiff(event);" required />
+	        <p id=diff></p>
+	        </td>
         <tr>
         <tr>
 	        <td><label for="notes">Extra Notes (optional) </label></td>
