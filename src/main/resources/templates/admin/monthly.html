@@ -20,9 +20,9 @@
     <form action="#" method="post" th:action="@{monthly}" th:object="${date}" class="formtemplate">
       <h2>Monthly</h2>
           <label for="startDate">Start Date</label>
-          <input type="date" th:value="${startDate}" name="startDate" id="startDate" onchange="cal()" required />
+          <input type="date" th:value="${startDate}" name="startDate" id="startDate" required />
           <label for="endDate">End Date</label>
-          <input type="date" th:value="${endDate}" name="endDate" id="endDate" onchange="cal()" required />
+          <input type="date" th:value="${endDate}" name="endDate" id="endDate" required />
           <span>
           <table id="myTable"><tbody>
             <tr th:each="dates : ${date}">

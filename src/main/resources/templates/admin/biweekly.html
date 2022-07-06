@@ -64,6 +64,7 @@ document.getElementById("endDate").addEventListener("change", function() {
     var date2 = new Date(document.getElementById("startDate").value);
     var date1 = new Date(input);
     var diffDays = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24), 10);
+    console.log(diffDays);
     document.getElementById("diff").innerHTML = Math.abs(diffDays);
 });
 
