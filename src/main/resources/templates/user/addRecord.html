@@ -10,28 +10,7 @@
 
 <header></header>
 
-<script>
 
-document.getElementById("workDate").addEventListener("change", function() {
-	console.log("ahh");
-    var input = this.value;
-    var date2 = new Date();
-    var date1 = new Date(input);
-    var diffDays = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24), 10);
-    if (diffDays < -1) {
-    	document.getElementById("diff").innerHTML = Math.abs(diffDays) + " days in the future";
-    } else if (diffDays == 1) {
-    	document.getElementById("diff").innerHTML = "1 day ago";
-    } else if (diffDays == -1 ){
-    	document.getElementById("diff").innerHTML = "1 day in the future";
-    } else if (diffDays == 0) {
-    	document.getElementById("diff").innerHTML = "Today";
-    } else {
-    	document.getElementById("diff").innerHTML = diffDays + " days ago";
-    }
-});
-
-</script>
 <body>
   <section class="screen">
 
@@ -82,8 +61,28 @@ document.getElementById("workDate").addEventListener("change", function() {
     </form>
   </section>
 
-    <script>
-    </script>
+<script>
+
+document.getElementById("workDate").addEventListener("change", function() {
+	console.log("ahh");
+    var input = this.value;
+    var date2 = new Date();
+    var date1 = new Date(input);
+    var diffDays = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24), 10);
+    if (diffDays < -1) {
+    	document.getElementById("diff").innerHTML = Math.abs(diffDays) + " days in the future";
+    } else if (diffDays == 1) {
+    	document.getElementById("diff").innerHTML = "1 day ago";
+    } else if (diffDays == -1 ){
+    	document.getElementById("diff").innerHTML = "1 day in the future";
+    } else if (diffDays == 0) {
+    	document.getElementById("diff").innerHTML = "Today";
+    } else {
+    	document.getElementById("diff").innerHTML = diffDays + " days ago";
+    }
+});
+
+</script>
 
 </body>
 
