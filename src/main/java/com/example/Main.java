@@ -771,10 +771,10 @@ public String handleRecordEdit(Map<String, Object> model, Record record, Authent
     //stmt.executeUpdate(save);
 
     String sql = "UPDATE records SET '"
-        + "clientName = '" + record.getClientName() + "', workHours = '" + record.getWorkHours()
-        + "', workType = '" + record.getWorkType() + "', workDate = '" + record.getWorkDate()
-        + "', employeeName = '" + authentication.getName() + "', notes = '" + record.getNotes()
-        + "' WHERE recordID =" + rid;
+        + "\"clientName\" = '" + record.getClientName() + "', \"workHours\" = '" + record.getWorkHours()
+        + "', \"workType\" = '" + record.getWorkType() + "', \"workDate\" = '" + record.getWorkDate()
+        + "', \"employeeName\" = '" + authentication.getName() + "', \"notes\" = '" + record.getNotes()
+        + "' WHERE \"recordID\" = '" + rid + "'";
 
     System.out.println(sql);
     //stmt.executeUpdate(sql);
