@@ -580,7 +580,7 @@ String recordListUser(Map<String, Object> model, dateRange date, Authentication 
     	      + " FROM records WHERE (\"workDate\" >= '" + date.getStartDate() + "' AND \"workDate\" <= '" + date.getEndDate() + "') "
     	      + "AND (\"employeeName\" = '" + authentication.getName()
     	      + "') GROUP BY \"employeeName\" ORDER BY \"employeeName\" ASC";
-      System.out.println(sql2);
+      //System.out.println(sql2);
     //} 
       ResultSet rs2 = stmt.executeQuery(sql2);
 
@@ -740,13 +740,13 @@ public String returnRecordEdit(Map<String, Object> model, @RequestParam String r
 }
 
 @PostMapping(path = "/user/editRecord", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-public String handleRecordEdit(Map<String, Object> model, Record record, Authentication authentication) throws Exception {
+public String handleRecordEdit(Map<String, Object> model, Record record, Authentication authentication, @RequestParam String rid) throws Exception {
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
     //final String UniqueID = UUID.randomUUID().toString().replace("-", "");
     //record.setRecordID(UniqueID);
     //record.setEmployeeName(authentication.getName());
-    String getOld = "SELECT * FROM records WHERE \"recordID\" = '" + "'";
+    String getOld = "SELECT * FROM records WHERE \"recordID\" = '" + rid + "'";
     ResultSet rs = stmt.executeQuery(getOld);
     Record oldRecord = new Record();
     if (rs.next()) {
@@ -772,8 +772,8 @@ public String handleRecordEdit(Map<String, Object> model, Record record, Authent
     String sql = "UPDATE records SET '"
         + "clientName = '" + record.getClientName() + "', workHours = '" + record.getWorkHours()
         + "', workType = '" + record.getWorkType() + "', workDate = '" + record.getWorkDate()
-        + "', employeeName = '" + record.getEmployeeName() + "', notes = '" + record.getNotes()
-        + "' WHERE recordID =" + record.getRecordID();
+        + "', employeeName = '" + authentication.getName() + "', notes = '" + record.getNotes()
+        + "' WHERE recordID =" + rid;
 
     System.out.println(sql);
     //stmt.executeUpdate(sql);
