@@ -257,6 +257,14 @@ a {
     background-color: red;
 }
 
+.bi-bi-trash-add {
+    background-color: rgb(116, 216, 116);
+}
+
+.bi-bi-trash-add:hover {
+    background-color: rgb(89, 189, 89);
+}
+
 .view:hover {
     background-color: rgb(245, 171, 184);
 }
