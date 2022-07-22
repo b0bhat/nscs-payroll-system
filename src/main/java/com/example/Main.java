@@ -746,6 +746,7 @@ public String handleRecordEdit(Map<String, Object> model, Record record, Authent
     //final String UniqueID = UUID.randomUUID().toString().replace("-", "");
     //record.setRecordID(UniqueID);
     //record.setEmployeeName(authentication.getName());
+    System.out.println(rid);
     String getOld = "SELECT * FROM records WHERE \"recordID\" = '" + rid + "'";
     ResultSet rs = stmt.executeQuery(getOld);
     Record oldRecord = new Record();
