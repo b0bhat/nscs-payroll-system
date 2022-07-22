@@ -643,7 +643,7 @@ public String returnRecordAdd(Map<String, Object> model) throws Exception {
       output.add(rs.getString("workType"));
     } model.put("workTypes", output);
 
-    String sql_c = "SELECT * FROM clients";
+    String sql_c = "SELECT * FROM clients ORDER BY clients ASC";
     ResultSet rs_c = stmt.executeQuery(sql_c);
     ArrayList<String> output_c = new ArrayList<String>();
     while (rs_c.next()) {
@@ -685,6 +685,98 @@ public String handleRecordAdd(Map<String, Object> model, Record record, Authenti
         + sqlDate + "','add','" +
         record.getRecordID() + "')";
     stmt.executeUpdate(save);
+
+    return "redirect:/user/home";
+  } catch (Exception e) {
+    model.put("message", e.getMessage());
+    return "error";
+  }
+}
+
+@GetMapping("/user/editRecord")
+public String returnRecordEdit(Map<String, Object> model, @RequestParam String rid) throws Exception {
+  try (Connection connection = dataSource.getConnection()) {
+    Statement stmt = connection.createStatement();
+    String editRecord = "SELECT * FROM records WHERE \"recordID\" = ?";
+    PreparedStatement pstmt = connection.prepareStatement(editRecord);
+    pstmt.setString(1, rid);
+    ResultSet rs_e = pstmt.executeQuery();
+    Record record = new Record();
+    if (rs_e.next()) {
+    	record.setRecordID(rs_e.getString("recordID"));
+    	record.setClientName(rs_e.getString("clientName"));
+    	record.setWorkHours(rs_e.getFloat("workHours"));
+    	record.setWorkType(rs_e.getString("workType"));
+    	record.setWorkDate(rs_e.getDate("workDate"));
+    	record.setEmployeeName(rs_e.getString("employeeName"));
+    	record.setNotes(rs_e.getString("notes"));
+    } model.put("record", record);
+    
+    String sql = "SELECT * FROM \"workTypes\"";
+    ResultSet rs = stmt.executeQuery(sql);
+    ArrayList<String> output = new ArrayList<String>();
+    while (rs.next()) {
+      output.add(rs.getString("workType"));
+    } model.put("workTypes", output);
+
+    String sql_c = "SELECT * FROM clients";
+    ResultSet rs_c = stmt.executeQuery(sql_c);
+    ArrayList<String> output_c = new ArrayList<String>();
+    while (rs_c.next()) {
+      output_c.add(rs_c.getString("clientName"));
+    } model.put("clients", output_c);
+
+    //Record record = new Record();
+    //model.put("record", record);
+    if (flag) {
+      return "user/editRecord";
+    } else {
+      return "nouser";
+    }
+  } catch (Exception e) {
+    model.put("message", e.getMessage());
+    return "error";
+  }
+}
+
+@PostMapping(path = "/user/editRecord", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+public String handleRecordEdit(Map<String, Object> model, Record record, Authentication authentication) throws Exception {
+  try (Connection connection = dataSource.getConnection()) {
+    Statement stmt = connection.createStatement();
+    //final String UniqueID = UUID.randomUUID().toString().replace("-", "");
+    //record.setRecordID(UniqueID);
+    //record.setEmployeeName(authentication.getName());
+    String getOld = "SELECT * FROM records WHERE \"recordID\" = '" + "'";
+    ResultSet rs = stmt.executeQuery(getOld);
+    Record oldRecord = new Record();
+    if (rs.next()) {
+    	oldRecord.setRecordID(rs.getString("recordID"));
+    	oldRecord.setClientName(rs.getString("clientName"));
+    	oldRecord.setWorkHours(rs.getFloat("workHours"));
+    	oldRecord.setWorkType(rs.getString("workType"));
+    	oldRecord.setWorkDate(rs.getDate("workDate"));
+    	oldRecord.setEmployeeName(rs.getString("employeeName"));
+    	oldRecord.setNotes(rs.getString("notes"));
+    }
+    
+    java.sql.Date sqlDate = new Date(System.currentTimeMillis());
+    String save = "INSERT INTO \"oldRecords\" VALUES ('"
+        + UUID.randomUUID().toString().replace("-", "") + "','"
+        + oldRecord.getClientName() + "','" + oldRecord.getWorkHours() + "','" + oldRecord.getWorkType() + "','"
+        + oldRecord.getWorkDate() + "','" + oldRecord.getEmployeeName() + "','"
+        + sqlDate + "','edit','" +
+        oldRecord.getRecordID() + "')";
+    System.out.println(save);
+    //stmt.executeUpdate(save);
+
+    String sql = "UPDATE records SET '"
+        + "clientName = '" + record.getClientName() + "', workHours = '" + record.getWorkHours()
+        + "', workType = '" + record.getWorkType() + "', workDate = '" + record.getWorkDate()
+        + "', employeeName = '" + record.getEmployeeName() + "', notes = '" + record.getNotes()
+        + "' WHERE recordID =" + record.getRecordID();
+
+    System.out.println(sql);
+    //stmt.executeUpdate(sql);
 
     return "redirect:/user/home";
   } catch (Exception e) {

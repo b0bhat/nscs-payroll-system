@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <title>Edit Record</title>
+</head>
+
+<header></header>
+
+
+<body>
+  <section class="screen">
+
+    <form action="#" method="post" th:action="@{/employees/edit?rid={id}(id = ${id})}" th:object="${record}" class="formtemplate">
+      <h2>Edit Record</h2>
+      <text>Fill in all fields.</text>
+      <br>
+      <table class="form">
+      	<tr>    
+	        <td><label for="workType">Work Type  </label></td>
+	        <td><select name="status" th:field="*{workType}" th:attr="value = ${record.workType}" id="workType" required>
+	          <!-- <option value="0">Select Worktype...</option>-->
+	          <option th:each="wType : ${workTypes}" th:value="${wType}" th:text="${wType}"></option>
+	        </select></td>
+		</tr>
+      	
+      	<tr>
+	        <td><label for="clientName">Client Name  </label></td>
+	        <td><select name="clientName" th:field="*{clientName}" th:attr="value = ${record.clientName}" id="clientName" required>
+	          <!--<option value="0">Select Client...</option>-->
+	          <option th:each="client : ${clients}" th:value="${client}" th:text="${client}"></option>
+	        </select></td>
+        </tr>
+
+		<tr>
+	        <td><label for="workHours">Work Hours </label></td>
+	        <td><input type="number" min="0" step="0.05" th:field="*{workHours}" th:attr="value = ${record.workHours}" id="workHours" required /></td>
+	    </tr>
+		
+		<tr>
+	        <td><label for="workDate">Work Date  </label></td>
+	        <td><input type="date" th:field="*{workDate}" th:attr="value = ${record.workDate}" id="workDate" required />
+	        </td>
+        </tr>
+        <tr>
+        	<td></td>
+        	<td><p id=diff></p></td>
+        </tr>
+        <tr>
+	        <td><label for="notes">Extra Notes (optional) </label></td>
+	        <td><input type="text" th:field="*{notes}" th:attr="value = ${record.notes}" id="notes" /></td>
+        <tr>
+	</table>
+        <span>
+          <button th:formaction="@{/user/home}" ><a th:href="@{/user/home}">Cancel</a></button>
+          <input type="submit" value="Save" />
+        </span>
+        
+    </form>
+  </section>
+
+<script>
+
+document.getElementById("workDate").addEventListener("change", function() {
+    var input = this.value;
+    var date2 = new Date();
+    var date1 = new Date(input);
+    var diffDays = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24), 10);
+    if (diffDays < -1) {
+    	document.getElementById("diff").innerHTML = Math.abs(diffDays) + " days in the future";
+    } else if (diffDays == 1) {
+    	document.getElementById("diff").innerHTML = "1 day ago";
+    } else if (diffDays == -1 ){
+    	document.getElementById("diff").innerHTML = "1 day in the future";
+    } else if (diffDays == 0) {
+    	document.getElementById("diff").innerHTML = "Today";
+    } else {
+    	document.getElementById("diff").innerHTML = diffDays + " days ago";
+    }
+});
+
+</script>
+
+</body>
+
+
+</html>
