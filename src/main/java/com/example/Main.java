@@ -767,17 +767,17 @@ public String handleRecordEdit(Map<String, Object> model, Record record, Authent
         + oldRecord.getWorkDate() + "','" + oldRecord.getEmployeeName() + "','"
         + sqlDate + "','edit','" +
         oldRecord.getRecordID() + "')";
-    System.out.println(save);
-    //stmt.executeUpdate(save);
+    //System.out.println(save);
+    stmt.executeUpdate(save);
 
-    String sql = "UPDATE records SET '"
+    String sql = "UPDATE records SET "
         + "\"clientName\" = '" + record.getClientName() + "', \"workHours\" = '" + record.getWorkHours()
         + "', \"workType\" = '" + record.getWorkType() + "', \"workDate\" = '" + record.getWorkDate()
         + "', \"employeeName\" = '" + authentication.getName() + "', \"notes\" = '" + record.getNotes()
         + "' WHERE \"recordID\" = '" + rid + "'";
 
-    System.out.println(sql);
-    //stmt.executeUpdate(sql);
+    //System.out.println(sql);
+    stmt.executeUpdate(sql);
 
     return "redirect:/user/home";
   } catch (Exception e) {
