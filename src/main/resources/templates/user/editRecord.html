@@ -14,7 +14,7 @@
 <body>
   <section class="screen">
 
-    <form action="#" method="post" th:action="@{/employees/edit?rid={id}(id = ${id})}" th:object="${record}" class="formtemplate">
+    <form action="#" method="post" th:action="@{/user/editRecord?rid={id}(id = ${id})}" th:object="${record}" class="formtemplate">
       <h2>Edit Record</h2>
       <text>Fill in all fields.</text>
       <br>
