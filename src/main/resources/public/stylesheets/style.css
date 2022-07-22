@@ -22,13 +22,13 @@ label {
     display: flex;
     padding: 20px 0;
 }
-
-.add {
+/***
+.add { 
     display: inline-block;
     text-align: right;
     align-self: flex-end;
 }
-
+***/
 .form {
     align-self: flex-end;
 }
@@ -163,7 +163,6 @@ button {
     padding: 4px 8px 4px 8px;
     border-radius: 4px;
     border: none;
-    background-color: #F25B5B;
     color: white;
     cursor: pointer;
     -webkit-appearance: none;
@@ -253,16 +252,12 @@ a {
     background-color: orange;
 }
 
+.bi-bi-trash {
+    background-color: #F25B5B;
+}
+
 .bi-bi-trash:hover {
     background-color: red;
-}
-
-.bi-bi-trash-add {
-    background-color: rgb(116, 216, 116);
-}
-
-.bi-bi-trash-add:hover {
-    background-color: rgb(89, 189, 89);
 }
 
 .view:hover {
