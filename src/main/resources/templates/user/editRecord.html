@@ -53,14 +53,16 @@
 	        <td><label for="notes">Extra Notes (optional) </label></td>
 	        <td><input type="text" th:field="*{notes}" th:attr="value = ${record.notes}" id="notes" /></td>
         </tr>
-	</table>
-	<input
+        <tr>
+        <td>
+        <input
 						type="text"
 						style="display: none"
-						th:field="*{id}"
+						th:field="*{recordID"
 						th:attr="value = ${record.recordID}"
 						readonly
-					/>
+					/> </td> <tr>
+	</table>
         <span>
           <button th:formaction="@{/user/home}" ><a th:href="@{/user/home}">Cancel</a></button>
           <input type="submit" value="Save" />
